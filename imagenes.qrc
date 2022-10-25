@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sprites/zona sprites/1 Tiles/IndustrialTile_05.png</file>
+        <file>sprites/zona sprites/1 Tiles/IndustrialTile_13.png</file>
+        <file>sprites/zona sprites/1 Tiles/IndustrialTile_14.png</file>
+        <file>sprites/zona sprites/1 Tiles/IndustrialTile_15.png</file>
+        <file>sprites/zona sprites/1 Tiles/IndustrialTile_16.png</file>
+        <file>sprites/zona sprites/1 Tiles/IndustrialTile_17.png</file>
+        <file>sprites/zona sprites/1 Tiles/IndustrialTile_11.png</file>
+        <file>sprites/zona sprites/1 Tiles/IndustrialTile_12.png</file>
+        <file>sprites/zona sprites/2 Background/Background.png</file>
+        <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Idle1.png</file>
+        <file>sprites/armas y movimientos sprites/1 Characters/3 Cyborg/Run1.png</file>
+        <file>sprites/armas y movimientos sprites/3 Hands/2 Punk/1.png</file>
+        <file>sprites/armas y movimientos sprites/3 Hands/2 Punk/2.png</file>
+        <file>sprites/armas y movimientos sprites/3 Hands/2 Punk/3.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Idle.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Attack.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Attack1.png</file>
+        <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1.png</file>
+        <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1.png</file>
+    </qresource>
+</RCC>
