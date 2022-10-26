@@ -47,12 +47,16 @@ void operaciones::acelerar(float px2_, float py2_, float mass2)
 }
 */
 
-void operaciones::actualizar(float dt)
+void operaciones::actualizarY(float dt)
 {
-    VX = VX + (ax*dt)/2;
     VY = VY + (ay*dt)/2;
-    PX = PX + (VX*dt);
     PY = PY + (VY*dt);
+}
+
+void operaciones::actualizarX(float dt)
+{
+     VX = VX + (ax*dt)/2;
+     PX = PX + (VX*dt);
 }
 
 void operaciones::setPY(float py)

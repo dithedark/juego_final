@@ -18,6 +18,7 @@
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Attack.png</file>
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Attack1.png</file>
         <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1.png</file>
-        <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1.png</file>
+        <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1_.png</file>
+        <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1_I.png</file>
     </qresource>
 </RCC>

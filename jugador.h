@@ -13,9 +13,12 @@ public:
     ~jugador();
 
     void formula();
-    void movimiento();
 
+    void direccion();
+
+    void movimientoY();
     void saltar();
+
     operaciones *calculo;
 
 
@@ -23,10 +26,13 @@ public:
 private:
     QString punk=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Idle1.png",
     manoPonk=":/sprites/armas y movimientos sprites/3 Hands/2 Punk/1.png",
-    salto=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1.png";
+    salto=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1.png",
+    correr=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1_",
+    reves="I",png=".png";
 
     QTimer *animacion;
-    int cambio_sprit=0;
+    int short cambio_sprit=0,cantidad_sprint=3;
+    bool vuelta=1 ;
 
 
 
@@ -35,7 +41,7 @@ private:
 
 
 private slots:
-    void cambio();
+    void esena();
 
 };
 

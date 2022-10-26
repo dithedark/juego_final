@@ -84,7 +84,7 @@ bool juego::aleatorio()
 
 void juego::movimien()
 {
-    personaje->movimiento();
+    personaje->movimientoY();
     for(int i=0;i<largo;i++)
     {
         if(bl[i][0]->collidesWithItem(personaje))
@@ -106,5 +106,9 @@ void juego::keyPressEvent(QKeyEvent *i)
         personaje->calculo->setAY(40);
         personaje->calculo->setVY(-60);
         caida->start(10);
+    }
+    if(e == Qt::Key_O)
+    {
+        personaje->direccion();
     }
 }
