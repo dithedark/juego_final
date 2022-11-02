@@ -21,9 +21,10 @@ void base::configuracion(QString nombre,bool copia, int x,int y ,int Ancho,int A
     {
         *img = img->copy(x,y,Ancho,Alto);
     }
+
 }
 
-void base::select_bloc(int x,int y, int Ancho  ,int Alto ,bool defecto ,int sx, int sy)
+void base::select_bloc(int x,int y, int Ancho  ,int Alto ,bool defecto ,int sx, int sy,bool rotar )
 {
 
 
@@ -36,6 +37,11 @@ void base::select_bloc(int x,int y, int Ancho  ,int Alto ,bool defecto ,int sx, 
     else
     {
         *im_blq = im_blq->scaled(sx,sy);
+    }
+
+    if(rotar)
+    {
+        *im_blq = rotation(im_blq);
     }
 
     setPixmap(*im_blq);
@@ -55,4 +61,14 @@ void base::CAMbloque(int Tipo_bloque)
     {
         type_block=Tipo_bloque;
     }
+}
+
+QPixmap base::rotation(QPixmap *img)
+{
+    QTransform o;
+    QPixmap img2;
+    o = o.rotate(180,Qt::YAxis);
+    img2 = img->transformed(o);
+
+    return img2;
 }

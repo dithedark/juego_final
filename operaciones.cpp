@@ -19,7 +19,7 @@ operaciones::operaciones(float PX_, float PY_, float VX_, float VY_, float mass,
 
 float operaciones::getPX() const
 {
-    return PY;
+    return PX;
 }
 
 float operaciones::getPY() const
@@ -27,9 +27,21 @@ float operaciones::getPY() const
     return PY;
 }
 
+
+
 float operaciones::getmasa() const
 {
     return masa;
+}
+
+float operaciones::getVX() const
+{
+    return VX;
+}
+
+float operaciones::getAX() const
+{
+    return ax;
 }
 
 float operaciones::getR() const
@@ -72,5 +84,15 @@ void operaciones::setAY(float _ay)
 void operaciones::setVY(float _vy)
 {
     VY=_vy;
+}
+
+void operaciones::setAX(float _ax)
+{
+    ax=_ax;
+}
+
+void operaciones::setVX(float _vx)
+{
+    VX=_vx;
 }
 

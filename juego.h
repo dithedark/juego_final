@@ -22,7 +22,7 @@ public:
 
 private:
     int select_bloc(int i, int j);
-    bool aleatorio();
+    bool aleatorio(),permisoO=true;
 
     float p = 0.3;
     bloques *bl[largo][2];

@@ -10,6 +10,8 @@ public:
     float getPX() const;
     float getPY() const;
     float getmasa() const;
+    float getVX() const;
+    float getAX() const;
     float getR() const;
 
     void acelerar(float px2_, float py2_, float masa2);

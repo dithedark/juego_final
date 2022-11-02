@@ -8,10 +8,12 @@ juego::juego()
     personaje= new jugador;
     gangster= new enemigo_1;
 
+
     mapa();
     //addItem(gangster);
+    addItem(personaje->mano);
     addItem(personaje);
-
+    //addItem(personaje->mano);
 
     caida= new QTimer;
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));
@@ -90,7 +92,9 @@ void juego::movimien()
         if(bl[i][0]->collidesWithItem(personaje))
         {
             personaje->calculo->setAY(0);
-            personaje->setPos(personaje->x(),bl[i][0]->y()-(48*1.2)-0.22);
+            personaje->setPos(personaje->x(),bl[i][0]->y()-(48*1.2)-0.22);            
+            personaje->cargaCorrer();
+            permisoO=true;
             caida->stop();
         }
     }
@@ -100,14 +104,18 @@ void juego::movimien()
 void juego::keyPressEvent(QKeyEvent *i)
 {
     const int e=i->key();
-    if(e == Qt::Key_P)
-    {
-        personaje->saltar();
-        personaje->calculo->setAY(40);
-        personaje->calculo->setVY(-60);
-        caida->start(10);
-    }
     if(e == Qt::Key_O)
+    {
+        if(permisoO)
+        {
+            permisoO=false;
+            personaje->saltar();
+            personaje->calculo->setAY(40);
+            personaje->calculo->setVY(-80);
+            caida->start(10);
+        }
+    }
+    if(e == Qt::Key_P)
     {
         personaje->direccion();
     }
