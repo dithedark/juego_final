@@ -154,7 +154,7 @@ void jugador::cargarDisparo()
 
 void jugador::escena()
 {
-    select_bloc((cambio_sprit*48),0,26,48,false,scale_sprite*24,48*1.2);
+    select_bloc((cambio_sprit*48),0,26,48,false,scale_sprite*x_jugador,scale_sprite*y_jugador);
 
     if(vuelta)
     {

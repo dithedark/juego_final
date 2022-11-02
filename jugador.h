@@ -1,6 +1,7 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
 
+
 #include "base.h"
 #include "operaciones.h"
 
@@ -36,7 +37,7 @@ private:
     reves="I",png=".png";
 
     QTimer *animacion,*andar;
-    int short cambio_sprit=0,cantidad_sprint=3,velocidad=23,posmanoX,posmanoY;
+    int short cambio_sprit=0,cantidad_sprint=3,velocidad=scale_sprite*(23/2),posmanoX,posmanoY;
     bool vuelta=1 ;
 
 
