@@ -23,7 +23,7 @@ jugador::jugador()
 
     mano->setPos(x()+20,y()+14);
     mano->configuracion(manoPunk);
-    mano->select_bloc(12,12,13,13,false,22,20*1.2);
+
 
 
     animacion->start(100);
@@ -123,7 +123,7 @@ void jugador::cargaCorrer()
     {
         configuracion(correr+png,true,0,14,288,34);
 
-        mano->select_bloc(12,12,13,13,false,22,20*1.2);
+        mano->select_bloc(12,12,13,13,false,24,20*1.2);
         posmanoX=31;
         posmanoY=18;
 
@@ -131,8 +131,8 @@ void jugador::cargaCorrer()
     else
     {
         configuracion(correr+reves+png,true,23,14,264,34);
-        mano->select_bloc(12,12,13,13,false,22,20*1.2,true);
-        posmanoX=4;
+        mano->select_bloc(12,12,13,13,false,24,20*1.2,true);
+        posmanoX=-8;
         posmanoY=18;
     }
 
