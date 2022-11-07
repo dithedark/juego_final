@@ -7,12 +7,13 @@ juego::juego()
 
     personaje= new jugador;
     gangster= new enemigo_1;
-
-
+    tanque= new enemigo_2;
+    dron= new enemigo_3;
     mapa();
 
+    addItem(dron);
     addItem(gangster);
-
+    addItem(tanque);
 
     //addItem(personaje->mano);
     addItem(personaje);

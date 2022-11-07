@@ -23,5 +23,9 @@
         <file>sprites/armas y movimientos sprites/2 Guns/3_1.png</file>
         <file>sprites/armas y movimientos sprites/2 Guns/3_2.png</file>
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Walk.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/6/Walk.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/6/Attack.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/5/Walk.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/5/Attack.png</file>
     </qresource>
 </RCC>

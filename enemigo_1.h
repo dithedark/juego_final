@@ -17,6 +17,7 @@ private:
     QString enemigo1D= ":/sprites/enemigos robots y drones con armas y animaciones sprites/2/Attack.png";
     QString enemigo1= ":/sprites/enemigos robots y drones con armas y animaciones sprites/2/Walk.png";
     QTimer *walkE1;
+
     int cambioE1_sprite=0;
     int cambioE1_spriteD;
     bool giro=true;

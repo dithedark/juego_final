@@ -10,6 +10,8 @@
 #include <time.h>
 #include "jugador.h"
 #include "enemigo_1.h"
+#include "enemigo_2.h"
+#include "enemigo_3.h"
 
 class juego : public QGraphicsScene
 {
@@ -29,7 +31,8 @@ private:
     base *fondo;
     jugador *personaje;
     enemigo_1 *gangster;
-
+    enemigo_2 *tanque;
+    enemigo_3 *dron;
     QTimer *caida;
 
 public slots:

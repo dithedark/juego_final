@@ -4,12 +4,12 @@ enemigo_1::enemigo_1()
 {
 
     walkE1=new QTimer;
-    configuracion(enemigo1,true,0,8,432,40);
+    configuracion(enemigo1,true,0,10,432,40);
     CAMbloque(3);
     connect(walkE1, SIGNAL (timeout()),this, SLOT(disparo()));
 
     setPos(16*(largo-4)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-     walkE1->start(150);
+     walkE1->start(90);
 
 }
 
@@ -20,7 +20,7 @@ enemigo_1::~enemigo_1()
 
 void enemigo_1::cambioE1()
 {
-    select_bloc(cambioE1_sprite*48,0,48,43,false,48*1.3,48*1.2,giro);
+    select_bloc(cambioE1_sprite*48,0,48,43,false,48*1.7,48*1.2,giro);
     if(cambioE1_sprite<cambioE1_spriteD)
     {
         cambioE1_sprite++;
@@ -50,9 +50,6 @@ void enemigo_1::cambioE1()
                 }
             }
     }
-
-
-
 }
 
 void enemigo_1::disparo()
