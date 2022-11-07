@@ -21,7 +21,9 @@ private:
     int cambioE1_spriteD;
     bool giro=true;
     bool pausa=true;
-
+    bool posF=false;
+    int punto=85;
+    int punto_contrario=2;
 
 
 

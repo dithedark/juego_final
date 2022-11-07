@@ -9,7 +9,7 @@ enemigo_1::enemigo_1()
     connect(walkE1, SIGNAL (timeout()),this, SLOT(disparo()));
 
     setPos(16*(largo-4)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-     walkE1->start(400);
+     walkE1->start(150);
 
 }
 
@@ -31,7 +31,24 @@ void enemigo_1::cambioE1()
     }
     if(pausa)
     {
-    setPos(x()-10,y());
+        if (posF==false)
+            {
+            setPos(x()-10,y());
+            if (x()==((largo-27)/2)*scale_sprite)
+                {
+                posF=true;
+                giro=false;
+                }
+            }
+        else if (posF==true)
+            {
+            setPos(x()+10,y());
+            if (x()==16*(largo-4)*scale_sprite)
+                {
+                posF=false;
+                giro=true;
+                }
+            }
     }
 
 
