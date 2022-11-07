@@ -12,7 +12,6 @@
         <file>sprites/armas y movimientos sprites/1 Characters/3 Cyborg/Run1.png</file>
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Idle.png</file>
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Attack.png</file>
-        <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Attack1.png</file>
         <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1_.png</file>
         <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1_I.png</file>
         <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1_I.png</file>
@@ -23,5 +22,6 @@
         <file>sprites/armas y movimientos sprites/3 Hands/2 Punk/3_.png</file>
         <file>sprites/armas y movimientos sprites/2 Guns/3_1.png</file>
         <file>sprites/armas y movimientos sprites/2 Guns/3_2.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Walk.png</file>
     </qresource>
 </RCC>

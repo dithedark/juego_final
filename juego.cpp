@@ -10,10 +10,13 @@ juego::juego()
 
 
     mapa();
-    //addItem(gangster);
-    addItem(personaje->mano);
-    addItem(personaje);
+
+    addItem(gangster);
+
+
     //addItem(personaje->mano);
+    addItem(personaje);
+
 
     caida= new QTimer;
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));

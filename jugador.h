@@ -15,9 +15,15 @@ public:
 
     void formula();
 
+    // para cambio de dirreccion
+    // si esta viendo a la izquierda lo pone a ver a la derecha
     void direccion();
 
+    //hace que cuando lo llamen vaya cambiando la posicion en Y
     void movimientoY();
+
+    //cambia los sprint de caminar a saltar
+    //y tambien si el jugador esta mirando hacia un lado el salto tambien
     void saltar();
 
     void cargaCorrer();

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< HEAD
-<!-- Written by QtCreator 7.0.1, 2022-11-02T12:22:16. -->
-=======
-<!-- Written by QtCreator 8.0.1, 2022-11-02T11:41:53. -->
->>>>>>> 3c06c1b68e1d7c0ee2b542af8be875dba72dcc58
+<!-- Written by QtCreator 8.0.1, 2022-11-05T21:19:55. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -246,7 +242,6 @@
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/HP/Desktop/UDEA/2022-1/INFO_2/proyecto final/proyec/build-Lab5-Desktop_Qt_5_15_2_MinGW_64_bit-Debug</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
