@@ -10,8 +10,9 @@ juego::juego()
 
 
     mapa();
-    //addItem(gangster);
+    addItem(gangster);
     addItem(personaje->mano);
+    addItem(personaje->pistola);
     addItem(personaje);
     //addItem(personaje->mano);
 

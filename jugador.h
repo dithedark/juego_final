@@ -30,14 +30,14 @@ public:
 
 private:
     QString punk=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Idle1.png",
-    manoPunk=":/sprites/armas y movimientos sprites/3 Hands/2 Punk/1_.png",
+    manoPunk=":/sprites/armas y movimientos sprites/3 Hands/2 Punk/2_.png",
     salto=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1_",
     correr=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1_",
     armaB=":/sprites/armas y movimientos sprites/2 Guns/3_",
     reves="I",png=".png";
 
     QTimer *animacion,*andar;
-    int short cambio_sprit=0,cantidad_sprint=3,velocidad=scale_sprite*(23/2),posmanoX,posmanoY;
+    int short cambio_sprit=0,cantidad_sprint=3,velocidad=scale_sprite*(23/2),posmanoX,posmanoY,pospistolaX,pospistolaY;
     bool vuelta=1 ;
 
 
