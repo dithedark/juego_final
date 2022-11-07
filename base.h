@@ -2,7 +2,7 @@
 #define BASE_H
 
 #include <QGraphicsPixmapItem>
-#include "macros.h"
+#include <macros.h>
 
 #include <iostream>
 
