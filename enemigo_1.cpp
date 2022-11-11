@@ -20,7 +20,7 @@ enemigo_1::~enemigo_1()
 
 void enemigo_1::cambioE1()
 {
-    select_bloc(cambioE1_sprite*48,0,48,43,false,48*1.7,48*1.2,giro);
+    select_bloc(cambioE1_sprite*48,0,48,43,false,48*1.6,48*1.2,giro);
     if(cambioE1_sprite<cambioE1_spriteD)
     {
         cambioE1_sprite++;
@@ -70,6 +70,5 @@ void enemigo_1::disparo()
         cambioE1_spriteD=5;
         cambioE1_sprite=0;
     }
-
     cambioE1();
 }

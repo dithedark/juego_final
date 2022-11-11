@@ -16,7 +16,7 @@ private:
     QTimer *flyE3;
 
     int cambioE3_sprite=0;
-    int cambioE3_spriteD;
+    int cambioE3_spriteD=0;
     bool giro3=true;
     bool pausa3=true;
     bool posF3=false;

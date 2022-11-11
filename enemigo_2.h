@@ -17,7 +17,7 @@ private:
     QTimer *walkE2;
 
     int cambioE2_sprite=0;
-    int cambioE2_spriteD;
+    int cambioE2_spriteD=0;
     bool giro2=true;
     bool pausa2=true;
     bool posF2=false;
