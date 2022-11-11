@@ -12,6 +12,7 @@
 #include "enemigo_1.h"
 #include "enemigo_2.h"
 #include "enemigo_3.h"
+#include "polvora.h"
 
 class juego : public QGraphicsScene
 {
@@ -26,6 +27,10 @@ private:
     int select_bloc(int i, int j);
     bool aleatorio(),permisoO=true;
 
+    unsigned numbalas=0;
+
+
+
     float p = 0.3;
     bloques *bl[largo][2];
     base *fondo;
@@ -33,11 +38,34 @@ private:
     enemigo_1 *gangster;
     enemigo_2 *tanque;
     enemigo_3 *dron;
-    QTimer *caida;
+    QTimer *caida,*DisparoProta;
+
+    QVector<polvora*> cartuchoprota;
+
+
+
+
+
+    /*
+
+
+
+        desaparece.setPos(malitos[var]->x(),malitos[var]->y());
+        removeItem(malitos[var]);
+        malitos.remove(var);
+        addItem(&desaparece);
+        muerteMalo->start(200);
+
+
+
+
+    */
 
 public slots:
 
     void movimien();
+    void FuncionDisparo();
+
 
 };
 

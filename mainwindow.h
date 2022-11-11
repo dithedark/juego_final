@@ -23,7 +23,6 @@ public:
 private:
     Ui::MainWindow *ui;
     juego *scene;
-    bloques *bl;
-    bloques *bl2;
+
 };
 #endif // MAINWINDOW_H

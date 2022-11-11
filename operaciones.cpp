@@ -4,7 +4,7 @@
 #include <cmath>
 
 
-operaciones::operaciones(float PX_, float PY_, float VX_, float VY_, float mass, float R_)
+operaciones::operaciones(float PX_, float PY_, float VX_, float VY_, float mass)
 {
     PX = PX_;
     PY = PY_;
@@ -14,7 +14,7 @@ operaciones::operaciones(float PX_, float PY_, float VX_, float VY_, float mass,
     ax = 0;
     ay = 0;
     G = 1;
-    R = R_;
+
 }
 
 float operaciones::getPX() const
@@ -44,12 +44,8 @@ float operaciones::getAX() const
     return ax;
 }
 
-float operaciones::getR() const
-{
-    return R;
-}
 
-/*
+
 void operaciones::acelerar(float px2_, float py2_, float mass2)
 {
     radio = pow((pow((px2_-PX),2)+pow((py2_-PY),2)),0.5);
@@ -57,7 +53,7 @@ void operaciones::acelerar(float px2_, float py2_, float mass2)
     ay = G*mass2*(py2_-PY)/pow(radio,3);
 
 }
-*/
+
 
 void operaciones::actualizarY(float dt)
 {
@@ -94,5 +90,10 @@ void operaciones::setAX(float _ax)
 void operaciones::setVX(float _vx)
 {
     VX=_vx;
+}
+
+void operaciones::setPX(float px)
+{
+    PX=px;
 }
 

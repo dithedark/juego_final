@@ -11,16 +11,27 @@ juego::juego()
     dron= new enemigo_3;
     mapa();
 
-    addItem(dron);
+    //addItem(dron);
     addItem(gangster);
-    addItem(tanque);
 
-    //addItem(personaje->mano);
+    addItem(personaje->mano);
+    addItem(personaje->pistola);
     addItem(personaje);
 
 
+    //addItem(gangster);
+
+
+
+    //addItem(tanque);
+
+    //addItem(personaje);
+
+
     caida= new QTimer;
+    DisparoProta=new QTimer;
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));
+    connect(DisparoProta, SIGNAL (timeout()),this, SLOT(FuncionDisparo()));
 
 
 
@@ -29,11 +40,16 @@ juego::juego()
 juego::~juego()
 {
     for(int i=0;i<largo;i++){
-        for(int j=0;j<ancho;j++) delete bl[i][j];
+        for(int j=0;j<2;j++) delete bl[i][j];
+    }
+    for (unsigned var = 0; var < numbalas; ++var)
+    {
+        delete cartuchoprota[var];
     }
     delete personaje;
     delete gangster;
     delete caida;
+    delete DisparoProta;
 
 }
 
@@ -72,6 +88,35 @@ void juego::mapa()
     }
 }
 
+void juego::FuncionDisparo()
+{
+    int eliminados=0;
+    if(numbalas!=0)
+    {
+
+        for (unsigned var = 0; var < numbalas-eliminados; ++var)
+        {
+            cartuchoprota[var]->fisicas();
+            if(cartuchoprota[var]->x()<=0 or cartuchoprota[var]->x()>=largo*scale_sprite*16)
+            {
+                removeItem(cartuchoprota[var]);
+                cartuchoprota.remove(var);
+                eliminados++;
+
+            }
+
+        }
+
+    }
+    else
+    {
+        DisparoProta->stop();
+    }
+
+    numbalas=numbalas-eliminados;
+
+}
+
 
 
 /*int juego::select_bloc(int i, int j)
@@ -108,7 +153,8 @@ void juego::movimien()
 void juego::keyPressEvent(QKeyEvent *i)
 {
     const int e=i->key();
-    if(e == Qt::Key_O)
+
+    if(e == Qt::Key_P)
     {
         if(permisoO)
         {
@@ -119,8 +165,23 @@ void juego::keyPressEvent(QKeyEvent *i)
             caida->start(10);
         }
     }
-    if(e == Qt::Key_P)
+    if(e == Qt::Key_O)
     {
         personaje->direccion();
+    }
+    if(e == Qt::Key_I)
+    {
+        int v;
+        numbalas++;
+        cartuchoprota.push_back(new polvora);
+
+        if(personaje->getvuelta())
+        {v=1;}
+        else
+        { v=-1;}
+        cartuchoprota[numbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",personaje->mano->x(),personaje->mano->y(),0,0,v*scale_sprite*20,0,0,personaje->getvuelta());
+        addItem(cartuchoprota[numbalas-1]);
+        DisparoProta->start(10);
+
     }
 }

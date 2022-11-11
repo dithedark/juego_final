@@ -18,7 +18,8 @@ SOURCES += \
     jugador.cpp \
     main.cpp \
     mainwindow.cpp \
-    operaciones.cpp
+    operaciones.cpp \
+    polvora.cpp
 
 HEADERS += \
     base.h \
@@ -30,7 +31,8 @@ HEADERS += \
     jugador.h \
     macros.h \
     mainwindow.h \
-    operaciones.h
+    operaciones.h \
+    polvora.h
 
 FORMS += \
     mainwindow.ui

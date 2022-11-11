@@ -9,7 +9,9 @@ jugador::jugador()
     pistola=new base;
 
 
+
     configuracion(punk,true,0,14,192,34);
+
 
     CAMbloque(2);
     connect(animacion, SIGNAL (timeout()),this, SLOT(escena()));
@@ -18,16 +20,19 @@ jugador::jugador()
 
 
     setPos(16*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-    calculo= new operaciones (x(),y(),0,0,0,0);
+    calculo= new operaciones (x(),y(),0,0,0);
     //calculo->Maceleracion(40);
 
     mano->setPos(x()+20,y()+14);
     mano->configuracion(manoPunk);
+    pistola->configuracion(armaB+"2"+png);
 
 
 
     animacion->start(100);
     andar->start(10);
+
+
 
 }
 
@@ -79,7 +84,18 @@ void jugador::movimientoY()
 
 void jugador::movimientoX()
 {
-    calculo->actualizarX(0.06667);
+    if(x()>0 and x()+x_jugador*scale_sprite < (scale_sprite*16*largo))
+        calculo->actualizarX(0.06667);
+    if( x()<0)
+    {
+        calculo->setPX(1);
+        calculo->setAX(25*scale_sprite);
+    }
+    if(x()+x_jugador*scale_sprite > (scale_sprite*16*largo))
+    {
+        calculo->setPX((scale_sprite*16*largo)-x_jugador*scale_sprite-1);
+        calculo->setAX(-1*25*scale_sprite);
+    }
 
     if((calculo->getVX() > velocidad) and ( calculo->getAX() > 0 ) )
     {
@@ -96,6 +112,9 @@ void jugador::movimientoX()
 
     setPos(calculo->getPX(),y());
     mano->setPos(x()+posmanoX,y()+posmanoY);
+    pistola->setPos((x()+posmanoX+(signo*tam_brazo_Descanso*4)/5),y()+posmanoY+((tam_brazo_Descanso*4)/5));
+
+
 
 }
 
@@ -123,33 +142,34 @@ void jugador::cargaCorrer()
     {
         configuracion(correr+png,true,0,14,288,34);
 
-        mano->select_bloc(12,12,13,13,false,24,20*1.2);
-        posmanoX=31;
+        mano->select_bloc(12,12,13,13,false,tam_brazo_Descanso*scale_sprite,tam_brazo_Descanso*scale_sprite);
+
+        pistola->select_bloc(0,0,12,12,false,(tam_brazo_Descanso*scale_sprite*4)/5,(tam_brazo_Descanso*scale_sprite*4)/5);
+        signo=1;
         posmanoY=18;
+        posmanoX=34;
+
 
     }
     else
     {
         configuracion(correr+reves+png,true,23,14,264,34);
-        mano->select_bloc(12,12,13,13,false,24,20*1.2,true);
-        posmanoX=-8;
+        mano->select_bloc(12,12,13,13,false,tam_brazo_Descanso*scale_sprite,tam_brazo_Descanso*scale_sprite,true);
+        pistola->select_bloc(0,0,12,12,false,(tam_brazo_Descanso*scale_sprite*4)/5,(tam_brazo_Descanso*scale_sprite*4)/5,true);
+        posmanoX=-10;
         posmanoY=18;
+
+        signo=0;
     }
 
 
 }
 
-void jugador::cargarDisparo()
+
+
+bool jugador::getvuelta()
 {
-    if(vuelta)
-    {
-
-    }
-    else
-    {
-
-    }
-
+    return vuelta ;
 }
 
 void jugador::escena()
@@ -181,5 +201,6 @@ void jugador::escena()
     }
 
 }
+
 
 
