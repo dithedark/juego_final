@@ -9,6 +9,7 @@ jugador::jugador()
     pistola=new base;
 
 
+
     configuracion(punk,true,0,14,192,34);
 
 
@@ -19,7 +20,7 @@ jugador::jugador()
 
 
     setPos(16*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-    calculo= new operaciones (x(),y(),0,0,0,0);
+    calculo= new operaciones (x(),y(),0,0,0);
     //calculo->Maceleracion(40);
 
     mano->setPos(x()+20,y()+14);
@@ -83,7 +84,18 @@ void jugador::movimientoY()
 
 void jugador::movimientoX()
 {
-    calculo->actualizarX(0.06667);
+    if(x()>0 and x()+x_jugador*scale_sprite < (scale_sprite*16*largo))
+        calculo->actualizarX(0.06667);
+    if( x()<0)
+    {
+        calculo->setPX(1);
+        calculo->setAX(25*scale_sprite);
+    }
+    if(x()+x_jugador*scale_sprite > (scale_sprite*16*largo))
+    {
+        calculo->setPX((scale_sprite*16*largo)-x_jugador*scale_sprite-1);
+        calculo->setAX(-1*25*scale_sprite);
+    }
 
     if((calculo->getVX() > velocidad) and ( calculo->getAX() > 0 ) )
     {
@@ -153,19 +165,11 @@ void jugador::cargaCorrer()
 
 }
 
-void jugador::cargarDisparo()
+
+
+bool jugador::getvuelta()
 {
-    if(vuelta)
-    {
-        configuracion(":/sprites/armas y movimientos sprites/3 Hands/2 Punk/3_.png");
-
-
-    }
-    else
-    {
-
-    }
-
+    return vuelta ;
 }
 
 void jugador::escena()

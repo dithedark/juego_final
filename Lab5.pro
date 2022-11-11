@@ -12,21 +12,27 @@ SOURCES += \
     base.cpp \
     bloques.cpp \
     enemigo_1.cpp \
+    enemigo_2.cpp \
+    enemigo_3.cpp \
     juego.cpp \
     jugador.cpp \
     main.cpp \
     mainwindow.cpp \
-    operaciones.cpp
+    operaciones.cpp \
+    polvora.cpp
 
 HEADERS += \
     base.h \
     bloques.h \
     enemigo_1.h \
+    enemigo_2.h \
+    enemigo_3.h \
     juego.h \
     jugador.h \
     macros.h \
     mainwindow.h \
-    operaciones.h
+    operaciones.h \
+    polvora.h
 
 FORMS += \
     mainwindow.ui

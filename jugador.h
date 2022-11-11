@@ -5,6 +5,7 @@
 #include "base.h"
 #include "operaciones.h"
 
+
 class jugador:public QObject , public base
 {
 Q_OBJECT
@@ -30,6 +31,8 @@ public:
 
     void cargarDisparo();
 
+    bool getvuelta();
+
     operaciones *calculo;
 
     base *mano,*pistola;
@@ -39,12 +42,15 @@ private:
     manoPunk=":/sprites/armas y movimientos sprites/3 Hands/2 Punk/2_.png",
     salto=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1_",
     correr=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1_",
-    armaB=":/sprites/armas y movimientos sprites/2 Guns/3_",
+    armaB=":/sprites/armas y movimientos sprites/2 Guns/2_",
+    bala=":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",
     reves="I",png=".png";
 
-    QTimer *animacion,*andar;
+    QTimer *animacion,*andar,*fisica_balar;
     int short cambio_sprit=0,cantidad_sprint=3,velocidad=scale_sprite*(23/2),posmanoX,posmanoY,pospistolaX,pospistolaY,signo;
     bool vuelta=1 ;
+
+
 
 
 

@@ -5,14 +5,14 @@
 class operaciones
 {
 public:
-    operaciones(float PX_,float PY_,float VX_,float VY_,float mass, float R_);
+    operaciones(float PX_,float PY_,float VX_,float VY_,float mass);
 
     float getPX() const;
     float getPY() const;
     float getmasa() const;
     float getVX() const;
     float getAX() const;
-    float getR() const;
+
 
     void acelerar(float px2_, float py2_, float masa2);
     void actualizarY(float dt);
@@ -27,10 +27,11 @@ public:
 
     void setAX(float _ax);
     void setVX(float _vx);
+    void setPX(float px);
 
 
 private:
-    float PX,PY,VX,VY, radio, masa, ax,ay, G, R;
+    float PX,PY,VX,VY, radio, masa, ax,ay, G;
 };
 
 #endif // OPERACIONES_H
