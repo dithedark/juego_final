@@ -17,9 +17,8 @@
         <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1_I.png</file>
         <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1_.png</file>
         <file>sprites/armas y movimientos sprites/1 Characters/2 Punk/Idle1.png</file>
-        <file>sprites/armas y movimientos sprites/3 Hands/2 Punk/1_.png</file>
-        <file>sprites/armas y movimientos sprites/3 Hands/2 Punk/2_.png</file>
-        <file>sprites/armas y movimientos sprites/3 Hands/2 Punk/3_.png</file>
+        <file>sprites/armas y movimientos sprites/3 Hands/2 Punk/2.png</file>
+        <file>sprites/armas y movimientos sprites/3 Hands/2 Punk/3.png</file>
         <file>sprites/armas y movimientos sprites/2 Guns/3_1.png</file>
         <file>sprites/armas y movimientos sprites/2 Guns/3_2.png</file>
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Walk.png</file>
@@ -33,5 +32,9 @@
         <file>sprites/armas y movimientos sprites/5 Bullets/4_1.png</file>
         <file>sprites/armas y movimientos sprites/2 Guns/2_1.png</file>
         <file>sprites/armas y movimientos sprites/2 Guns/2_2.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/5/Death.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/5/Hurt.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/5/Idle.png</file>
+        <file>sprites/armas y movimientos sprites/5 Bullets/6.png</file>
     </qresource>
 </RCC>
