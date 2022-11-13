@@ -55,6 +55,7 @@ void enemigo_1::cambioE1()
 
 void enemigo_1::disparo()
 {
+
     if(cambioE1_sprite==cambioE1_spriteD and pausa==true)
     {
         configuracion(enemigo1D,true,0,8,432,40);

@@ -1,4 +1,4 @@
-#include "juego.h"
+ #include "juego.h"
 
 juego::juego()
 {
@@ -11,7 +11,7 @@ juego::juego()
     dron= new enemigo_3;
     mapa();
 
-    //addItem(dron);
+    addItem(dron);
     addItem(gangster);
 
     addItem(personaje->mano);
@@ -23,7 +23,7 @@ juego::juego()
 
 
 
-    //addItem(tanque);
+    addItem(tanque);
 
     //addItem(personaje);
 
