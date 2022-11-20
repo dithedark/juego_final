@@ -28,6 +28,7 @@ private:
     bool aleatorio(),permisoO=true;
 
     unsigned numbalas=0;
+    unsigned dronesEnemigos=0,dronesbalas=0,limiteDrones;
 
 
 
@@ -38,9 +39,13 @@ private:
     enemigo_1 *gangster;
     enemigo_2 *tanque;
     enemigo_3 *dron;
-    QTimer *caida,*DisparoProta;
+    QTimer *caida,*DisparoProta,*movimiento_drones;
 
     QVector<polvora*> cartuchoprota;
+
+    QVector<enemigo_3*> drones;
+
+
 
 
 
@@ -65,6 +70,7 @@ public slots:
 
     void movimien();
     void FuncionDisparo();
+    void inteligencia_drones();
 
 
 };

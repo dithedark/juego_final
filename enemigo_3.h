@@ -10,20 +10,26 @@ Q_OBJECT
 public:
     enemigo_3();
     ~enemigo_3();
+    int fase();
+    void muerte();
 private:
     QString enemigo3D=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Attack.png";
     QString enemigo3=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Walk.png";
+    QString enemigo_quieto=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Idle.png" ;
+    QString enemigo_herido=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Hurt.png";
+    QString enemigo_muerte=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Death.png";
     QTimer *flyE3;
 
     int cambioE3_sprite=0;
     int cambioE3_spriteD=0;
     bool giro3=true;
-    bool pausa3=true;
+    unsigned short pausa3=1;
     bool posF3=false;
     int punto3=85;
     int punto_contrario3=2;
 
-private slots:
+
+public slots:
     void disparoE3();
     void cambioE3();
 

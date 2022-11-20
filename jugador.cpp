@@ -24,7 +24,7 @@ jugador::jugador()
     //calculo->Maceleracion(40);
 
     mano->setPos(x()+20,y()+14);
-    mano->configuracion(manoPunk);
+    mano->configuracion(manoPunk+"2"+png);
     pistola->configuracion(armaB+"2"+png);
 
 
@@ -112,7 +112,7 @@ void jugador::movimientoX()
 
     setPos(calculo->getPX(),y());
     mano->setPos(x()+posmanoX,y()+posmanoY);
-    pistola->setPos((x()+posmanoX+(signo*tam_brazo_Descanso*4)/5),y()+posmanoY+((tam_brazo_Descanso*4)/5));
+    pistola->setPos(x()+posmanoX+(signo*pospistolaX),y()+posmanoY+pospistolaY);
 
 
 
@@ -138,6 +138,11 @@ void jugador::saltar()
 
 void jugador::cargaCorrer()
 {
+    mano->configuracion(manoPunk+"2"+png);
+    pistola->configuracion(armaB+"2"+png);
+    pospistolaX=(tam_brazo_Descanso*4)/5;
+    pospistolaY=pospistolaX;
+
     if(vuelta)
     {
         configuracion(correr+png,true,0,14,288,34);
@@ -146,8 +151,9 @@ void jugador::cargaCorrer()
 
         pistola->select_bloc(0,0,12,12,false,(tam_brazo_Descanso*scale_sprite*4)/5,(tam_brazo_Descanso*scale_sprite*4)/5);
         signo=1;
-        posmanoY=18;
-        posmanoX=34;
+        posmanoY=9*scale_sprite;
+        posmanoX=17*scale_sprite;
+
 
 
     }
@@ -156,12 +162,38 @@ void jugador::cargaCorrer()
         configuracion(correr+reves+png,true,23,14,264,34);
         mano->select_bloc(12,12,13,13,false,tam_brazo_Descanso*scale_sprite,tam_brazo_Descanso*scale_sprite,true);
         pistola->select_bloc(0,0,12,12,false,(tam_brazo_Descanso*scale_sprite*4)/5,(tam_brazo_Descanso*scale_sprite*4)/5,true);
-        posmanoX=-10;
-        posmanoY=18;
+        posmanoX=-5*scale_sprite;
+        posmanoY=9*scale_sprite;
+
 
         signo=0;
     }
 
+
+}
+
+void jugador::cargarDisparo()
+{
+
+    mano->configuracion(manoPunk+"3"+png);
+    pistola->configuracion(armaB+"1"+png);
+    pospistolaY=0;
+
+    if(vuelta)
+    {
+        mano->select_bloc(12,12,13,13,false,tam_brazo_Descanso*scale_sprite,tam_brazo_Descanso*scale_sprite);
+        pistola->select_bloc(0,0,12,12,false,(tam_brazo_Descanso*scale_sprite*4)/5,(tam_brazo_Descanso*scale_sprite*4)/5);
+
+    }
+    else
+    {
+        mano->select_bloc(12,12,13,13,false,tam_brazo_Descanso*scale_sprite,tam_brazo_Descanso*scale_sprite,true);
+        pistola->select_bloc(0,0,12,12,false,(tam_brazo_Descanso*scale_sprite*4)/5,(tam_brazo_Descanso*scale_sprite*4)/5,true);
+
+
+
+
+    }
 
 }
 

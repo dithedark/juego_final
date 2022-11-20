@@ -39,7 +39,7 @@ public:
 
 private:
     QString punk=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Idle1.png",
-    manoPunk=":/sprites/armas y movimientos sprites/3 Hands/2 Punk/2_.png",
+    manoPunk=":/sprites/armas y movimientos sprites/3 Hands/2 Punk/",
     salto=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Jump1_",
     correr=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1_",
     armaB=":/sprites/armas y movimientos sprites/2 Guns/2_",

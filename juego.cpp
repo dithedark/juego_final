@@ -12,11 +12,19 @@ juego::juego()
     mapa();
 
     addItem(dron);
+<<<<<<< HEAD
     addItem(gangster);
+=======
+    //addItem(gangster);
+>>>>>>> 30fbec5a066e93e00e7ca4dabf5db0248730cff2
 
     addItem(personaje->mano);
     addItem(personaje->pistola);
     addItem(personaje);
+
+    drones.push_back(new enemigo_3);
+    dronesEnemigos++;
+    addItem(drones[0]);
 
 
     //addItem(gangster);
@@ -25,15 +33,17 @@ juego::juego()
 
     addItem(tanque);
 
-    //addItem(personaje);
 
 
     caida= new QTimer;
     DisparoProta=new QTimer;
+    movimiento_drones=new QTimer;
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));
     connect(DisparoProta, SIGNAL (timeout()),this, SLOT(FuncionDisparo()));
+    connect(movimiento_drones, SIGNAL (timeout()),this, SLOT(inteligencia_drones()));
 
 
+    movimiento_drones->start(120);
 
 }
 
@@ -50,6 +60,7 @@ juego::~juego()
     delete gangster;
     delete caida;
     delete DisparoProta;
+    delete movimiento_drones;
 
 }
 
@@ -97,13 +108,26 @@ void juego::FuncionDisparo()
         for (unsigned var = 0; var < numbalas-eliminados; ++var)
         {
             cartuchoprota[var]->fisicas();
-            if(cartuchoprota[var]->x()<=0 or cartuchoprota[var]->x()>=largo*scale_sprite*16)
+
+            for (unsigned i = 0; i < dronesEnemigos; ++i)
+            {
+                if(drones[i]->collidesWithItem(cartuchoprota[var]))
+                {
+                    removeItem(cartuchoprota[var]);
+                    cartuchoprota.remove(var);
+                    eliminados++;
+                }
+
+            }
+            if((cartuchoprota[var]->x()<=0 or cartuchoprota[var]->x()>=largo*scale_sprite*16) or cartuchoprota[var]->y()<0 or cartuchoprota[var]->y()>ancho*16*scale_sprite)
             {
                 removeItem(cartuchoprota[var]);
                 cartuchoprota.remove(var);
                 eliminados++;
 
             }
+
+
 
         }
 
@@ -115,6 +139,24 @@ void juego::FuncionDisparo()
 
     numbalas=numbalas-eliminados;
 
+}
+
+void juego::inteligencia_drones()
+{
+    for (unsigned var = 0; var < dronesEnemigos; ++var)
+    {
+        drones[var]->disparoE3();
+        if(drones[var]->fase()==0)
+        {
+            numbalas++;
+            cartuchoprota.push_back(new polvora);
+            if(personaje->getvuelta())
+            cartuchoprota[numbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",drones[var]->x()+(22*scale_sprite),drones[var]->y()+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
+            addItem(cartuchoprota[numbalas-1]);
+
+        }
+    }
+    dron->fase();
 }
 
 
@@ -154,7 +196,7 @@ void juego::keyPressEvent(QKeyEvent *i)
 {
     const int e=i->key();
 
-    if(e == Qt::Key_P)
+    if(e == Qt::Key_I)
     {
         if(permisoO)
         {
@@ -165,14 +207,15 @@ void juego::keyPressEvent(QKeyEvent *i)
             caida->start(10);
         }
     }
-    if(e == Qt::Key_O)
+    if(e == Qt::Key_P)
     {
         personaje->direccion();
     }
-    if(e == Qt::Key_I)
+    if(e == Qt::Key_O)
     {
         int v;
         numbalas++;
+        personaje->cargarDisparo();
         cartuchoprota.push_back(new polvora);
 
         if(personaje->getvuelta())
