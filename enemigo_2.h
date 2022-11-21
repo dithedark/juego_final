@@ -13,11 +13,13 @@ public:
 
 private:
     QString enemigo2D=":/sprites/enemigos robots y drones con armas y animaciones sprites/6/Attack.png";
+
     QString enemigo2=":/sprites/enemigos robots y drones con armas y animaciones sprites/6/Walk.png";
     QTimer *walkE2;
 
-    int cambioE2_sprite=0;
-    int cambioE2_spriteD=0;
+    int cambioE2_sprite=0,
+    cambioE2_spriteD=0;
+
     bool giro2=true;
     bool pausa2=true;
     bool posF2=false;

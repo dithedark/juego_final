@@ -69,6 +69,9 @@ void enemigo_3::cambioE3()
             }
     }
 }
+
+
+
 void enemigo_3::disparoE3()
 {
     if(cambioE3_sprite==cambioE3_spriteD and pausa3==0)

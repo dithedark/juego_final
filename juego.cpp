@@ -2,6 +2,7 @@
 
 juego::juego()
 {
+
     srand(time(NULL));
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
 
@@ -45,6 +46,8 @@ juego::juego()
 
 
     movimiento_drones->start(120);
+    Disparo_enemigos->start(10);
+
 
 
 }
@@ -66,8 +69,11 @@ juego::~juego()
 
 }
 
+
+
 void juego::mapa()
 {
+
     fondo =new base;
     fondo->configuracion(":/sprites/zona sprites/2 Background/Background.png");
 
@@ -75,7 +81,8 @@ void juego::mapa()
     fondo->select_bloc(0,0,576,324,false,largo*32,(ancho-2)*32);
     addItem(fondo);
 
-    for(int i=0;i<largo;i++){
+    for(int i=0;i<largo;i++)
+    {
 
             bl[i][0] = new bloques;
             bl[i][0]->configuracion(":/sprites/zona sprites/1 Tiles/IndustrialTile_05.png");
@@ -85,7 +92,8 @@ void juego::mapa()
 
     }
 
-    for(int i=0;i<largo;i++){
+    for(int i=0;i<largo;i++)
+    {
 
             QString sprint ;
             sprint=char(49+( rand() % (7  )) );
@@ -99,7 +107,10 @@ void juego::mapa()
             addItem(bl[i][1]);
 
     }
+
 }
+
+
 
 void juego::FuncionDisparoProta()
 {
@@ -143,6 +154,7 @@ void juego::FuncionDisparoProta()
     //numbalas=numbalas-eliminados;
 
 }
+
 
 
 void juego::disparoEnemigos()
@@ -191,7 +203,7 @@ void juego::inteligencia_drones()
 
             cartuchoEnemigos[dronesbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",drones[var]->x()+(13*scale_sprite),drones[var]->y()+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
             addItem(cartuchoEnemigos[dronesbalas-1]);
-            Disparo_enemigos->start(10);
+           // Disparo_enemigos->start(10);
 
 
 
@@ -202,14 +214,18 @@ void juego::inteligencia_drones()
 
 
 
-/*int juego::select_bloc(int i, int j)
+/*
+ int juego::select_bloc(int i, int j)
 {
    int bl=9;
 
    if(j==0 || j==ancho-1 || i==0 || i==largo-1 || (i%2==0 && j%2==0)) bl = 0;
    else if(aleatorio() && !((i==1 && j==1) || (i==2 && j==1) || (i==1 && j==2))) bl = 1;
    return bl;
-}*/
+}
+*/
+
+
 
 bool juego::aleatorio()
 {
@@ -231,6 +247,8 @@ void juego::movimien()
         }
     }
 }
+
+
 
 
 void juego::keyPressEvent(QKeyEvent *i)
@@ -263,7 +281,7 @@ void juego::keyPressEvent(QKeyEvent *i)
         {v=1;}
         else
         { v=-1;}
-        cartuchoprota[numbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",personaje->mano->x(),personaje->mano->y(),0,0,v*scale_sprite*20,0,0,personaje->getvuelta());
+        cartuchoprota[numbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",personaje->mano->x(),personaje->mano->y(),0,0,v*scale_sprite*40,0,0,personaje->getvuelta());
         addItem(cartuchoprota[numbalas-1]);
         DisparoProta->start(10);
 
