@@ -18,14 +18,27 @@ enemigo_3::~enemigo_3()
 
 int enemigo_3::fase()
 {
-    cout<<pausa3<<endl;
-    return pausa3;
+    if (conteopausa==9 and pausa3==0)
+    {
+        conteopausa++;
+        return pausa3;
+    }
+    else if(conteopausa <9 and pausa3==0)
+    {
+        conteopausa++;
+        return 1;
+    }
+    else if (conteopausa ==10 and pausa3==0)
+    {
+        conteopausa=0;
+    }
 
+    return 1;
 }
 
 void enemigo_3::cambioE3()
 {
-    select_bloc(cambioE3_sprite*48,0,48,43,false,40.8*scale_sprite,28.8*scale_sprite,giro3);
+    select_bloc(cambioE3_sprite*48,0,35,43,false,30*scale_sprite,30*scale_sprite,giro3);
     if(cambioE3_sprite<cambioE3_spriteD)
     {
         cambioE3_sprite++;
@@ -56,6 +69,9 @@ void enemigo_3::cambioE3()
             }
     }
 }
+
+
+
 void enemigo_3::disparoE3()
 {
     if(cambioE3_sprite==cambioE3_spriteD and pausa3==0)

@@ -23,7 +23,7 @@ private:
     int cambioE3_sprite=0;
     int cambioE3_spriteD=0;
     bool giro3=true;
-    unsigned short pausa3=1;
+    unsigned short pausa3=1,conteopausa=0;
     bool posF3=false;
     int punto3=85;
     int punto_contrario3=2;

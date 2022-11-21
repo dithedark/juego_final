@@ -2,6 +2,7 @@
 
 juego::juego()
 {
+
     srand(time(NULL));
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
 
@@ -11,10 +12,14 @@ juego::juego()
     dron= new enemigo_3;
     mapa();
 
+<<<<<<< HEAD
     addItem(dron);
 /*<<<<<<< HEAD
     addItem(gangster);
 =======
+=======
+
+>>>>>>> 21e82c20da52eb4f640ed659123e60b0811a1d4d
     //addItem(gangster);
 >>>>>>> 30fbec5a066e93e00e7ca4dabf5db0248730cff2*/
     addItem(gangster);
@@ -28,6 +33,8 @@ juego::juego()
     addItem(drones[0]);
 
 
+
+
     //addItem(gangster);
 
 
@@ -39,12 +46,18 @@ juego::juego()
     caida= new QTimer;
     DisparoProta=new QTimer;
     movimiento_drones=new QTimer;
+    Disparo_enemigos=new QTimer;
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));
-    connect(DisparoProta, SIGNAL (timeout()),this, SLOT(FuncionDisparo()));
+    connect(DisparoProta, SIGNAL (timeout()),this, SLOT(FuncionDisparoProta()));
     connect(movimiento_drones, SIGNAL (timeout()),this, SLOT(inteligencia_drones()));
+    connect(Disparo_enemigos, SIGNAL (timeout()),this, SLOT(disparoEnemigos()));
+
 
 
     movimiento_drones->start(120);
+    Disparo_enemigos->start(10);
+
+
 
 }
 
@@ -65,8 +78,11 @@ juego::~juego()
 
 }
 
+
+
 void juego::mapa()
 {
+
     fondo =new base;
     fondo->configuracion(":/sprites/zona sprites/2 Background/Background.png");
 
@@ -74,7 +90,8 @@ void juego::mapa()
     fondo->select_bloc(0,0,576,324,false,largo*32,(ancho-2)*32);
     addItem(fondo);
 
-    for(int i=0;i<largo;i++){
+    for(int i=0;i<largo;i++)
+    {
 
             bl[i][0] = new bloques;
             bl[i][0]->configuracion(":/sprites/zona sprites/1 Tiles/IndustrialTile_05.png");
@@ -84,7 +101,8 @@ void juego::mapa()
 
     }
 
-    for(int i=0;i<largo;i++){
+    for(int i=0;i<largo;i++)
+    {
 
             QString sprint ;
             sprint=char(49+( rand() % (7  )) );
@@ -98,15 +116,18 @@ void juego::mapa()
             addItem(bl[i][1]);
 
     }
+
 }
 
-void juego::FuncionDisparo()
+
+
+void juego::FuncionDisparoProta()
 {
-    int eliminados=0;
+    //int eliminados=0;
     if(numbalas!=0)
     {
 
-        for (unsigned var = 0; var < numbalas-eliminados; ++var)
+        for (unsigned var = 0; var < numbalas; ++var)
         {
             cartuchoprota[var]->fisicas();
 
@@ -116,16 +137,17 @@ void juego::FuncionDisparo()
                 {
                     removeItem(cartuchoprota[var]);
                     cartuchoprota.remove(var);
-                    eliminados++;
+                    //eliminados++;
+                    numbalas--;
                 }
 
             }
-            if((cartuchoprota[var]->x()<=0 or cartuchoprota[var]->x()>=largo*scale_sprite*16) or cartuchoprota[var]->y()<0 or cartuchoprota[var]->y()>ancho*16*scale_sprite)
+            if((cartuchoprota[var]->x()<=0 or cartuchoprota[var]->x()>=largo*scale_sprite*16) )
             {
                 removeItem(cartuchoprota[var]);
                 cartuchoprota.remove(var);
-                eliminados++;
-
+                //eliminados++;
+                numbalas--;
             }
 
 
@@ -138,9 +160,44 @@ void juego::FuncionDisparo()
         DisparoProta->stop();
     }
 
-    numbalas=numbalas-eliminados;
+    //numbalas=numbalas-eliminados;
 
 }
+
+
+
+void juego::disparoEnemigos()
+{
+    unsigned balasenemigos=dronesbalas;
+
+
+        for (unsigned var = 0; var < balasenemigos; ++var)
+        {
+
+            cartuchoEnemigos[var]->fisicas(personaje->x()+((x_jugador/2)*scale_sprite),personaje->y()+((y_jugador/2)*scale_sprite),personaje->calculo->getmasa());
+
+            if(( (cartuchoEnemigos[var]->x()<=0) or (cartuchoEnemigos[var]->x()>=largo*scale_sprite*16)) or (cartuchoEnemigos[var]->y()<0) or (cartuchoEnemigos[var]->y()>ancho*16*scale_sprite))
+            {
+                removeItem(cartuchoEnemigos[var]);
+                cartuchoEnemigos.remove(var);
+                //eliminados++;
+                balasenemigos--;
+                dronesbalas--;
+            }
+
+
+
+        }
+
+
+
+    //numbalas=numbalas-eliminados;
+
+
+}
+
+
+
 
 void juego::inteligencia_drones()
 {
@@ -149,27 +206,35 @@ void juego::inteligencia_drones()
         drones[var]->disparoE3();
         if(drones[var]->fase()==0)
         {
-            numbalas++;
-            cartuchoprota.push_back(new polvora);
-            if(personaje->getvuelta())
-            cartuchoprota[numbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",drones[var]->x()+(22*scale_sprite),drones[var]->y()+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
-            addItem(cartuchoprota[numbalas-1]);
+
+            dronesbalas++;
+            cartuchoEnemigos.push_back(new polvora);
+
+            cartuchoEnemigos[dronesbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",drones[var]->x()+(13*scale_sprite),drones[var]->y()+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
+            addItem(cartuchoEnemigos[dronesbalas-1]);
+           // Disparo_enemigos->start(10);
+
+
 
         }
     }
-    dron->fase();
+
 }
 
 
 
-/*int juego::select_bloc(int i, int j)
+/*
+ int juego::select_bloc(int i, int j)
 {
    int bl=9;
 
    if(j==0 || j==ancho-1 || i==0 || i==largo-1 || (i%2==0 && j%2==0)) bl = 0;
    else if(aleatorio() && !((i==1 && j==1) || (i==2 && j==1) || (i==1 && j==2))) bl = 1;
    return bl;
-}*/
+}
+*/
+
+
 
 bool juego::aleatorio()
 {
@@ -191,6 +256,8 @@ void juego::movimien()
         }
     }
 }
+
+
 
 
 void juego::keyPressEvent(QKeyEvent *i)
@@ -223,7 +290,7 @@ void juego::keyPressEvent(QKeyEvent *i)
         {v=1;}
         else
         { v=-1;}
-        cartuchoprota[numbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",personaje->mano->x(),personaje->mano->y(),0,0,v*scale_sprite*20,0,0,personaje->getvuelta());
+        cartuchoprota[numbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",personaje->mano->x(),personaje->mano->y(),0,0,v*scale_sprite*40,0,0,personaje->getvuelta());
         addItem(cartuchoprota[numbalas-1]);
         DisparoProta->start(10);
 

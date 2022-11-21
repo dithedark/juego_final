@@ -39,9 +39,13 @@ private:
     enemigo_1 *gangster;
     enemigo_2 *tanque;
     enemigo_3 *dron;
-    QTimer *caida,*DisparoProta,*movimiento_drones;
+    QTimer *caida
+    ,*DisparoProta,
+    *movimiento_drones,
+    *Disparo_enemigos;
 
     QVector<polvora*> cartuchoprota;
+    QVector<polvora*> cartuchoEnemigos;
 
     QVector<enemigo_3*> drones;
 
@@ -68,8 +72,15 @@ private:
 
 public slots:
 
+    //movimiento personaje
     void movimien();
-    void FuncionDisparo();
+
+    // fisicas disparos
+    void FuncionDisparoProta();
+    void disparoEnemigos();
+
+
+    // inteligencia enemigos
     void inteligencia_drones();
 
 

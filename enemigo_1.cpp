@@ -1,5 +1,7 @@
 #include "enemigo_1.h"
 
+
+
 enemigo_1::enemigo_1()
 {
 
@@ -11,10 +13,15 @@ enemigo_1::enemigo_1()
     walkE1->start(100);
 }
 
+
+
+
 enemigo_1::~enemigo_1()
 {
     delete walkE1;
 }
+
+
 
 void enemigo_1::cambioE1()
 {
@@ -52,6 +59,8 @@ void enemigo_1::cambioE1()
             }
     }
 }
+
+
 
 void enemigo_1::disparo()
 {
