@@ -20,7 +20,7 @@ jugador::jugador()
 
 
     setPos(16*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-    calculo= new operaciones (x(),y(),0,0,0);
+    calculo= new operaciones (x(),y(),0,0,70000);
     //calculo->Maceleracion(40);
 
     mano->setPos(x()+20,y()+14);
