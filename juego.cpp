@@ -12,11 +12,12 @@ juego::juego()
     mapa();
 
     addItem(dron);
-<<<<<<< HEAD
+/*<<<<<<< HEAD
     addItem(gangster);
 =======
     //addItem(gangster);
->>>>>>> 30fbec5a066e93e00e7ca4dabf5db0248730cff2
+>>>>>>> 30fbec5a066e93e00e7ca4dabf5db0248730cff2*/
+    addItem(gangster);
 
     addItem(personaje->mano);
     addItem(personaje->pistola);
