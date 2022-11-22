@@ -12,15 +12,15 @@ juego::juego()
     dron= new enemigo_3;
     mapa();
 
-<<<<<<< HEAD
-    addItem(dron);
 /*<<<<<<< HEAD
+    addItem(dron);
+<<<<<<< HEAD
     addItem(gangster);
 =======
 =======
 
 >>>>>>> 21e82c20da52eb4f640ed659123e60b0811a1d4d
-    //addItem(gangster);
+    addItem(gangster);
 >>>>>>> 30fbec5a066e93e00e7ca4dabf5db0248730cff2*/
     addItem(gangster);
 
