@@ -13,6 +13,7 @@
 #include "enemigo_2.h"
 #include "enemigo_3.h"
 #include "polvora.h"
+#include "objetivo.h"
 
 class juego : public QGraphicsScene
 {
@@ -27,18 +28,19 @@ private:
     int select_bloc(int i, int j);
     bool aleatorio(),permisoO=true;
 
-    unsigned numbalas=0;
+    unsigned dispa=0;
     unsigned dronesEnemigos=0,dronesbalas=0,limiteDrones;
 
 
 
     float p = 0.3;
+    objetivo *trampolin;
     bloques *bl[largo][2];
     base *fondo;
     jugador *personaje;
     enemigo_1 *gangster;
     enemigo_2 *tanque;
-    enemigo_3 *dron;
+
     QTimer *caida
     ,*DisparoProta,
     *movimiento_drones,
@@ -48,7 +50,7 @@ private:
     QVector<polvora*> cartuchoEnemigos;
 
     QVector<enemigo_3*> drones;
-
+    QVector<enemigo_2*> tanques;
 
 
 

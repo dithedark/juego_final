@@ -18,6 +18,7 @@ SOURCES += \
     jugador.cpp \
     main.cpp \
     mainwindow.cpp \
+    objetivo.cpp \
     operaciones.cpp \
     polvora.cpp
 
@@ -31,6 +32,7 @@ HEADERS += \
     jugador.h \
     macros.h \
     mainwindow.h \
+    objetivo.h \
     operaciones.h \
     polvora.h
 

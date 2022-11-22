@@ -7,7 +7,7 @@ enemigo_3::enemigo_3()
     CAMbloque(3);
     connect(flyE3, SIGNAL (timeout()),this, SLOT(disparoE3()));
 
-    setPos(16*(largo-4)*scale_sprite,16*(ancho*1/12)*scale_sprite);
+    setPos(16*(largo-4)*scale_sprite,16*(ancho*2/11)*scale_sprite);
 
 }
 
@@ -18,22 +18,22 @@ enemigo_3::~enemigo_3()
 
 int enemigo_3::fase()
 {
-    if (conteopausa==9 and pausa3==0)
+    if (conteopausa==9 and pausa3==2)
     {
         conteopausa++;
         return pausa3;
     }
-    else if(conteopausa <9 and pausa3==0)
+    else if(conteopausa <9 and pausa3==2)
     {
         conteopausa++;
-        return 1;
+        return 0;
     }
-    else if (conteopausa ==10 and pausa3==0)
+    else if (conteopausa ==10 and pausa3==2)
     {
         conteopausa=0;
     }
 
-    return 1;
+    return 0;
 }
 
 void enemigo_3::cambioE3()
@@ -47,7 +47,7 @@ void enemigo_3::cambioE3()
     {
         cambioE3_sprite=0;
     }
-    if(pausa3)
+    if(pausa3==1)
     {
         if (posF3==false)
             {
@@ -76,7 +76,7 @@ void enemigo_3::disparoE3()
 {
     if(cambioE3_sprite==cambioE3_spriteD and pausa3==0)
     {
-        configuracion(enemigo3D,true,0,8,432,40);
+        configuracion(enemigo3,true,0,8,432,40);
         pausa3=1;
         cambioE3_spriteD=3;
         cambioE3_sprite=0;
@@ -84,7 +84,7 @@ void enemigo_3::disparoE3()
     }
     else if (cambioE3_sprite==cambioE3_spriteD and pausa3==1)
     {
-        configuracion(enemigo3,true,0,8,432,40);
+        configuracion(enemigo3D,true,0,8,432,40);
         pausa3=2;
         cambioE3_spriteD=3;
         cambioE3_sprite=0;

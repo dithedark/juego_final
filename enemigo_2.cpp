@@ -9,7 +9,7 @@ enemigo_2::enemigo_2()
     connect(walkE2, SIGNAL (timeout()),this, SLOT(disparoE2()));
 
     setPos(16*(largo-4)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-     walkE2->start(400);
+
 
 }
 
@@ -55,20 +55,29 @@ void enemigo_2::cambioE2()
 void enemigo_2::disparoE2()
 {
 
-    if(cambioE2_sprite==cambioE2_spriteD and pausa2==true)
+
+    if(cambioE2_sprite==cambioE2_spriteD and pausa2==0)
     {
-        configuracion(enemigo2D,true,0,8,432,40);
-        pausa2=false;
+        configuracion(enemigo2,true,0,8,432,40);
+        pausa2=1;
         cambioE2_spriteD=3;
         cambioE2_sprite=0;
 
     }
-    else if (cambioE2_sprite==cambioE2_spriteD and pausa2==false)
+    else if (cambioE2_sprite==cambioE2_spriteD and pausa2==1)
     {
-        configuracion(enemigo2,true,0,8,432,40);
-        pausa2=true;
+        configuracion(enemigo2D,true,0,8,432,40);
+        pausa2=2;
         cambioE2_spriteD=3;
         cambioE2_sprite=0;
+    }
+    else if(cambioE2_sprite==cambioE2_spriteD and pausa2==2)
+    {
+        configuracion(enemigo_quieto,true,0,8,432,40);
+        pausa2=0;
+        cambioE2_spriteD=3;
+        cambioE2_sprite=0;
+
     }
 
     cambioE2();
