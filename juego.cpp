@@ -9,8 +9,9 @@ juego::juego()
     personaje= new jugador;
     gangster= new enemigo_1;
     tanque= new enemigo_2;
-    dron= new enemigo_3;
+
     mapa();
+
 
 
     //addItem(gangster);
@@ -30,7 +31,7 @@ juego::juego()
 
 
 
-    //addItem(tanque);
+    addItem(tanque);
 
 
 
@@ -45,9 +46,13 @@ juego::juego()
 
 
 
-    movimiento_drones->start(120);
+    movimiento_drones->start(150);
     Disparo_enemigos->start(10);
 
+    trampolin =new objetivo ;
+    trampolin->parametros(":/sprites/zona sprites/3 Objects/Mop.png",scale_sprite*16*largo*0.5,scale_sprite*16*ancho*0.5);
+
+    addItem(trampolin);
 
 
 }
@@ -57,7 +62,7 @@ juego::~juego()
     for(int i=0;i<largo;i++){
         for(int j=0;j<2;j++) delete bl[i][j];
     }
-    for (unsigned var = 0; var < numbalas; ++var)
+    for (unsigned var = 0; var < dispa; ++var)
     {
         delete cartuchoprota[var];
     }
@@ -114,12 +119,14 @@ void juego::mapa()
 
 void juego::FuncionDisparoProta()
 {
-    //int eliminados=0;
+    unsigned numbalas=dispa;
+    bool entrada=false;
     if(numbalas!=0)
     {
 
         for (unsigned var = 0; var < numbalas; ++var)
         {
+            entrada=false;
             cartuchoprota[var]->fisicas();
 
             for (unsigned i = 0; i < dronesEnemigos; ++i)
@@ -129,16 +136,24 @@ void juego::FuncionDisparoProta()
                     removeItem(cartuchoprota[var]);
                     cartuchoprota.remove(var);
                     //eliminados++;
+                    dispa--;
                     numbalas--;
+                    entrada = true;
+                    break;
                 }
 
             }
-            if((cartuchoprota[var]->x()<=0 or cartuchoprota[var]->x()>=largo*scale_sprite*16) )
+
+            if(  entrada != true and var<numbalas )
             {
-                removeItem(cartuchoprota[var]);
-                cartuchoprota.remove(var);
-                //eliminados++;
-                numbalas--;
+                if((cartuchoprota[var]->x()<=0 or cartuchoprota[var]->x()>=largo*scale_sprite*16 ))
+                {
+                    removeItem(cartuchoprota[var]);
+                    cartuchoprota.remove(var);
+                    //eliminados++;
+                    dispa--;
+                    numbalas--;
+                }
             }
 
 
@@ -175,12 +190,13 @@ void juego::disparoEnemigos()
                 balasenemigos--;
                 dronesbalas--;
             }
-
-
-
         }
 
 
+
+
+
+         trampolin->Msen();
 
     //numbalas=numbalas-eliminados;
 
@@ -195,7 +211,7 @@ void juego::inteligencia_drones()
     for (unsigned var = 0; var < dronesEnemigos; ++var)
     {
         drones[var]->disparoE3();
-        if(drones[var]->fase()==0)
+        if(drones[var]->fase()==2)
         {
 
             dronesbalas++;
@@ -209,6 +225,8 @@ void juego::inteligencia_drones()
 
         }
     }
+
+    tanque->disparoE2();
 
 }
 
@@ -257,6 +275,10 @@ void juego::keyPressEvent(QKeyEvent *i)
 
     if(e == Qt::Key_I)
     {
+        if(personaje->collidesWithItem(trampolin))
+        {
+            permisoO=true;
+        }
         if(permisoO)
         {
             permisoO=false;
@@ -273,7 +295,7 @@ void juego::keyPressEvent(QKeyEvent *i)
     if(e == Qt::Key_O)
     {
         int v;
-        numbalas++;
+        dispa++;
         personaje->cargarDisparo();
         cartuchoprota.push_back(new polvora);
 
@@ -281,8 +303,8 @@ void juego::keyPressEvent(QKeyEvent *i)
         {v=1;}
         else
         { v=-1;}
-        cartuchoprota[numbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",personaje->mano->x(),personaje->mano->y(),0,0,v*scale_sprite*40,0,0,personaje->getvuelta());
-        addItem(cartuchoprota[numbalas-1]);
+        cartuchoprota[dispa-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",personaje->mano->x(),personaje->mano->y(),0,0,v*scale_sprite*40,0,0,personaje->getvuelta());
+        addItem(cartuchoprota[dispa-1]);
         DisparoProta->start(10);
 
     }
