@@ -38,5 +38,7 @@
         <file>sprites/armas y movimientos sprites/5 Bullets/6.png</file>
         <file>sprites/zona sprites/3 Objects/Mop.png</file>
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/6/Idle.png</file>
+        <file>sprites/zona sprites/4 Animated objects/Card.png</file>
+        <file>sprites/zona sprites/3 Objects/Fire-extinguisher1.png</file>
     </qresource>
 </RCC>

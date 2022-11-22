@@ -12,22 +12,9 @@ juego::juego()
 
     mapa();
 
-/*<<<<<<< HEAD
-    addItem(dron);
-<<<<<<< HEAD
-    addItem(gangster);
-=======
-=======
 
-<<<<<<< HEAD
->>>>>>> 21e82c20da52eb4f640ed659123e60b0811a1d4d
     addItem(gangster);
->>>>>>> 30fbec5a066e93e00e7ca4dabf5db0248730cff2*/
-    addItem(gangster);
-=======
 
-    //addItem(gangster);
->>>>>>> 5434a20323f0df15f61b7ad4c2d46c919bed1c9d
 
     addItem(personaje->mano);
     addItem(personaje->pistola);
@@ -63,7 +50,7 @@ juego::juego()
     Disparo_enemigos->start(10);
 
     trampolin =new objetivo ;
-    trampolin->parametros(":/sprites/zona sprites/3 Objects/Mop.png",scale_sprite*16*largo*0.5,scale_sprite*16*ancho*0.5);
+    trampolin->parametros(":/sprites/zona sprites/3 Objects/Fire-extinguisher1.png",scale_sprite*16*largo*0.5,scale_sprite*16*ancho*0.5);
 
     addItem(trampolin);
 
