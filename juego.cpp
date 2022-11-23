@@ -1,4 +1,4 @@
-#include "juego.h"
+ #include "juego.h"
 
 juego::juego()
 {
@@ -13,8 +13,8 @@ juego::juego()
     mapa();
 
 
+    addItem(gangster);
 
-    //addItem(gangster);
 
     addItem(personaje->mano);
     addItem(personaje->pistola);
@@ -50,7 +50,7 @@ juego::juego()
     Disparo_enemigos->start(10);
 
     trampolin =new objetivo ;
-    trampolin->parametros(":/sprites/zona sprites/3 Objects/Mop.png",scale_sprite*16*largo*0.5,scale_sprite*16*ancho*0.5);
+    trampolin->parametros(":/sprites/zona sprites/3 Objects/Fire-extinguisher1.png",scale_sprite*16*largo*0.5,scale_sprite*16*ancho*0.5);
 
     addItem(trampolin);
 

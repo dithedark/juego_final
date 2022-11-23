@@ -9,10 +9,8 @@ enemigo_1::enemigo_1()
     configuracion(enemigo1,true,0,10,432,40);
     CAMbloque(3);
     connect(walkE1, SIGNAL (timeout()),this, SLOT(disparo()));
-
     setPos(16*(largo-4)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-     walkE1->start(100);
-
+    walkE1->start(100);
 }
 
 
@@ -27,7 +25,7 @@ enemigo_1::~enemigo_1()
 
 void enemigo_1::cambioE1()
 {
-    select_bloc(cambioE1_sprite*48,0,48,43,false,48*1.7,48*1.2,giro);
+    select_bloc(cambioE1_sprite*48,0,48,43,false,48*1.6,48*1.2,giro);
     if(cambioE1_sprite<cambioE1_spriteD)
     {
         cambioE1_sprite++;
@@ -36,6 +34,9 @@ void enemigo_1::cambioE1()
     {
         cambioE1_sprite=0;
     }
+
+
+
     if(pausa)
     {
         if (posF==false)
@@ -68,7 +69,7 @@ void enemigo_1::disparo()
     {
         configuracion(enemigo1D,true,0,8,432,40);
         pausa=false;
-        cambioE1_spriteD=2;
+        cambioE1_spriteD=3;
         cambioE1_sprite=0;
 
     }
@@ -76,7 +77,7 @@ void enemigo_1::disparo()
     {
         configuracion(enemigo1,true,0,8,432,40);
         pausa=true;
-        cambioE1_spriteD=5;
+        cambioE1_spriteD=3;
         cambioE1_sprite=0;
     }
 
