@@ -7,14 +7,8 @@ juego::juego()
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
 
     personaje= new jugador;
-    gangster= new enemigo_1(false);
-    tanque= new enemigo_2;
 
     mapa();
-
-
-    addItem(gangster);
-
 
     addItem(personaje->mano);
     addItem(personaje->pistola);
@@ -24,13 +18,6 @@ juego::juego()
     dronesEnemigos++;
     addItem(drones[0]);
 
-
-
-
-    //addItem(gangster);
-
-
-
     //addItem(tanque);
 
 
@@ -39,14 +26,15 @@ juego::juego()
     DisparoProta=new QTimer;
     movimiento_drones=new QTimer;
     Disparo_enemigos=new QTimer;
+    t_cargar_enemigos = new QTimer;
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));
     connect(DisparoProta, SIGNAL (timeout()),this, SLOT(FuncionDisparoProta()));
     connect(movimiento_drones, SIGNAL (timeout()),this, SLOT(inteligencia_drones()));
     connect(Disparo_enemigos, SIGNAL (timeout()),this, SLOT(disparoEnemigos()));
+    connect(t_cargar_enemigos, SIGNAL (timeout()), this, SLOT(cargar_enemigos()));
 
-
-
-    movimiento_drones->start(190);
+    //t_cargar_enemigos->start(t_enemigos);
+    movimiento_drones->start(150);
     Disparo_enemigos->start(10);
 
     trampolin =new objetivo ;
@@ -177,13 +165,9 @@ void juego::FuncionDisparoProta()
 void juego::disparoEnemigos()
 {
     unsigned balasenemigos=dronesbalas;
-
-
         for (unsigned var = 0; var < balasenemigos; ++var)
         {
-
             cartuchoEnemigos[var]->fisicas(personaje->x()+((x_jugador/2)*scale_sprite),personaje->y()+((y_jugador/2)*scale_sprite),personaje->calculo->getmasa());
-
             if(( (cartuchoEnemigos[var]->x()<=0) or (cartuchoEnemigos[var]->x()>=largo*scale_sprite*16)) or (cartuchoEnemigos[var]->y()<0) or (cartuchoEnemigos[var]->y()>ancho*16*scale_sprite))
             {
                 removeItem(cartuchoEnemigos[var]);
@@ -193,16 +177,8 @@ void juego::disparoEnemigos()
                 dronesbalas--;
             }
         }
-
-
-
-
-
          trampolin->Msen();
-
     //numbalas=numbalas-eliminados;
-
-
 }
 
 
@@ -244,7 +220,13 @@ void juego::inteligencia_drones()
 
 }
 
-
+void juego::cargar_enemigos(){
+    if(t_enemigos > 0){
+        enemigo_1 *enemigo = new enemigo_1(aleatorio());
+        addItem(enemigo);
+        t_enemigos -= 500;
+    }
+}
 
 /*
  int juego::select_bloc(int i, int j)
