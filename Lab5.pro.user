@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.1, 2022-11-22T23:29:14. -->
+<!-- Written by QtCreator 8.0.1, 2022-11-22T22:23:03. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -265,16 +265,23 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/universidad/info 2 nuevo/juego_final/Lab5/Lab5/Lab5.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/universidad/info 2 nuevo/juego_final/Lab5/Lab5/Lab5.pro</value>
 =======
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
 >>>>>>> 349f5fa (Jugador de los dos lados)
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/Andres Ignacio/juegofinal/juego_final/Lab5.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/Andres Ignacio/juegofinal/juego_final/Lab5.pro</value>
+>>>>>>> 65d44af (Pro)
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">E:/Andres Ignacio/juegofinal/build-Lab5-Desktop_Qt_6_4_0_MinGW_64_bit-Debug</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
