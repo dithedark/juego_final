@@ -6,11 +6,9 @@ juego::juego()
     srand(time(NULL));
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
 
-    personaje= new jugador;
-    //tanque= new enemigo_2;
-
     mapa();
 
+    personaje= new jugador;
     addItem(personaje->mano);
     addItem(personaje->pistola);
     addItem(personaje);
