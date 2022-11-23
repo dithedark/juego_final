@@ -34,6 +34,9 @@ juego::juego()
 
     t_cargar_enemigos->start(t_enemigos);
     movimiento_drones->start(150);
+
+
+    movimiento_drones->start(190);
     Disparo_enemigos->start(10);
 
     trampolin =new objetivo ;
@@ -117,8 +120,10 @@ void juego::FuncionDisparoProta()
 
             for (unsigned i = 0; i < dronesEnemigos; ++i)
             {
-                if(drones[i]->collidesWithItem(cartuchoprota[var]))
+                if(drones[i]->collidesWithItem(cartuchoprota[var]) and drones[i]->convidas() >1)
                 {
+                    drones[i]->muerte();
+                    movimiento_drones->start(190);
                     removeItem(cartuchoprota[var]);
                     cartuchoprota.remove(var);
                     //eliminados++;
@@ -184,7 +189,7 @@ void juego::inteligencia_drones()
 {
     for (unsigned var = 0; var < dronesEnemigos; ++var)
     {
-        drones[var]->disparoE3();
+
         if(drones[var]->fase()==2)
         {
             dronesbalas++;
@@ -192,6 +197,22 @@ void juego::inteligencia_drones()
             cartuchoEnemigos[dronesbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",drones[var]->x()+(13*scale_sprite),drones[var]->y()+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
             addItem(cartuchoEnemigos[dronesbalas-1]);
            // Disparo_enemigos->start(10);
+            // Disparo_enemigos->start(10);
+
+        }
+        if( drones[var]->convidas() ==1)
+        {
+            drones[var]->muerte();
+        }
+        else if(drones[var]->convidas() ==0)
+        {
+            removeItem(drones[var]);
+            drones.remove(var);
+            dronesEnemigos--;
+        }
+        else
+        {
+            drones[var]->disparoE3();
         }
     }
 
