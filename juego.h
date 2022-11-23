@@ -40,11 +40,13 @@ private:
     jugador *personaje;
     enemigo_1 *gangster;
     enemigo_2 *tanque;
+    int t_enemigos = 3000;
 
     QTimer *caida
     ,*DisparoProta,
     *movimiento_drones,
-    *Disparo_enemigos;
+    *Disparo_enemigos,
+    *t_cargar_enemigos;
 
     QVector<polvora*> cartuchoprota;
     QVector<polvora*> cartuchoEnemigos;
@@ -85,6 +87,7 @@ public slots:
     // inteligencia enemigos
     void inteligencia_drones();
 
+    void cargar_enemigos();
 
 };
 
