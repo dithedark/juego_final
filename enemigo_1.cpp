@@ -28,7 +28,6 @@ void enemigo_1::initState(){
     walkE1->start(100);
 }
 
-
 void enemigo_1::cambioE1()
 {
     select_bloc(cambioE1_sprite*48,0,48,43,false,48*1.6,48*1.2,!posF);
@@ -52,8 +51,6 @@ void enemigo_1::cambioE1()
         }
     }
 }
-
-
 
 void enemigo_1::disparo()
 {
