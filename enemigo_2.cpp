@@ -29,7 +29,7 @@ void enemigo_2::cambioE2()
     {
         cambioE2_sprite=0;
     }
-    if(pausa2)
+    if(pausa2==1)
     {
         if (posF2==false)
             {

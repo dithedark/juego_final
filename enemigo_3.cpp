@@ -23,7 +23,7 @@ int enemigo_3::fase()
         conteopausa++;
         return pausa3;
     }
-    else if(conteopausa <9 and pausa3==2)
+    else if(conteopausa !=9 and pausa3==2)
     {
         conteopausa++;
         return 0;
@@ -33,7 +33,36 @@ int enemigo_3::fase()
         conteopausa=0;
     }
 
-    return 0;
+    return pausa3;
+}
+
+int enemigo_3::muerte()
+{
+
+    if(vidas == 1 and pausa3 !=3)
+    {
+        configuracion(enemigo_muerte,true,0,8,432,40);
+        pausa3=3;
+        cambioE3_spriteD=3;
+        cambioE3_sprite=0;
+    }
+    else if(cambioE3_sprite<3 and vidas ==1 )
+    {
+
+        cambioE3();
+    }
+    else
+    {
+        vidas--;
+
+    }
+
+    return vidas;
+}
+
+int enemigo_3::convidas()
+{
+    return vidas;
 }
 
 void enemigo_3::cambioE3()
@@ -74,6 +103,7 @@ void enemigo_3::cambioE3()
 
 void enemigo_3::disparoE3()
 {
+
     if(cambioE3_sprite==cambioE3_spriteD and pausa3==0)
     {
         configuracion(enemigo3,true,0,8,432,40);
@@ -97,6 +127,7 @@ void enemigo_3::disparoE3()
         cambioE3_sprite=0;
 
     }
+
 
     cambioE3();
 }

@@ -11,7 +11,11 @@ public:
     enemigo_3();
     ~enemigo_3();
     int fase();
-    void muerte();
+
+
+    int muerte();
+    int convidas();
+
 private:
     QString enemigo3D=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Attack.png";
     QString enemigo3=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Walk.png";
@@ -20,6 +24,8 @@ private:
     QString enemigo_muerte=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Death.png";
     QTimer *flyE3;
 
+
+    int vidas=5;
     int cambioE3_sprite=0;
     int cambioE3_spriteD=0;
     bool giro3=true;
