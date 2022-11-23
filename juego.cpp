@@ -1,4 +1,5 @@
- #include "juego.h"
+#include "juego.h"
+#include "enemigo_1.h"
 
 juego::juego()
 {
@@ -7,6 +8,8 @@ juego::juego()
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
 
     personaje= new jugador;
+
+    tanque= new enemigo_2;
 
     mapa();
 
@@ -17,10 +20,6 @@ juego::juego()
     drones.push_back(new enemigo_3);
     dronesEnemigos++;
     addItem(drones[0]);
-
-    //addItem(tanque);
-
-
 
     caida= new QTimer;
     DisparoProta=new QTimer;
@@ -33,7 +32,7 @@ juego::juego()
     connect(Disparo_enemigos, SIGNAL (timeout()),this, SLOT(disparoEnemigos()));
     connect(t_cargar_enemigos, SIGNAL (timeout()), this, SLOT(cargar_enemigos()));
 
-    //t_cargar_enemigos->start(t_enemigos);
+    t_cargar_enemigos->start(t_enemigos);
     movimiento_drones->start(150);
     Disparo_enemigos->start(10);
 
@@ -55,7 +54,6 @@ juego::~juego()
         delete cartuchoprota[var];
     }
     delete personaje;
-    delete gangster;
     delete caida;
     delete DisparoProta;
     delete movimiento_drones;
@@ -189,16 +187,11 @@ void juego::inteligencia_drones()
         drones[var]->disparoE3();
         if(drones[var]->fase()==2)
         {
-
             dronesbalas++;
             cartuchoEnemigos.push_back(new polvora);
-
             cartuchoEnemigos[dronesbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",drones[var]->x()+(13*scale_sprite),drones[var]->y()+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
             addItem(cartuchoEnemigos[dronesbalas-1]);
            // Disparo_enemigos->start(10);
-
-
-
         }
     }
 
@@ -210,7 +203,7 @@ void juego::cargar_enemigos(){
     if(t_enemigos > 0){
         enemigo_1 *enemigo = new enemigo_1(aleatorio());
         addItem(enemigo);
-        t_enemigos -= 500;
+        t_enemigos -= 1500;
     }
 }
 
