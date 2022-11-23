@@ -189,6 +189,8 @@ void juego::inteligencia_drones()
             cartuchoEnemigos[dronesbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",drones[var]->x()+(13*scale_sprite),drones[var]->y()+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
             addItem(cartuchoEnemigos[dronesbalas-1]);
            // Disparo_enemigos->start(10);
+            // Disparo_enemigos->start(10);
+
         }
         if( drones[var]->convidas() ==1)
         {
