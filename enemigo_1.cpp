@@ -79,12 +79,12 @@ void enemigo_1::muerte(){
     delete walkE1;
     delete t_muerte;
     configuracion(enemigo1M,true,0,0,288,48);
-    t_mostrar_muerte -> start(100);
+    t_mostrar_muerte -> start(1000);
 }
 
 void enemigo_1::mostrar_muerte(){
     for(int i = 0; i < 6; i++){
-        select_bloc(i*48,0,48,48,false,48*1.6,48*1.2,!posF);
+        select_bloc(i*48,0,48,48,true,0,0,!posF);
         if(i == 6)
             delete t_mostrar_muerte;
     }
