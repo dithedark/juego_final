@@ -7,7 +7,7 @@ juego::juego()
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
 
     personaje= new jugador;
-    gangster= new enemigo_1;
+    gangster= new enemigo_1(false);
     tanque= new enemigo_2;
 
     mapa();
@@ -31,7 +31,7 @@ juego::juego()
 
 
 
-    addItem(tanque);
+    //addItem(tanque);
 
 
 
