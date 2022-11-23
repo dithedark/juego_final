@@ -9,6 +9,7 @@ Q_OBJECT
 
 public:
     enemigo_1();
+    enemigo_1(bool initPos);
     ~enemigo_1();
 
 
@@ -30,6 +31,7 @@ private:
 
 
 private slots:
+    void initState();
     void disparo();
     void cambioE1();
 };
