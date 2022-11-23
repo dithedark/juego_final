@@ -125,6 +125,14 @@ void juego::disparo_protagonista()
                     else
                         this -> removeItem(i);
                 }
+                enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(i);
+                if(e2){
+                    // TO-DO: Implementar lo que sucede cuando la bala choca con el enemigo 2
+                }
+                enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(i);
+                if(e3){
+                    // TO-DO: Implementar lo que sucede cuando la bala choca con el enemigo 3
+                }
             }
             if(exit) break;
         }
@@ -188,9 +196,10 @@ void juego::inteligencia_drones()
 }
 
 void juego::cargar_enemigos(){
-    if(enemigos1_muertos == 50){
+    if(enemigos1_muertos == 10){
         enemigos1_muertos = 0;
-        t_enemigos -= 150;
+        if(t_enemigos > 300)
+            t_enemigos -= 200;
         e1_vidas += 3;
     }
     if(enemigos1_muertos < 500){
