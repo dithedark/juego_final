@@ -15,7 +15,6 @@ SOURCES += \
     enemigo_1.cpp \
     enemigo_2.cpp \
     enemigo_3.cpp \
-    iobserver.cpp \
     juego.cpp \
     jugador.cpp \
     main.cpp \
@@ -30,7 +29,6 @@ HEADERS += \
     enemigo_1.h \
     enemigo_2.h \
     enemigo_3.h \
-    iobserver.h \
     juego.h \
     jugador.h \
     macros.h \

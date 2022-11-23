@@ -10,7 +10,6 @@ Q_OBJECT
 public:
     enemigo_2();
     ~enemigo_2();
-   void disparoE2();
 
 private:
     QString enemigo2D=":/sprites/enemigos robots y drones con armas y animaciones sprites/6/Attack.png";
@@ -32,6 +31,7 @@ private:
 private slots:
 
      void cambioE2();
+     void disparoE2();
 
 };
 

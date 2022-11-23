@@ -7,7 +7,7 @@ juego::juego()
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
 
     personaje= new jugador;
-    tanque= new enemigo_2;
+    //tanque= new enemigo_2;
 
     mapa();
 
@@ -19,12 +19,13 @@ juego::juego()
     dronesEnemigos++;
     addItem(drones[0]);
 
+    t_disparo_protagonista=new QTimer;
     caida= new QTimer;
-    DisparoProta=new QTimer;
     movimiento_drones=new QTimer;
     Disparo_enemigos=new QTimer;
+
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));
-    connect(DisparoProta, SIGNAL (timeout()),this, SLOT(FuncionDisparoProta()));
+    connect(t_disparo_protagonista, SIGNAL (timeout()),this, SLOT(disparo_protagonista()));
     connect(movimiento_drones, SIGNAL (timeout()),this, SLOT(inteligencia_drones()));
     connect(Disparo_enemigos, SIGNAL (timeout()),this, SLOT(disparoEnemigos()));
 
@@ -32,6 +33,7 @@ juego::juego()
     t_cargar_enemigos = new QTimer;
     connect(t_cargar_enemigos, SIGNAL (timeout()), this, SLOT(cargar_enemigos()));
     t_cargar_enemigos->start(t_enemigos);
+
     movimiento_drones->start(150);
     Disparo_enemigos->start(10);
 
@@ -54,7 +56,7 @@ juego::~juego()
     }
     delete personaje;
     delete caida;
-    delete DisparoProta;
+    delete t_disparo_protagonista;
     delete movimiento_drones;
 
 }
@@ -102,59 +104,35 @@ void juego::mapa()
 
 
 
-void juego::FuncionDisparoProta()
+void juego::disparo_protagonista()
 {
-    unsigned numbalas=dispa;
-    bool entrada=false;
-    if(numbalas!=0)
-    {
-
-        for (unsigned var = 0; var < numbalas; ++var)
+    bool exit = false;
+    if(dispa > 0){
+        for (unsigned var = 0; var < dispa; ++var)
         {
-            entrada=false;
             cartuchoprota[var]->fisicas();
-
-            for (unsigned i = 0; i < dronesEnemigos; ++i)
-            {
-                if(drones[i]->collidesWithItem(cartuchoprota[var]) and drones[i]->convidas() >1)
-                {
-                    drones[i]->muerte();
-                    movimiento_drones->start(190);
-                    removeItem(cartuchoprota[var]);
-                    cartuchoprota.remove(var);
-                    //eliminados++;
-                    dispa--;
-                    numbalas--;
-                    entrada = true;
-                    break;
-                }
-
-            }
-
-            if(  entrada != true and var<numbalas )
-            {
-                if((cartuchoprota[var]->x()<=0 or cartuchoprota[var]->x()>=largo*scale_sprite*16 ))
-                {
-                    removeItem(cartuchoprota[var]);
-                    cartuchoprota.remove(var);
-                    //eliminados++;
-                    dispa--;
-                    numbalas--;
+            QList<QGraphicsItem *> items = collidingItems(cartuchoprota[var], Qt::ItemSelectionMode::IntersectsItemShape);
+            foreach (QGraphicsItem * i, items) {
+                enemigo_1 * e1 = dynamic_cast<enemigo_1 *>(i);
+                if(e1){
+                    e1->recibir_disparo();
+                    if(e1->obtener_total_vidas() > 0){
+                        removeItem(cartuchoprota[var]);
+                        cartuchoprota.remove(var);
+                        exit = true;
+                        dispa--;
+                        enemigos1_muertos++;
+                        break;
+                    }
+                    else
+                        this -> removeItem(i);
                 }
             }
-
-
-
+            if(exit) break;
         }
-
+    } else {
+        t_disparo_protagonista->stop();
     }
-    else
-    {
-        DisparoProta->stop();
-    }
-
-    //numbalas=numbalas-eliminados;
-
 }
 
 
@@ -208,14 +186,18 @@ void juego::inteligencia_drones()
         }
     }
 
-    tanque->disparoE2();
+    //tanque->disparoE2();
 }
 
 void juego::cargar_enemigos(){
-    if(t_enemigos > 0){
-        enemigo_1 *enemigo = new enemigo_1(aleatorio());
+    if(enemigos1_muertos == 50){
+        enemigos1_muertos = 0;
+        t_enemigos -= 150;
+        e1_vidas += 3;
+    }
+    if(enemigos1_muertos < 500){
+        enemigo_1 *enemigo = new enemigo_1(aleatorio(), e1_vidas);
         addItem(enemigo);
-        t_enemigos -= 1500;
     }
 }
 
@@ -289,6 +271,6 @@ void juego::keyPressEvent(QKeyEvent *i)
         { v=-1;}
         cartuchoprota[dispa-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",personaje->mano->x(),personaje->mano->y(),0,0,v*scale_sprite*40,0,0,personaje->getvuelta());
         addItem(cartuchoprota[dispa-1]);
-        DisparoProta->start(10);
+        t_disparo_protagonista -> start(10);
     }
 }

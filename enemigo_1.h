@@ -8,12 +8,19 @@ class enemigo_1:public QObject , public base
 Q_OBJECT
 
 public:
+    // Constructores
     enemigo_1();
     enemigo_1(bool posicionInicial);
     enemigo_1(bool posicionInicial, int vidas);
+
+    // Deestructor
     ~enemigo_1();
 
+    // Propiedades
     int obtener_total_vidas();
+
+    // Metodos
+    void recibir_disparo();
 
 private:
 
@@ -22,7 +29,7 @@ private:
     QString enemigo1I=":/sprites/enemigos robots y drones con armas y animaciones sprites/2/Idle.png";
     QString enemigo1M = ":/sprites/enemigos robots y drones con armas y animaciones sprites/2/Death.png";
     QString enemigo1H = ":/sprites/enemigos robots y drones con armas y animaciones sprites/2/Hurt.png";
-    QTimer *walkE1;
+    QTimer *t_caminar;
     QTimer *t_mostrar_muerte;
     bool dobl=false;
     int cambioE1_sprite=0;
@@ -41,7 +48,6 @@ private slots:
     void disparo();
     void cambioE1();
     void muerte();
-    void mostrar_muerte();
 };
 
 #endif // ENEMIGO_1_H

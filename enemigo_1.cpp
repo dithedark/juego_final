@@ -20,29 +20,34 @@ enemigo_1::enemigo_1(bool posicionInicial, int vidas){
 
 enemigo_1::~enemigo_1()
 {
-    delete walkE1;
+    delete t_caminar;
 }
 
 // Propiedades
 int enemigo_1::obtener_total_vidas(){
     return totalVidas;
 }
-// Metodos
 
+// Metodos
 void enemigo_1::estado_inicial(){
-    walkE1=new QTimer;
+    t_caminar = new QTimer;
     t_mostrar_muerte = new QTimer;
     configuracion(enemigo1,true,0,10,432,40);
+
     CAMbloque(3);
-    connect(walkE1, SIGNAL (timeout()),this, SLOT(disparo()));
-    connect(t_mostrar_muerte, SIGNAL(timeout()), this, SLOT(mostrar_muerte()));
+
+    // Conectar timers con los slots
+    connect(t_caminar, SIGNAL (timeout()),this, SLOT(disparo()));
+    connect(t_mostrar_muerte, SIGNAL(timeout()), this, SLOT(muerte()));
+
+    // Establece la dirección inical
     if(posF)
         setPos(16*scale_sprite,16*(ancho-(3.7))*scale_sprite);
     else
         setPos(16*(largo-4)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-    walkE1->start(100);
-    // Tiempo de vida
-    t_muerte->start(5000);
+
+    // Iniciar movimiento
+    t_caminar->start(100);
 }
 
 void enemigo_1::cambioE1()
@@ -83,17 +88,17 @@ void enemigo_1::disparo()
     cambioE1();
 }
 
-void enemigo_1::muerte(){
+void enemigo_1::recibir_disparo(){
     totalVidas--;
     if(totalVidas == 0){
-        delete walkE1;
+        delete t_caminar;
         configuracion(enemigo1M,true,0,0,288,48);
         cambioE1_sprite = 0;
         t_mostrar_muerte -> start(100);
     }
 }
 
-void enemigo_1::mostrar_muerte(){
+void enemigo_1::muerte(){
     select_bloc(cambioE1_sprite*48,0,48,48,false,48*1.6,48*1.2,posF);
     cambioE1_sprite++;
     if(cambioE1_sprite == 6)

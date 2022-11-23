@@ -29,6 +29,7 @@ private:
 
     unsigned dispa=0;
     unsigned dronesEnemigos=0,dronesbalas=0,limiteDrones;
+    unsigned enemigos1_muertos = 0;
 
 
 
@@ -38,11 +39,12 @@ private:
     base *fondo;
     jugador *personaje;
 
-    enemigo_2 *tanque;
-    int t_enemigos = 3000;
+    //enemigo_2 *tanque;
+    int t_enemigos = 2000;
+    int e1_vidas = 3;
 
     QTimer *caida
-    ,*DisparoProta,
+    ,*t_disparo_protagonista,
     *movimiento_drones,
     *Disparo_enemigos,
     *t_cargar_enemigos;
@@ -51,27 +53,7 @@ private:
     QVector<polvora*> cartuchoEnemigos;
 
     QVector<enemigo_3*> drones;
-    QVector<enemigo_2*> tanques;
-
-
-
-
-
-
-    /*
-
-
-
-        desaparece.setPos(malitos[var]->x(),malitos[var]->y());
-        removeItem(malitos[var]);
-        malitos.remove(var);
-        addItem(&desaparece);
-        muerteMalo->start(200);
-
-
-
-
-    */
+    //QVector<enemigo_2*> tanques;
 
 public slots:
 
@@ -79,7 +61,7 @@ public slots:
     void movimien();
 
     // fisicas disparos
-    void FuncionDisparoProta();
+    void disparo_protagonista();
     void disparoEnemigos();
 
 
