@@ -23,13 +23,14 @@ juego::juego()
     DisparoProta=new QTimer;
     movimiento_drones=new QTimer;
     Disparo_enemigos=new QTimer;
-    t_cargar_enemigos = new QTimer;
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));
     connect(DisparoProta, SIGNAL (timeout()),this, SLOT(FuncionDisparoProta()));
     connect(movimiento_drones, SIGNAL (timeout()),this, SLOT(inteligencia_drones()));
     connect(Disparo_enemigos, SIGNAL (timeout()),this, SLOT(disparoEnemigos()));
-    connect(t_cargar_enemigos, SIGNAL (timeout()), this, SLOT(cargar_enemigos()));
 
+    // Carga Enemigos Aleatoriamente
+    t_cargar_enemigos = new QTimer;
+    connect(t_cargar_enemigos, SIGNAL (timeout()), this, SLOT(cargar_enemigos()));
     t_cargar_enemigos->start(t_enemigos);
     movimiento_drones->start(150);
     Disparo_enemigos->start(10);
@@ -177,14 +178,10 @@ void juego::disparoEnemigos()
     //numbalas=numbalas-eliminados;
 }
 
-
-
-
 void juego::inteligencia_drones()
 {
     for (unsigned var = 0; var < dronesEnemigos; ++var)
     {
-
         if(drones[var]->fase()==2)
         {
             dronesbalas++;
@@ -210,7 +207,6 @@ void juego::inteligencia_drones()
     }
 
     tanque->disparoE2();
-
 }
 
 void juego::cargar_enemigos(){
@@ -255,9 +251,6 @@ void juego::movimien()
     }
 }
 
-
-
-
 void juego::keyPressEvent(QKeyEvent *i)
 {
     const int e=i->key();
@@ -295,6 +288,5 @@ void juego::keyPressEvent(QKeyEvent *i)
         cartuchoprota[dispa-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",personaje->mano->x(),personaje->mano->y(),0,0,v*scale_sprite*40,0,0,personaje->getvuelta());
         addItem(cartuchoprota[dispa-1]);
         DisparoProta->start(10);
-
     }
 }

@@ -1,15 +1,21 @@
 #include "enemigo_1.h"
 #include <time.h>
-#include "QThread";
 
+// Constructores
 enemigo_1::enemigo_1(){
-    initState();
+    estado_inicial();
 }
 
-enemigo_1::enemigo_1(bool initPos)
+enemigo_1::enemigo_1(bool posicionInicial)
 {
-    posF = initPos;
-    initState();
+    posF = posicionInicial;
+    estado_inicial();
+}
+
+enemigo_1::enemigo_1(bool posicionInicial, int vidas){
+    posF = posicionInicial;
+    totalVidas = vidas;
+    estado_inicial();
 }
 
 enemigo_1::~enemigo_1()
@@ -17,16 +23,18 @@ enemigo_1::~enemigo_1()
     delete walkE1;
 }
 
-void enemigo_1::initState(){
+// Propiedades
+int enemigo_1::obtener_total_vidas(){
+    return totalVidas;
+}
+// Metodos
+
+void enemigo_1::estado_inicial(){
     walkE1=new QTimer;
-    // Remover
-    t_muerte = new QTimer;
     t_mostrar_muerte = new QTimer;
     configuracion(enemigo1,true,0,10,432,40);
     CAMbloque(3);
     connect(walkE1, SIGNAL (timeout()),this, SLOT(disparo()));
-    // Remover cuando se implemente la muerte
-    connect(t_muerte, SIGNAL(timeout()), this, SLOT(muerte()));
     connect(t_mostrar_muerte, SIGNAL(timeout()), this, SLOT(mostrar_muerte()));
     if(posF)
         setPos(16*scale_sprite,16*(ancho-(3.7))*scale_sprite);
@@ -76,16 +84,18 @@ void enemigo_1::disparo()
 }
 
 void enemigo_1::muerte(){
-    delete walkE1;
-    delete t_muerte;
-    configuracion(enemigo1M,true,0,0,288,48);
-    t_mostrar_muerte -> start(1000);
+    totalVidas--;
+    if(totalVidas == 0){
+        delete walkE1;
+        configuracion(enemigo1M,true,0,0,288,48);
+        cambioE1_sprite = 0;
+        t_mostrar_muerte -> start(100);
+    }
 }
 
 void enemigo_1::mostrar_muerte(){
-    for(int i = 0; i < 6; i++){
-        select_bloc(i*48,0,48,48,true,0,0,!posF);
-        if(i == 6)
-            delete t_mostrar_muerte;
-    }
+    select_bloc(cambioE1_sprite*48,0,48,48,false,48*1.6,48*1.2,posF);
+    cambioE1_sprite++;
+    if(cambioE1_sprite == 6)
+        delete t_mostrar_muerte;
 }
