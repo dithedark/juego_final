@@ -201,6 +201,7 @@ void juego::cargar_enemigos(){
         if(t_enemigos > 300)
             t_enemigos -= 200;
         e1_vidas += 3;
+        // TO-DO: Poner mensaje de nueva orda
     }
     if(enemigos1_muertos < 500){
         enemigo_1 *enemigo = new enemigo_1(aleatorio(), e1_vidas);
