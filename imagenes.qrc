@@ -41,5 +41,6 @@
         <file>sprites/zona sprites/4 Animated objects/Card.png</file>
         <file>sprites/zona sprites/3 Objects/Fire-extinguisher1.png</file>
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Death.png</file>
+        <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Hurt.png</file>
     </qresource>
 </RCC>

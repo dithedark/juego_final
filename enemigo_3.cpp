@@ -99,8 +99,6 @@ void enemigo_3::cambioE3()
     }
 }
 
-
-
 void enemigo_3::disparoE3()
 {
 
@@ -131,4 +129,3 @@ void enemigo_3::disparoE3()
 
     cambioE3();
 }
-

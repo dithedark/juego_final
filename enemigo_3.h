@@ -25,7 +25,7 @@ private:
     QTimer *flyE3;
 
 
-    int vidas=5;
+    int vidas=2;
     int cambioE3_sprite=0;
     int cambioE3_spriteD=0;
     bool giro3=true;
