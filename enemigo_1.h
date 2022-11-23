@@ -18,7 +18,10 @@ private:
     QString enemigo1D= ":/sprites/enemigos robots y drones con armas y animaciones sprites/2/Attack.png";
     QString enemigo1= ":/sprites/enemigos robots y drones con armas y animaciones sprites/2/Walk.png";
     QString enemigo1I=":/sprites/enemigos robots y drones con armas y animaciones sprites/2/Idle.png";
+    QString enemigo1M = ":/sprites/enemigos robots y drones con armas y animaciones sprites/2/Death.png";
     QTimer *walkE1;
+    QTimer *t_muerte;
+    QTimer *t_mostrar_muerte;
     bool dobl=false;
     int cambioE1_sprite=0;
     int cambioE1_spriteD=0;
@@ -34,6 +37,8 @@ private slots:
     void initState();
     void disparo();
     void cambioE1();
+    void muerte();
+    void mostrar_muerte();
 };
 
 #endif // ENEMIGO_1_H

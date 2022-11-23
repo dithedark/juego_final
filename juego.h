@@ -9,7 +9,6 @@
 #include <cstdlib>
 #include <time.h>
 #include "jugador.h"
-#include "enemigo_1.h"
 #include "enemigo_2.h"
 #include "enemigo_3.h"
 #include "polvora.h"
@@ -38,7 +37,7 @@ private:
     bloques *bl[largo][2];
     base *fondo;
     jugador *personaje;
-    enemigo_1 *gangster;
+
     enemigo_2 *tanque;
     int t_enemigos = 3000;
 
