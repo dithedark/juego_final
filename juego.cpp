@@ -95,12 +95,24 @@ void juego::iniciar_juego(){
 
 void juego::mapa()
 {
+
+
     fondo =new base;
     fondo->configuracion(":/sprites/zona sprites/2 Background/Background.png");
 
 
     fondo->select_bloc(0,0,576,324,false,largo*32,(ancho-2)*32);
     addItem(fondo);
+
+
+    QString s_puntaje_total = QStringLiteral("%1").arg(puntaje_total, 5, 10, QLatin1Char('0'));
+    QGraphicsTextItem* puntaje_pad = new QGraphicsTextItem(s_puntaje_total);
+    QFont puntajeFont("comic sans",15);
+    puntaje_pad->setFont(puntajeFont);
+    int txPos = 130;
+    int tyPos = 22;
+    puntaje_pad->setPos(txPos,tyPos);
+    addItem(puntaje_pad);
 
 
     nivel = new base;
@@ -290,6 +302,7 @@ void juego::inteligencia_drones()
 }
 
 void juego::cargar_enemigos(){
+    puntaje_total++;
     if((total_enemigos1 % 10) == 0 && total_enemigos1 > 10){
         if(t_enemigos > 300)
             t_enemigos -= 200;
