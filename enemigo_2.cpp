@@ -2,15 +2,20 @@
 #include <time.h>
 
 //Constructores
-enemigo_2::enemigo_2()
+enemigo_2::enemigo_2(){
+    estado_inicial2();
+}
+
+enemigo_2::enemigo_2(bool posicionInicial2)
 {
-    t_caminar2 = new QTimer;
-    t_mostrar_muerte2 = new QTimer;
-    configuracion(enemigo2,true,0,10,432,40);
-    CAMbloque(3);
-    connect(t_caminar2, SIGNAL (timeout()),this, SLOT(disparoE2()));
-    setPos(16*(largo-4)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-    t_caminar2->start(200);
+    posF2 = posicionInicial2;
+    estado_inicial2();
+}
+
+enemigo_2::enemigo_2(bool posicionInicial2, int vidas2){
+    posF2 = posicionInicial2;
+    totalVidas2 = vidas2;
+    estado_inicial2();
 }
 
 // Propiedades

@@ -39,6 +39,8 @@ private:
     objetivo *trampolin;
     bloques *bl[largo][2];
     base *fondo;
+    base *level;
+    base *number_level;
     jugador *personaje;
 
     //enemigo_2 *tanque;

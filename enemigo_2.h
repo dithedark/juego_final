@@ -47,8 +47,7 @@ private:
     Observer *observador;
 
 
-    int punto2=85;
-    int punto_contrario2=2;
+
 
 
 
