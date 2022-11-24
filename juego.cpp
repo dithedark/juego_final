@@ -8,8 +8,7 @@ juego::juego()
 {
     srand(time(NULL));
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
-    mapa();
-    ver_menu();
+    iniciar_juego();
 }
 
 juego::~juego()
@@ -26,30 +25,6 @@ juego::~juego()
     delete t_disparo_protagonista;
     delete movimiento_drones;
 
-}
-
-void juego::ver_menu(){
-    QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("SALTARIN"));
-    QFont titleFont("comic sans",50);
-    titleText->setFont(titleFont);
-    int txPos = this->width()/2 - titleText->boundingRect().width()/2;
-    int tyPos = 150;
-    titleText->setPos(txPos,tyPos);
-    addItem(titleText);
-
-    Button* playButton = new Button(QString("Jugar"));
-    int bxPos = this->width()/2 - playButton->boundingRect().width()/2;
-    int byPos = 275;
-    playButton->setPos(bxPos,byPos);
-    connect(playButton,SIGNAL(clicked()),this,SLOT(iniciar_juego()));
-    addItem(playButton);
-
-    Button* quitButton = new Button(QString("Salir"));
-    int qxPos = this->width()/2 - quitButton->boundingRect().width()/2;
-    int qyPos = 350;
-    quitButton->setPos(qxPos,qyPos);
-    connect(quitButton,SIGNAL(clicked()),this,SLOT(close()));
-    addItem(quitButton);
 }
 
 void juego::iniciar_juego(){

@@ -18,11 +18,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     void setup_window();
     void setup_juego();
+    void menu_inicio();
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
     juego *scene;
 
+public slots:
+    void iniciar_juego();
 };
 #endif // MAINWINDOW_H
