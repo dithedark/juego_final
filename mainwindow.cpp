@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "button.h"
+#include "base.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -23,13 +24,13 @@ void MainWindow::menu_inicio(){
     ui->graphicsView->setGeometry(0,0,16*scale_sprite*largo+2,16*scale_sprite*ancho+2);
     ui->graphicsView->setScene(scene);
 
-    QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("SALTARIN"));
-    QFont titleFont("comic sans",50);
-    titleText->setFont(titleFont);
-    int txPos = this->width()/2 - titleText->boundingRect().width()/2;
+    logo= new base;
+    logo->configuracion(":/sprites/interfaz/TITLE_2-removebg-preview.png");
+    logo->select_bloc(0,0,512,96,false,largo*3,(ancho)*1);
+    int txPos = this->width()/2 - 256;
     int tyPos = 150;
-    titleText->setPos(txPos,tyPos);
-    scene->addItem(titleText);
+    logo-> setPos(txPos,tyPos);
+    scene->addItem(logo);
 
     Button* playButton = new Button(QString("Jugar"));
     int bxPos = this->width()/2 - playButton->boundingRect().width()/2;

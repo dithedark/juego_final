@@ -5,6 +5,7 @@
 #include "bloques.h"
 #include "macros.h"
 #include "juego.h"
+#include "base.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,9 +22,11 @@ public:
     void menu_inicio();
     ~MainWindow();
 
+
 private:
     Ui::MainWindow *ui;
     juego *scene;
+    base *logo;
 
 public slots:
     void iniciar_juego();
