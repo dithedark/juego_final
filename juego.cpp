@@ -210,11 +210,11 @@ void juego::disparo_protagonista()
                 }
                 enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(i);
                 if(e2){
-                    e2->recibir_disparo2();
+                    e2->recibir_disparo();
                     removeItem(cartuchoprota[var]);
                     cartuchoprota.remove(var);
                     dispa--;
-                    if(e2->obtener_total_vidas2() > 0){
+                    if(e2->obtener_total_vidas() > 0){
                         exit = true;
                         break;
                     }
@@ -223,19 +223,15 @@ void juego::disparo_protagonista()
                 }
                 enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(i);
                 if(e3){
-                    // TO-DO: Implementar lo que sucede cuando la bala choca con el enemigo 3
                     e3->recibir_disparo();
+                    removeItem(cartuchoprota[var]);
+                    cartuchoprota.remove(var);
                     if(e3->obtener_total_vidas() > 0){
-                        removeItem(cartuchoprota[var]);
-                        cartuchoprota.remove(var);
                         exit = true;
                         dispa--;
-                        enemigos2_muertos++;
                         break;
                      }
                 }
-
-
             }
             if(exit) break;
         }
