@@ -77,8 +77,10 @@ void enemigo_1::cambioE1()
 void enemigo_1::disparo()
 {
     if(cambioE1_sprite == cambioE1_spriteD){
-        if(pausa)
+        if(pausa){
             configuracion(enemigo1D,true,0,8,432,40);
+            notificar();
+        }
         else
             configuracion(enemigo1,true,0,8,432,40);
         pausa = !pausa;
@@ -101,6 +103,20 @@ void enemigo_1::recibir_disparo(){
 void enemigo_1::muerte(){
     select_bloc(cambioE1_sprite*48,0,48,48,false,48*1.6,48*1.2,posF);
     cambioE1_sprite++;
-    if(cambioE1_sprite == 6)
+    if(cambioE1_sprite == 6){
         delete t_mostrar_muerte;
+        remover_observador();
+    }
+}
+
+void enemigo_1::agregar_observador(Observer *obs){
+    observador = obs;
+}
+
+void enemigo_1::remover_observador(){
+    observador = NULL;
+}
+
+void enemigo_1::notificar(){
+    observador->notificacion_enemigo(1, x(), y(), posF);
 }

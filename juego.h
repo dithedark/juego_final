@@ -9,19 +9,20 @@
 #include <cstdlib>
 #include <time.h>
 #include "jugador.h"
-#include "enemigo_2.h"
 #include "enemigo_3.h"
 #include "polvora.h"
 #include "objetivo.h"
+#include "Observador.h"
 
-class juego : public QGraphicsScene
+class juego : public QGraphicsScene, public Observer
 {
 Q_OBJECT
 public:
     juego();
     ~juego();
-    void keyPressEvent(QKeyEvent *i);
+    void keyPressEvent(QKeyEvent *i) override;
     void mapa();
+    virtual void notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro) override;
 
 private:
     int select_bloc(int i, int j);
@@ -30,6 +31,7 @@ private:
     unsigned dispa=0;
     unsigned dronesEnemigos=0,dronesbalas=0,limiteDrones;
     unsigned enemigos1_muertos = 0;
+    unsigned enemigos2_muertos = 0;
 
 
 

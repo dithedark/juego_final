@@ -2,14 +2,20 @@
 #define ENEMIGO_2_H
 
 #include "base.h"
+#include "Sujeto.h"
 
-class enemigo_2:public QObject , public base
+class enemigo_2:public QObject , public base, public Subject
 {
 Q_OBJECT
 
 public:
     enemigo_2();
     ~enemigo_2();
+
+    // Metodos del Sujeto
+    void agregar_observador(Observer *obs) override;
+    void remover_observador() override;
+    void notificar() override;
 
 private:
     QString enemigo2D=":/sprites/enemigos robots y drones con armas y animaciones sprites/6/Attack.png";
@@ -27,6 +33,7 @@ private:
     bool posF2=false;
     int punto2=85;
     int punto_contrario2=2;
+    Observer *observador;
 
 private slots:
 

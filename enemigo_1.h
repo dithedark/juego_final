@@ -2,8 +2,10 @@
 #define ENEMIGO_1_H
 
 #include "base.h"
+#include "Sujeto.h"
+#include "Observador.h"
 
-class enemigo_1:public QObject , public base
+class enemigo_1:public QObject , public base, public Subject
 {
 Q_OBJECT
 
@@ -13,6 +15,11 @@ public:
     enemigo_1(bool posicionInicial);
     enemigo_1(bool posicionInicial, int vidas);
 
+    // Metodos del Sujeto
+    void agregar_observador(Observer *obs) override;
+    void remover_observador() override;
+    void notificar() override;
+
     // Deestructor
     ~enemigo_1();
 
@@ -21,6 +28,7 @@ public:
 
     // Metodos
     void recibir_disparo();
+
 
 private:
 
@@ -39,8 +47,7 @@ private:
     bool pausa=true;
     bool posF=false;
     int totalVidas=3;
-
-
+    Observer *observador;
 
 
 private slots:

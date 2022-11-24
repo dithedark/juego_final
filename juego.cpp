@@ -1,5 +1,7 @@
 #include "juego.h"
 #include "enemigo_1.h"
+#include "enemigo_2.h"
+#include "enemigo_3.h"
 
 juego::juego()
 {
@@ -30,7 +32,7 @@ juego::juego()
     // Carga Enemigos Aleatoriamente
     t_cargar_enemigos = new QTimer;
     connect(t_cargar_enemigos, SIGNAL (timeout()), this, SLOT(cargar_enemigos()));
-    t_cargar_enemigos->start(t_enemigos);
+    t_cargar_enemigos -> start(t_enemigos);
 
     movimiento_drones->start(150);
     Disparo_enemigos->start(10);
@@ -100,7 +102,28 @@ void juego::mapa()
 
 }
 
+void juego::notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro){
+    int v;
+    if(giro)
+        {v = 1;}
+    else
+        {v = -1;}
+    polvora *p = new polvora();
+    switch(tipo_enemigo){
+        case 1:
+            p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",
+                           x+10,y+10,0,0,v*scale_sprite*40,0,0,giro);
+        break;
 
+        case 2:
+            p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",
+                       x+(13*scale_sprite),y+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
+        break;
+    }
+    cartuchoEnemigos.push_back(p);
+    dronesbalas++;
+    addItem(p);
+}
 
 void juego::disparo_protagonista()
 {
@@ -140,8 +163,6 @@ void juego::disparo_protagonista()
         t_disparo_protagonista->stop();
     }
 }
-
-
 
 void juego::disparoEnemigos()
 {
@@ -204,8 +225,13 @@ void juego::cargar_enemigos(){
         // TO-DO: Poner mensaje de nueva orda
     }
     if(enemigos1_muertos < 500){
-        enemigo_1 *enemigo = new enemigo_1(aleatorio(), e1_vidas);
-        addItem(enemigo);
+        enemigo_1 *enemigo1 = new enemigo_1(aleatorio(), e1_vidas);
+        enemigo1->agregar_observador(this);
+        addItem(enemigo1);
+
+        enemigo_2 *enemigo2 = new enemigo_2();
+        enemigo2->agregar_observador(this);
+        addItem(enemigo2);
     }
 }
 

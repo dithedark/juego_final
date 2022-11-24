@@ -24,6 +24,8 @@ SOURCES += \
     polvora.cpp
 
 HEADERS += \
+    Observador.h \
+    Sujeto.h \
     base.h \
     bloques.h \
     enemigo_1.h \

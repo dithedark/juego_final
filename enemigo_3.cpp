@@ -23,7 +23,7 @@ int enemigo_3::fase()
         conteopausa++;
         return pausa3;
     }
-    else if(conteopausa !=9 and pausa3==2)
+    else if(conteopausa <=9 and pausa3==2)
     {
         conteopausa++;
         return 0;
@@ -33,7 +33,7 @@ int enemigo_3::fase()
         conteopausa=0;
     }
 
-    return pausa3;
+    return 0;
 }
 
 int enemigo_3::muerte()
