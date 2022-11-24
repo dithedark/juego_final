@@ -1,5 +1,4 @@
 #include "juego.h"
-#include "button.h"
 #include "enemigo_1.h"
 #include "enemigo_2.h"
 #include "enemigo_3.h"
@@ -8,7 +7,7 @@ juego::juego()
 {
     srand(time(NULL));
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
-    iniciar_juego();
+    mapa();
 }
 
 juego::~juego()
@@ -176,8 +175,10 @@ void juego::disparo_protagonista()
                         exit = true;
                         break;
                     }
-                    else
+                    else{
                         this -> removeItem(i);
+                        total_enemigos1--;
+                    }
                 }
                 enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(i);
                 if(e2){
@@ -189,8 +190,10 @@ void juego::disparo_protagonista()
                         exit = true;
                         break;
                     }
-                    else
+                    else{
                         this -> removeItem(i);
+                        total_enemigos2--;
+                    }
                 }
                 enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(i);
                 if(e3){
@@ -201,7 +204,10 @@ void juego::disparo_protagonista()
                         exit = true;
                         dispa--;
                         break;
-                     }
+                     }                    else{
+                        this -> removeItem(i);
+                        total_enemigos3--;
+                    }
                 }
             }
             if(exit) break;
@@ -281,14 +287,14 @@ void juego::cargar_enemigos(){
     total_enemigos1++;
 
     if(total_enemigos2 < 3){
-        enemigo_2 *enemigo2 = new enemigo_2();
+        enemigo_2 *enemigo2 = new enemigo_2(aleatorio(), e1_vidas);
         enemigo2->agregar_observador(this);
         addItem(enemigo2);
         total_enemigos2++;
     }
 
     if(total_enemigos3 < 2){
-        enemigo_3 *enemigo3 = new enemigo_3();
+        enemigo_3 *enemigo3 = new enemigo_3(aleatorio(), e1_vidas);
         enemigo3->agregar_observador(this);
         addItem(enemigo3);
         total_enemigos3++;
