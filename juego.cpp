@@ -159,10 +159,23 @@ void juego::disparo_protagonista()
                 enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(i);
                 if(e2){
                     // TO-DO: Implementar lo que sucede cuando la bala choca con el enemigo 2
+                    e2->recibir_disparo2();
+                    if(e2->obtener_total_vidas2() > 0){
+                        removeItem(cartuchoprota[var]);
+                        cartuchoprota.remove(var);
+                        exit = true;
+                        dispa--;
+                        enemigos2_muertos++;
+                        break;
+                    }
+                    else
+                        this -> removeItem(i);
+
                 }
                 enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(i);
                 if(e3){
                     // TO-DO: Implementar lo que sucede cuando la bala choca con el enemigo 3
+
                 }
             }
             if(exit) break;
