@@ -2,7 +2,11 @@
 #include <time.h>
 
 //Constructores
-enemigo_2::enemigo_2()
+enemigo_2::enemigo_2(){
+    estado_inicial2();
+}
+
+enemigo_2::enemigo_2(bool posicionInicial2)
 {
     estado_inicial();
 }

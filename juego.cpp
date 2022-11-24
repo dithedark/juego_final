@@ -1,4 +1,5 @@
 #include "juego.h"
+#include "button.h"
 #include "enemigo_1.h"
 #include "enemigo_2.h"
 #include "enemigo_3.h"
@@ -7,8 +8,60 @@ juego::juego()
 {
     srand(time(NULL));
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
-
     mapa();
+    ver_menu();
+}
+
+juego::~juego()
+{
+    for(int i=0;i<largo;i++){
+        for(int j=0;j<2;j++) delete bl[i][j];
+    }
+    for (unsigned var = 0; var < dispa; ++var)
+    {
+        delete cartuchoprota[var];
+    }
+    delete personaje;
+    delete caida;
+    delete t_disparo_protagonista;
+    delete movimiento_drones;
+
+}
+
+void juego::ver_menu(){
+    QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("SALTARIN"));
+    QFont titleFont("comic sans",50);
+    titleText->setFont(titleFont);
+    int txPos = this->width()/2 - titleText->boundingRect().width()/2;
+    int tyPos = 150;
+    titleText->setPos(txPos,tyPos);
+    addItem(titleText);
+
+    Button* playButton = new Button(QString("Jugar"));
+    int bxPos = this->width()/2 - playButton->boundingRect().width()/2;
+    int byPos = 275;
+    playButton->setPos(bxPos,byPos);
+    connect(playButton,SIGNAL(clicked()),this,SLOT(iniciar_juego()));
+    addItem(playButton);
+
+    Button* quitButton = new Button(QString("Salir"));
+    int qxPos = this->width()/2 - quitButton->boundingRect().width()/2;
+    int qyPos = 350;
+    quitButton->setPos(qxPos,qyPos);
+    connect(quitButton,SIGNAL(clicked()),this,SLOT(close()));
+    addItem(quitButton);
+}
+
+void juego::iniciar_juego(){
+    this->clear();
+    mapa();
+
+    nivel_etiqueta = new base;
+    QString imagen = ":/sprites/interfaz/1.png";
+    nivel_etiqueta->configuracion(imagen);
+    nivel_etiqueta->select_bloc(0,0,22,36,false,largo*2,(ancho)*2);
+    nivel_etiqueta-> setPos(16*4*scale_sprite,16*(ancho-1)*scale_sprite);
+    addItem(nivel_etiqueta);
 
     personaje= new jugador;
     addItem(personaje->mano);
@@ -42,36 +95,23 @@ juego::juego()
 
     addItem(trampolin);
 
-
 }
-
-juego::~juego()
-{
-    for(int i=0;i<largo;i++){
-        for(int j=0;j<2;j++) delete bl[i][j];
-    }
-    for (unsigned var = 0; var < dispa; ++var)
-    {
-        delete cartuchoprota[var];
-    }
-    delete personaje;
-    delete caida;
-    delete t_disparo_protagonista;
-    delete movimiento_drones;
-
-}
-
-
 
 void juego::mapa()
 {
-
     fondo =new base;
     fondo->configuracion(":/sprites/zona sprites/2 Background/Background.png");
 
 
     fondo->select_bloc(0,0,576,324,false,largo*32,(ancho-2)*32);
     addItem(fondo);
+
+
+    nivel = new base;
+    nivel->configuracion(":/sprites/interfaz/LEVEL-removebg-preview.png");
+
+    puntaje = new base;
+    puntaje->configuracion(":/sprites/interfaz/SCORE-removebg-preview.png");
 
     for(int i=0;i<largo;i++)
     {
@@ -99,6 +139,13 @@ void juego::mapa()
             addItem(bl[i][1]);
 
     }
+    nivel->select_bloc(0,0,320,40,false,largo*3,(ancho)*1);
+    nivel-> setPos(16*1*scale_sprite,16*(ancho-1)*scale_sprite);
+    addItem(nivel);
+
+    puntaje->select_bloc(0,0,320,40,false,largo*3,(ancho)*1);
+    puntaje-> setPos(16*1*scale_sprite,16*(ancho-14)*scale_sprite);
+    addItem(puntaje);
 
 }
 
@@ -151,12 +198,11 @@ void juego::disparo_protagonista()
                 enemigo_1 * e1 = dynamic_cast<enemigo_1 *>(i);
                 if(e1){
                     e1->recibir_disparo();
+                    removeItem(cartuchoprota[var]);
+                    cartuchoprota.remove(var);
+                    dispa--;
                     if(e1->obtener_total_vidas() > 0){
-                        removeItem(cartuchoprota[var]);
-                        cartuchoprota.remove(var);
                         exit = true;
-                        dispa--;
-                        enemigos1_muertos++;
                         break;
                     }
                     else
@@ -164,19 +210,16 @@ void juego::disparo_protagonista()
                 }
                 enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(i);
                 if(e2){
-                    // TO-DO: Implementar lo que sucede cuando la bala choca con el enemigo 2
-                    e2->recibir_disparo();
-                    if(e2->obtener_total_vidas() > 0){
-                        removeItem(cartuchoprota[var]);
-                        cartuchoprota.remove(var);
+                    e2->recibir_disparo2();
+                    removeItem(cartuchoprota[var]);
+                    cartuchoprota.remove(var);
+                    dispa--;
+                    if(e2->obtener_total_vidas2() > 0){
                         exit = true;
-                        dispa--;
-                        enemigos2_muertos++;
                         break;
                     }
                     else
                         this -> removeItem(i);
-
                 }
                 enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(i);
                 if(e3){
@@ -255,24 +298,27 @@ void juego::inteligencia_drones()
 }
 
 void juego::cargar_enemigos(){
-    if(enemigos1_muertos > 10){
-        enemigos1_muertos = 0;
+    if((total_enemigos1 % 10) == 0 && total_enemigos1 > 10){
         if(t_enemigos > 300)
             t_enemigos -= 200;
         e1_vidas += 3;
-        // TO-DO: Poner mensaje de nueva orda
+        nivel_activo++;
+        QString imagen = ":/sprites/interfaz/"+QString::number(nivel_activo)+".png";
+        nivel_etiqueta->configuracion(imagen);
+        nivel_etiqueta->select_bloc(0,0,22,36,false,largo*2,(ancho)*2);
     }
-    //if(enemigos1_muertos < 500){
-        /*
-        enemigo_1 *enemigo1 = new enemigo_1(aleatorio(), e1_vidas);
-        enemigo1->agregar_observador(this);
-        addItem(enemigo1);*/
-        enemigo_3 *enemigo3 = new enemigo_3();
-        //enemigo_2 *enemigo2 = new enemigo_2();
-        //enemigo2->agregar_observador(this);
-        enemigo3->agregar_observador(this);
-        addItem(enemigo3);
-    //}
+
+    enemigo_1 *enemigo1 = new enemigo_1(aleatorio(), e1_vidas);
+    enemigo1->agregar_observador(this);
+    addItem(enemigo1);
+    total_enemigos1++;
+
+    if(total_enemigos2 < 3){
+        enemigo_2 *enemigo2 = new enemigo_2();
+        enemigo2->agregar_observador(this);
+        addItem(enemigo2);
+        total_enemigos2++;
+    }
 }
 
 /*

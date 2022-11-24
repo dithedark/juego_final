@@ -52,9 +52,9 @@ private:
 
     Observer *observador;
 
+    void estado_inicial();
 
 private slots:
-    void estado_inicial();
     void disparo();
     void cambioE1();
     void muerte();
