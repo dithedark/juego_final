@@ -68,10 +68,6 @@ void juego::iniciar_juego(){
     addItem(personaje->pistola);
     addItem(personaje);
 
-    drones.push_back(new enemigo_3);
-    dronesEnemigos++;
-    addItem(drones[0]);
-
     t_disparo_protagonista=new QTimer;
     caida= new QTimer;
     movimiento_drones=new QTimer;
@@ -314,6 +310,13 @@ void juego::cargar_enemigos(){
         enemigo2->agregar_observador(this);
         addItem(enemigo2);
         total_enemigos2++;
+    }
+
+    if(total_enemigos3 < 2){
+        enemigo_3 *enemigo3 = new enemigo_3();
+        enemigo3->agregar_observador(this);
+        addItem(enemigo3);
+        total_enemigos3++;
     }
 }
 

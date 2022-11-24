@@ -36,6 +36,7 @@ private:
     int nivel_activo = 1;
     unsigned total_enemigos1 = 0;
     unsigned total_enemigos2 = 0;
+    unsigned total_enemigos3 = 0;
 
 
 
