@@ -36,6 +36,7 @@ private:
     unsigned total_enemigos1 = 0;
     unsigned total_enemigos2 = 0;
     unsigned total_enemigos3 = 0;
+    unsigned puntaje_total = 0;
 
 
 
