@@ -112,12 +112,20 @@ void juego::notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro){
     switch(tipo_enemigo){
         case 1:
             p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",
-                           x+10,y+10,0,0,v*scale_sprite*40,0,0,giro);
+                           x+10,y+10,0,0,v*scale_sprite*10,0,0,giro);
         break;
 
         case 2:
-            p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",
-                       x+(13*scale_sprite),y+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
+            p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/3.png",
+                       x+((20.4*scale_sprite)),y+(14.4*scale_sprite),0,40,v*50,-90,0,false,10*scale_sprite);
+
+            polvora *s= new polvora();
+
+            s->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/3.png",
+                       x+((20.4*scale_sprite)),y+(14.4*scale_sprite),0,40,v*50,-45,0,false,10*scale_sprite);
+            cartuchoEnemigos.push_back(s);
+            dronesbalas++;
+            addItem(s);
         break;
     }
     cartuchoEnemigos.push_back(p);
@@ -217,7 +225,7 @@ void juego::inteligencia_drones()
 }
 
 void juego::cargar_enemigos(){
-    if(enemigos1_muertos == 10){
+    if(enemigos1_muertos > 10){
         enemigos1_muertos = 0;
         if(t_enemigos > 300)
             t_enemigos -= 200;
@@ -225,9 +233,10 @@ void juego::cargar_enemigos(){
         // TO-DO: Poner mensaje de nueva orda
     }
     if(enemigos1_muertos < 500){
+        /*
         enemigo_1 *enemigo1 = new enemigo_1(aleatorio(), e1_vidas);
         enemigo1->agregar_observador(this);
-        addItem(enemigo1);
+        addItem(enemigo1);*/
 
         enemigo_2 *enemigo2 = new enemigo_2();
         enemigo2->agregar_observador(this);

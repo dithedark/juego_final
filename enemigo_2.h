@@ -10,6 +10,9 @@ Q_OBJECT
 
 public:
     enemigo_2();
+    enemigo_2(bool posicionInicial);
+    enemigo_2(bool posicionInicial,int vidas);
+
     ~enemigo_2();
 
     // Metodos del Sujeto
@@ -18,12 +21,18 @@ public:
     void notificar() override;
 
 private:
+    void estado_inicial();
+
+
+
+
     QString enemigo2D=":/sprites/enemigos robots y drones con armas y animaciones sprites/6/Attack.png";
 
     QString enemigo2=":/sprites/enemigos robots y drones con armas y animaciones sprites/6/Walk.png";
     QString enemigo_quieto=":/sprites/enemigos robots y drones con armas y animaciones sprites/6/Idle.png";
 
     QTimer *walkE2;
+    QTimer *secuencia_muerte;
 
     int cambioE2_sprite=0,
     cambioE2_spriteD=0;
@@ -33,6 +42,7 @@ private:
     bool posF2=false;
     int punto2=85;
     int punto_contrario2=2;
+    int vidastotales=3;
     Observer *observador;
 
 private slots:

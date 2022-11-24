@@ -2,7 +2,34 @@
 
 enemigo_2::enemigo_2()
 {
+    estado_inicial();
+}
+
+enemigo_2::enemigo_2(bool posicionInicial)
+{
+    posF2=posicionInicial;
+    estado_inicial();
+}
+
+enemigo_2::enemigo_2(bool posicionInicial, int vidas)
+{
+    posF2=posicionInicial;
+    vidastotales=vidas;
+    estado_inicial();
+}
+
+
+
+enemigo_2::~enemigo_2()
+{
+    delete walkE2;
+}
+
+
+void enemigo_2::estado_inicial()
+{
     walkE2=new QTimer;
+    secuencia_muerte= new QTimer;
     configuracion(enemigo2,true,0,10,432,40);
     CAMbloque(3);
     connect(walkE2, SIGNAL (timeout()),this, SLOT(disparoE2()));
@@ -10,10 +37,6 @@ enemigo_2::enemigo_2()
     walkE2->start(200);
 }
 
-enemigo_2::~enemigo_2()
-{
-    delete walkE2;
-}
 
 void enemigo_2::cambioE2()
 {
@@ -87,5 +110,6 @@ void enemigo_2::remover_observador(){
 }
 
 void enemigo_2::notificar(){
-    observador->notificacion_enemigo(2, x(), y(), giro2);
+    observador->notificacion_enemigo(2, x(), y(), posF2);
 }
+

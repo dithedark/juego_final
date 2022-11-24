@@ -50,6 +50,14 @@ void enemigo_1::estado_inicial(){
     t_caminar->start(100);
 }
 
+void enemigo_1::muerte(){
+    select_bloc(cambioE1_sprite*48,0,48,48,false,48*1.6,48*1.2,posF);
+    cambioE1_sprite++;
+    if(cambioE1_sprite == 6){
+        delete t_mostrar_muerte;
+        remover_observador();
+    }
+}
 void enemigo_1::cambioE1()
 {
     select_bloc(cambioE1_sprite*48,0,48,43,false,48*1.6,48*1.2,!posF);
@@ -100,14 +108,7 @@ void enemigo_1::recibir_disparo(){
     }
 }
 
-void enemigo_1::muerte(){
-    select_bloc(cambioE1_sprite*48,0,48,48,false,48*1.6,48*1.2,posF);
-    cambioE1_sprite++;
-    if(cambioE1_sprite == 6){
-        delete t_mostrar_muerte;
-        remover_observador();
-    }
-}
+
 
 void enemigo_1::agregar_observador(Observer *obs){
     observador = obs;
