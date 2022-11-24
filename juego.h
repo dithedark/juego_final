@@ -22,7 +22,6 @@ public:
     ~juego();
 
     void mapa();
-    void ver_menu();
 
     void keyPressEvent(QKeyEvent *i) override;
     virtual void notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro) override;
