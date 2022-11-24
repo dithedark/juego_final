@@ -12,6 +12,7 @@ CONFIG += c++17
 SOURCES += \
     base.cpp \
     bloques.cpp \
+    button.cpp \
     enemigo_1.cpp \
     enemigo_2.cpp \
     enemigo_3.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     Sujeto.h \
     base.h \
     bloques.h \
+    button.h \
     enemigo_1.h \
     enemigo_2.h \
     enemigo_3.h \
