@@ -47,6 +47,9 @@ private:
     bool pausa=true;
     bool posF=false;
     int totalVidas=3;
+
+
+
     Observer *observador;
 
     void estado_inicial();

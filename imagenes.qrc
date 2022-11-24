@@ -42,5 +42,31 @@
         <file>sprites/zona sprites/3 Objects/Fire-extinguisher1.png</file>
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Death.png</file>
         <file>sprites/enemigos robots y drones con armas y animaciones sprites/2/Hurt.png</file>
+        <file>sprites/interfaz/0.png</file>
+        <file>sprites/interfaz/LEVEL-removebg-preview.png</file>
+        <file>sprites/interfaz/1.png</file>
+        <file>sprites/interfaz/2.png</file>
+        <file>sprites/interfaz/3.png</file>
+        <file>sprites/interfaz/4.png</file>
+        <file>sprites/interfaz/5.png</file>
+        <file>sprites/interfaz/6.png</file>
+        <file>sprites/interfaz/7.png</file>
+        <file>sprites/interfaz/8.png</file>
+        <file>sprites/interfaz/9.png</file>
+        <file>sprites/interfaz/ARCADE-removebg-preview.png</file>
+        <file>sprites/interfaz/BACK-removebg-preview.png</file>
+        <file>sprites/interfaz/CONTINUE-removebg-preview.png</file>
+        <file>sprites/interfaz/EXIT-removebg-preview.png</file>
+        <file>sprites/interfaz/LOAD_GAME-removebg-preview.png</file>
+        <file>sprites/interfaz/LOG_IN-removebg-preview.png</file>
+        <file>sprites/interfaz/MULTIPLAYER-removebg-preview (1).png</file>
+        <file>sprites/interfaz/PASSWORD-removebg-preview.png</file>
+        <file>sprites/interfaz/PLAY-removebg-preview.png</file>
+        <file>sprites/interfaz/RECORD-removebg-preview.png</file>
+        <file>sprites/interfaz/SCORE-removebg-preview.png</file>
+        <file>sprites/interfaz/SING_UP-removebg-preview.png</file>
+        <file>sprites/interfaz/TITLE-removebg-preview.png</file>
+        <file>sprites/interfaz/TITLE_2-removebg-preview.png</file>
+        <file>sprites/interfaz/USERNAME-removebg-preview.png</file>
     </qresource>
 </RCC>
