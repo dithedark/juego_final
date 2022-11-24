@@ -18,10 +18,12 @@ enemigo_1::enemigo_1(bool posicionInicial, int vidas){
     estado_inicial();
 }
 
+//Destructores
 enemigo_1::~enemigo_1()
 {
     delete t_caminar;
 }
+
 
 // Propiedades
 int enemigo_1::obtener_total_vidas(){
