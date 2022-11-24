@@ -40,12 +40,15 @@ private:
     bloques *bl[largo][2];
     base *fondo;
     base *level;
+    base *score;
+    base *number_score;
     base *number_level;
     jugador *personaje;
 
     //enemigo_2 *tanque;
-    int t_enemigos = 2000;
+    int t_enemigos = 2500;
     int e1_vidas = 3;
+    int n=1;
 
     QTimer *caida
     ,*t_disparo_protagonista,

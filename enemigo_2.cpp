@@ -48,7 +48,7 @@ void enemigo_2::estado_inicial2(){
         setPos(16*(largo-4)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
 
     // Iniciar movimiento
-    t_caminar2->start(100);
+    t_caminar2->start(200);
 
 }
 

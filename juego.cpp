@@ -77,6 +77,8 @@ void juego::mapa()
     level = new base;
     level->configuracion(":/sprites/interfaz/LEVEL-removebg-preview.png");
 
+    score = new base;
+    score->configuracion(":/sprites/interfaz/SCORE-removebg-preview.png");
 
     for(int i=0;i<largo;i++)
     {
@@ -104,9 +106,13 @@ void juego::mapa()
             addItem(bl[i][1]);
 
     }
-    level->select_bloc(0,0,320,40,false,largo*3,(ancho)*1);
+    level->select_bloc(0,0,320,40,true,largo*3,(ancho)*1);
     level-> setPos(16*1*scale_sprite,16*(ancho-1)*scale_sprite);
     addItem(level);
+
+    score->select_bloc(0,0,320,40,false,largo*3,(ancho)*1);
+    score-> setPos(16*1*scale_sprite,16*(ancho-14)*scale_sprite);
+    addItem(score);
 
 }
 
@@ -237,23 +243,25 @@ void juego::inteligencia_drones()
 }
 
 void juego::cargar_enemigos(){
-    if(enemigos1_muertos == 10){
+    if(enemigos1_muertos == 4){
         enemigos1_muertos = 0;
-        if(t_enemigos > 300){
-            t_enemigos -= 200;
-        e1_vidas += 3;}
+       // n++;
         // TO-DO: Poner mensaje de nueva orda
-        for (int i=1;i<6;i++){
+        if(enemigos1_muertos == 0){
             number_level = new base;
-            QString imagen = ":/sprites/interfaz/"+QString::number( i)+".png";
+            QString imagen = ":/sprites/interfaz/"+QString::number( n)+".png";
             number_level->configuracion(imagen);
-           // number_level->configuracion(":/sprites/interfaz/1.png");
-            number_level->select_bloc(0,0,22,36,false,largo*2,(ancho)*2);
-            number_level-> setPos(16*4*scale_sprite,16*(ancho-1)*scale_sprite);
+            number_level->select_bloc(0,0,28,36,false,largo*2,(ancho)*2);
+            number_level-> setPos(16*10.5*scale_sprite,16*(ancho-1)*scale_sprite);
             addItem(number_level);
+        }
 
-            }
+        if(t_enemigos > 300)
+            t_enemigos -= 200;
+        e1_vidas += 3;
+    n++;
     }
+
     if(enemigos1_muertos < 500){
         enemigo_1 *enemigo1 = new enemigo_1(aleatorio(), e1_vidas);
         enemigo1->agregar_observador(this);
