@@ -110,8 +110,8 @@ void juego::mapa()
     nivel = new base;
     nivel->configuracion(":/sprites/interfaz/LEVEL-removebg-preview.png");
 
-    score = new base;
-    score->configuracion(":/sprites/interfaz/SCORE-removebg-preview.png");
+    puntaje = new base;
+    puntaje->configuracion(":/sprites/interfaz/SCORE-removebg-preview.png");
 
     for(int i=0;i<largo;i++)
     {
@@ -143,9 +143,9 @@ void juego::mapa()
     nivel-> setPos(16*1*scale_sprite,16*(ancho-1)*scale_sprite);
     addItem(nivel);
 
-    score->select_bloc(0,0,320,40,false,largo*3,(ancho)*1);
-    score-> setPos(16*1*scale_sprite,16*(ancho-14)*scale_sprite);
-    addItem(score);
+    puntaje->select_bloc(0,0,320,40,false,largo*3,(ancho)*1);
+    puntaje-> setPos(16*1*scale_sprite,16*(ancho-14)*scale_sprite);
+    addItem(puntaje);
 
 }
 

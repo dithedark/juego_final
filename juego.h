@@ -44,6 +44,7 @@ private:
     bloques *bl[largo][2];
     base *fondo;
     base *nivel;
+    base *puntaje;
     base *nivel_etiqueta;
     jugador *personaje;
 
