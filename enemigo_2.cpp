@@ -22,60 +22,42 @@ enemigo_2::enemigo_2(bool posicionInicial, int vidas)
 
 
 
-enemigo_2::~enemigo_2()
-{
-    delete walkE2;
-}
-
-
-void enemigo_2::estado_inicial()
-{
-    walkE2=new QTimer;
-    secuencia_muerte= new QTimer;
-    t_caminar2 = new QTimer;
-    t_mostrar_muerte2 = new QTimer;
-    configuracion(enemigo2,true,0,10,432,40);
-    CAMbloque(3);
-    connect(t_caminar2, SIGNAL (timeout()),this, SLOT(disparoE2()));
-    setPos(16*(largo-4)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
-    t_caminar2->start(200);
-}
 
 // Propiedades
-int enemigo_2::obtener_total_vidas2(){
-    return totalVidas2;
+int enemigo_2::obtener_total_vidas(){
+    return vidastotales;
 }
 //Destructores
 enemigo_2::~enemigo_2()
 {
-    delete t_caminar2;
+    delete t_caminar;
 }
 
 
 //Metodos
-void enemigo_2::estado_inicial2(){
-    t_caminar2 = new QTimer;
-    t_mostrar_muerte2 = new QTimer;
+void enemigo_2::estado_inicial(){
+    t_caminar = new QTimer;
+    t_mostrar_muerte= new QTimer;
     configuracion(enemigo2,true,0,10,432,40);
 
     CAMbloque(3);
 
     // Conectar timers con los slots
-    connect(t_caminar2, SIGNAL (timeout()),this, SLOT(disparoE2()));
-    connect(t_mostrar_muerte2, SIGNAL(timeout()), this, SLOT(muerte2()));
+    connect(t_caminar, SIGNAL (timeout()),this, SLOT(disparoE()));
+    connect(t_mostrar_muerte, SIGNAL(timeout()), this, SLOT(muerte()));
 
     // Establece la dirección inical
     if(posF2)
-        setPos(16*scale_sprite,16*(ancho-(3.7))*scale_sprite);
+        setPos(0,16*(ancho-(3.7))*scale_sprite);
     else
-        setPos(16*(largo-4)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
+        setPos(16*(largo)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
 
     // Iniciar movimiento
-    t_caminar2->start(100);
+    t_caminar->start(200);
 
 }
 
-void enemigo_2::cambioE2()
+void enemigo_2::cambioE()
 {
     select_bloc(cambioE2_sprite*48,0,48,43,false,48*1.6,48*1.2,!posF2);
     if(cambioE2_sprite < cambioE2_spriteD)
@@ -99,7 +81,7 @@ void enemigo_2::cambioE2()
     }
 }
 
-void enemigo_2::disparoE2()
+void enemigo_2::disparoE()
 {
     if(cambioE2_sprite==cambioE2_spriteD and pausa2==0)
     {
@@ -125,23 +107,23 @@ void enemigo_2::disparoE2()
         cambioE2_sprite=0;
 
     }
-    cambioE2();
+    cambioE();
 }
-void enemigo_2::recibir_disparo2(){
-    totalVidas2--;
-    if(totalVidas2 == 0){
-        delete t_caminar2;
+void enemigo_2::recibir_disparo(){
+    vidastotales--;
+    if(vidastotales == 0){
+        delete t_caminar;
         configuracion(enemigo2M,true,0,0,288,48);
         cambioE2_sprite = 0;
-        t_mostrar_muerte2 -> start(100);
+        t_mostrar_muerte -> start(200);
     }
 }
 
-void enemigo_2::muerte2(){
+void enemigo_2::muerte(){
     select_bloc(cambioE2_sprite*48,0,48,48,false,48*1.6,48*1.2,posF2);
     cambioE2_sprite++;
     if(cambioE2_sprite == 6){
-        delete t_mostrar_muerte2;
+        delete t_mostrar_muerte;
         remover_observador();
     }
 }

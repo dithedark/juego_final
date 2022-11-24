@@ -22,10 +22,10 @@ public:
     void notificar() override;
 
     // Propiedades
-    int obtener_total_vidas2();
+    int obtener_total_vidas();
 
     // Metodos
-    void recibir_disparo2();
+    void recibir_disparo();
 
 
 private:
@@ -39,8 +39,8 @@ private:
     QString enemigo2M="";
     QString enemigo_quieto=":/sprites/enemigos robots y drones con armas y animaciones sprites/6/Idle.png";
 
-    QTimer *walkE2;
-    QTimer *secuencia_muerte;
+    QTimer *t_caminar;
+    QTimer *t_mostrar_muerte;
 
     int cambioE2_sprite=0,
     cambioE2_spriteD=0;
@@ -54,17 +54,16 @@ private:
     Observer *observador;
 
 
-    int punto2=85;
-    int punto_contrario2=2;
+
 
 
 
 
 private slots:
-     void estado_inicial2();
-     void cambioE2();
-     void disparoE2();
-     void muerte2();
+
+     void cambioE();
+     void disparoE();
+     void muerte();
 };
 
 #endif // ENEMIGO_2_H

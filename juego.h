@@ -54,7 +54,9 @@ private:
     QVector<polvora*> cartuchoprota;
     QVector<polvora*> cartuchoEnemigos;
 
-    QVector<enemigo_3*> drones;
+    QVector<enemigo_3*>drones;
+
+
     //QVector<enemigo_2*> tanques;
 
 public slots:

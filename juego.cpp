@@ -109,17 +109,19 @@ void juego::notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro){
     else
         {v = -1;}
     polvora *p = new polvora();
+    polvora *s;
     switch(tipo_enemigo){
         case 1:
             p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",
                            x+10,y+10,0,0,v*scale_sprite*10,0,0,giro);
         break;
 
+
         case 2:
             p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/3.png",
                        x+((20.4*scale_sprite)),y+(14.4*scale_sprite),0,40,v*50,-90,0,false,10*scale_sprite);
+            s=new polvora();
 
-            polvora *s= new polvora();
 
             s->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/3.png",
                        x+((20.4*scale_sprite)),y+(14.4*scale_sprite),0,40,v*50,-45,0,false,10*scale_sprite);
@@ -127,6 +129,10 @@ void juego::notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro){
             dronesbalas++;
             addItem(s);
         break;
+        case 3:
+              p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",x+(13*scale_sprite),y+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
+        break;
+
     }
     cartuchoEnemigos.push_back(p);
     dronesbalas++;
@@ -159,8 +165,8 @@ void juego::disparo_protagonista()
                 enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(i);
                 if(e2){
                     // TO-DO: Implementar lo que sucede cuando la bala choca con el enemigo 2
-                    e2->recibir_disparo2();
-                    if(e2->obtener_total_vidas2() > 0){
+                    e2->recibir_disparo();
+                    if(e2->obtener_total_vidas() > 0){
                         removeItem(cartuchoprota[var]);
                         cartuchoprota.remove(var);
                         exit = true;
@@ -175,8 +181,18 @@ void juego::disparo_protagonista()
                 enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(i);
                 if(e3){
                     // TO-DO: Implementar lo que sucede cuando la bala choca con el enemigo 3
-
+                    e3->recibir_disparo();
+                    if(e3->obtener_total_vidas() > 0){
+                        removeItem(cartuchoprota[var]);
+                        cartuchoprota.remove(var);
+                        exit = true;
+                        dispa--;
+                        enemigos2_muertos++;
+                        break;
+                     }
                 }
+
+
             }
             if(exit) break;
         }
@@ -208,6 +224,7 @@ void juego::inteligencia_drones()
 {
     for (unsigned var = 0; var < dronesEnemigos; ++var)
     {
+        /*
         if(drones[var]->fase()==2)
         {
             dronesbalas++;
@@ -231,7 +248,7 @@ void juego::inteligencia_drones()
         else
         {
             drones[var]->disparoE3();
-        }
+        }*/
     }
 
     //tanque->disparoE2();
@@ -245,16 +262,17 @@ void juego::cargar_enemigos(){
         e1_vidas += 3;
         // TO-DO: Poner mensaje de nueva orda
     }
-    if(enemigos1_muertos < 500){
+    //if(enemigos1_muertos < 500){
         /*
         enemigo_1 *enemigo1 = new enemigo_1(aleatorio(), e1_vidas);
         enemigo1->agregar_observador(this);
         addItem(enemigo1);*/
-
-        enemigo_2 *enemigo2 = new enemigo_2();
-        enemigo2->agregar_observador(this);
-        addItem(enemigo2);
-    }
+        enemigo_3 *enemigo3 = new enemigo_3();
+        //enemigo_2 *enemigo2 = new enemigo_2();
+        //enemigo2->agregar_observador(this);
+        enemigo3->agregar_observador(this);
+        addItem(enemigo3);
+    //}
 }
 
 /*

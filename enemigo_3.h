@@ -2,42 +2,60 @@
 #define ENEMIGO_3_H
 
 #include "base.h"
+#include "Sujeto.h"
 
-class enemigo_3:public QObject , public base
+class enemigo_3:public QObject , public base,public Subject
 {
 Q_OBJECT
 
 public:
     enemigo_3();
     ~enemigo_3();
-    int fase();
+
+    enemigo_3(bool posicionInicial);
+    enemigo_3(bool posicionInicial, int vidas);
 
 
-    int muerte();
-    int convidas();
+    void agregar_observador(Observer *obs) override;
+    void remover_observador() override;
+    void notificar() override;
+
+
+    int obtener_total_vidas();
+
+    void recibir_disparo();
+
 
 private:
+
+     void estado_inicial();
+
     QString enemigo3D=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Attack.png";
     QString enemigo3=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Walk.png";
     QString enemigo_quieto=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Idle.png" ;
-    QString enemigo_herido=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Hurt.png";
     QString enemigo_muerte=":/sprites/enemigos robots y drones con armas y animaciones sprites/5/Death.png";
-    QTimer *flyE3;
+
+    QTimer *t_caminar;
+    QTimer *t_mostrar_muerte;
 
 
-    int vidas=2;
+
     int cambioE3_sprite=0;
     int cambioE3_spriteD=0;
+
     bool giro3=true;
-    unsigned short pausa3=1,conteopausa=0;
+    int pausa3=0;
     bool posF3=false;
     int punto3=85;
     int punto_contrario3=2;
+    int vidastotales=3;
+    Observer *observador;
 
 
 public slots:
     void disparoE3();
     void cambioE3();
+    void muerte();
 
 
 
