@@ -50,6 +50,7 @@ void MainWindow::menu_inicio(){
 void MainWindow::setup_juego()
 {
     scene = new juego;
+    scene->iniciar_juego();
     ui->graphicsView->setGeometry(0,0,16*scale_sprite*largo+2,16*scale_sprite*ancho+2);
     ui->graphicsView->setScene(scene);
 }
