@@ -20,8 +20,11 @@ Q_OBJECT
 public:
     juego();
     ~juego();
-    void keyPressEvent(QKeyEvent *i) override;
+
     void mapa();
+    void ver_menu();
+
+    void keyPressEvent(QKeyEvent *i) override;
     virtual void notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro) override;
 
 private:
@@ -30,8 +33,9 @@ private:
 
     unsigned dispa=0;
     unsigned dronesEnemigos=0,dronesbalas=0,limiteDrones;
-    unsigned enemigos1_muertos = 0;
-    unsigned enemigos2_muertos = 0;
+    int nivel_activo = 1;
+    unsigned total_enemigos1 = 0;
+    unsigned total_enemigos2 = 0;
 
 
 
@@ -39,14 +43,11 @@ private:
     objetivo *trampolin;
     bloques *bl[largo][2];
     base *fondo;
-    base *level;
-    base *score;
-    base *number_score;
-    base *number_level;
+    base *nivel;
+    base *nivel_etiqueta;
     jugador *personaje;
 
-    //enemigo_2 *tanque;
-    int t_enemigos = 2500;
+    int t_enemigos = 4000;
     int e1_vidas = 3;
     int n=1;
 
@@ -60,9 +61,10 @@ private:
     QVector<polvora*> cartuchoEnemigos;
 
     QVector<enemigo_3*> drones;
-    //QVector<enemigo_2*> tanques;
 
 public slots:
+
+    void iniciar_juego();
 
     //movimiento personaje
     void movimien();
