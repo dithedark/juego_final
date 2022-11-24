@@ -33,6 +33,7 @@ private:
 
     unsigned dispa=0;
     unsigned dronesEnemigos=0,dronesbalas=0,limiteDrones;
+    int nivel_activo = 1;
     unsigned total_enemigos1 = 0;
     unsigned total_enemigos2 = 0;
 
@@ -42,12 +43,11 @@ private:
     objetivo *trampolin;
     bloques *bl[largo][2];
     base *fondo;
-    base *level;
-    base *number_level;
+    base *nivel;
+    base *nivel_etiqueta;
     jugador *personaje;
 
-    //enemigo_2 *tanque;
-    int t_enemigos = 2000;
+    int t_enemigos = 4000;
     int e1_vidas = 3;
 
     QTimer *caida

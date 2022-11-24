@@ -53,9 +53,16 @@ void juego::ver_menu(){
 }
 
 void juego::iniciar_juego(){
-
     this->clear();
     mapa();
+
+    nivel_etiqueta = new base;
+    QString imagen = ":/sprites/interfaz/1.png";
+    nivel_etiqueta->configuracion(imagen);
+    nivel_etiqueta->select_bloc(0,0,22,36,false,largo*2,(ancho)*2);
+    nivel_etiqueta-> setPos(16*4*scale_sprite,16*(ancho-1)*scale_sprite);
+    addItem(nivel_etiqueta);
+
     personaje= new jugador;
     addItem(personaje->mano);
     addItem(personaje->pistola);
@@ -100,8 +107,8 @@ void juego::mapa()
     addItem(fondo);
 
 
-    level = new base;
-    level->configuracion(":/sprites/interfaz/LEVEL-removebg-preview.png");
+    nivel = new base;
+    nivel->configuracion(":/sprites/interfaz/LEVEL-removebg-preview.png");
 
 
     for(int i=0;i<largo;i++)
@@ -130,9 +137,9 @@ void juego::mapa()
             addItem(bl[i][1]);
 
     }
-    level->select_bloc(0,0,320,40,false,largo*3,(ancho)*1);
-    level-> setPos(16*1*scale_sprite,16*(ancho-1)*scale_sprite);
-    addItem(level);
+    nivel->select_bloc(0,0,320,40,false,largo*3,(ancho)*1);
+    nivel-> setPos(16*1*scale_sprite,16*(ancho-1)*scale_sprite);
+    addItem(nivel);
 
 }
 
@@ -184,17 +191,15 @@ void juego::disparo_protagonista()
                 enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(i);
                 if(e2){
                     e2->recibir_disparo2();
+                    removeItem(cartuchoprota[var]);
+                    cartuchoprota.remove(var);
+                    dispa--;
                     if(e2->obtener_total_vidas2() > 0){
-                        removeItem(cartuchoprota[var]);
-                        cartuchoprota.remove(var);
                         exit = true;
-                        dispa--;
-                        enemigos2_muertos++;
                         break;
                     }
                     else
                         this -> removeItem(i);
-
                 }
                 enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(i);
                 if(e3){
@@ -262,22 +267,16 @@ void juego::inteligencia_drones()
 }
 
 void juego::cargar_enemigos(){
-    if((total_enemigos1 % 20) == 0 && total_enemigos1 > 0){
+    if((total_enemigos1 % 10) == 0 && total_enemigos1 > 10){
         if(t_enemigos > 300)
             t_enemigos -= 200;
-        e1_vidas += 3;}
-        // TO-DO: Poner mensaje de nueva orda
-        for (int i=1;i<6;i++){
-            number_level = new base;
-            QString imagen = ":/sprites/interfaz/"+QString::number( i)+".png";
-            number_level->configuracion(imagen);
-           // number_level->configuracion(":/sprites/interfaz/1.png");
-            number_level->select_bloc(0,0,22,36,false,largo*2,(ancho)*2);
-            number_level-> setPos(16*4*scale_sprite,16*(ancho-1)*scale_sprite);
-            addItem(number_level);
-
-            }
+        e1_vidas += 3;
+        nivel_activo++;
+        QString imagen = ":/sprites/interfaz/"+QString::number(nivel_activo)+".png";
+        nivel_etiqueta->configuracion(imagen);
+        nivel_etiqueta->select_bloc(0,0,22,36,false,largo*2,(ancho)*2);
     }
+
     enemigo_1 *enemigo1 = new enemigo_1(aleatorio(), e1_vidas);
     enemigo1->agregar_observador(this);
     addItem(enemigo1);
