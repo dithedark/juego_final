@@ -1,68 +1,63 @@
 #include "enemigo_3.h"
 
+//Constructores
 enemigo_3::enemigo_3()
 {
-    flyE3=new QTimer;
-    configuracion(enemigo3,true,0,10,432,40);
-    CAMbloque(3);
-    connect(flyE3, SIGNAL (timeout()),this, SLOT(disparoE3()));
-
-    setPos(16*(largo-4)*scale_sprite,16*(ancho*2/11)*scale_sprite);
+    estado_inicial();
 
 }
 
+enemigo_3::enemigo_3(bool posicionInicial)
+{
+    posF3=posicionInicial;
+    estado_inicial();
+}
+
+enemigo_3::enemigo_3(bool posicionInicial, int vidas)
+{
+    posF3=posicionInicial;
+    vidastotales=vidas;
+    estado_inicial();
+}
+
+//Destructores
 enemigo_3::~enemigo_3()
 {
-    delete flyE3;
+    delete t_caminar;
+    delete t_mostrar_muerte;
 }
 
-int enemigo_3::fase()
-{
-    if (conteopausa==9 and pausa3==2)
-    {
-        conteopausa++;
-        return pausa3;
-    }
-    else if(conteopausa !=9 and pausa3==2)
-    {
-        conteopausa++;
-        return 0;
-    }
-    else if (conteopausa ==10 and pausa3==2)
-    {
-        conteopausa=0;
-    }
-
-    return pausa3;
+//Metodos
+void enemigo_3::muerte(){
+    remover_observador();
 }
 
-int enemigo_3::muerte()
+
+int enemigo_3::obtener_total_vidas()
 {
+    return vidastotales;
+}
 
-    if(vidas == 1 and pausa3 !=3)
-    {
-        configuracion(enemigo_muerte,true,0,8,432,40);
-        pausa3=3;
-        cambioE3_spriteD=3;
-        cambioE3_sprite=0;
-    }
-    else if(cambioE3_sprite<3 and vidas ==1 )
-    {
+void enemigo_3::estado_inicial()
+{
+    t_caminar = new QTimer;
+    t_mostrar_muerte= new QTimer;
+    configuracion(enemigo3,true,0,10,432,40);
 
-        cambioE3();
-    }
+    CAMbloque(3);
+
+    // Conectar timers con los slots
+    connect(t_caminar, SIGNAL (timeout()),this, SLOT(disparoE3()));
+    connect(t_mostrar_muerte, SIGNAL(timeout()), this, SLOT(muerte()));
+
+    // Establece la dirección inical
+    if(posF3)
+        setPos(0,16*(ancho*2/11)*scale_sprite);
     else
-    {
-        vidas--;
+        setPos(16*(largo)*scale_sprite,16*(ancho*2/11)*scale_sprite);
 
-    }
-
-    return vidas;
-}
-
-int enemigo_3::convidas()
-{
-    return vidas;
+    // Iniciar movimiento
+    t_caminar->start(300);
 }
 
 void enemigo_3::cambioE3()
@@ -99,8 +94,6 @@ void enemigo_3::cambioE3()
     }
 }
 
-
-
 void enemigo_3::disparoE3()
 {
 
@@ -118,6 +111,7 @@ void enemigo_3::disparoE3()
         pausa3=2;
         cambioE3_spriteD=3;
         cambioE3_sprite=0;
+        notificar();
     }
     else if(cambioE3_sprite==cambioE3_spriteD and pausa3==2)
     {
@@ -132,3 +126,31 @@ void enemigo_3::disparoE3()
     cambioE3();
 }
 
+
+
+void enemigo_3::recibir_disparo(){
+    vidastotales--;
+    if(vidastotales == 0){
+        delete t_caminar;
+        configuracion(enemigo_muerte,true,0,0,288,48);
+        cambioE3_sprite = 0;
+        t_mostrar_muerte -> start(500);
+    }
+}
+
+void enemigo_3::terminar(){
+    muerte();
+}
+
+void enemigo_3::agregar_observador(Observer *obs){
+    observador = obs;
+}
+
+void enemigo_3::remover_observador(){
+    observador = NULL;
+}
+
+void enemigo_3::notificar(){
+    if(observador)
+        observador->notificacion_enemigo(3, x(), y(), posF3);
+}

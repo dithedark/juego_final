@@ -9,8 +9,13 @@ class objetivo: public base
 
 
 public:
+    //Constructor
     objetivo();
+
+    //Destructor
     ~objetivo();
+
+    //Metodos
     void parametros(QString nombre,float px, float py);
     void Msen();
 
