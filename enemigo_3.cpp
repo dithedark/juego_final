@@ -29,12 +29,7 @@ enemigo_3::~enemigo_3()
 
 //Metodos
 void enemigo_3::muerte(){
-    select_bloc(cambioE3_sprite*48,0,48,48,false,48*1.6,48*1.2,posF3);
-    cambioE3_sprite++;
-    if(cambioE3_sprite == 3){
-        delete t_mostrar_muerte;
-        remover_observador();
-    }
+    remover_observador();
 }
 
 
@@ -139,11 +134,13 @@ void enemigo_3::recibir_disparo(){
         delete t_caminar;
         configuracion(enemigo_muerte,true,0,0,288,48);
         cambioE3_sprite = 0;
-        t_mostrar_muerte -> start(200);
+        t_mostrar_muerte -> start(500);
     }
 }
 
-
+void enemigo_3::terminar(){
+    muerte();
+}
 
 void enemigo_3::agregar_observador(Observer *obs){
     observador = obs;
@@ -154,5 +151,6 @@ void enemigo_3::remover_observador(){
 }
 
 void enemigo_3::notificar(){
-    observador->notificacion_enemigo(3, x(), y(), posF3);
+    if(observador)
+        observador->notificacion_enemigo(3, x(), y(), posF3);
 }

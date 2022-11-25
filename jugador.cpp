@@ -37,8 +37,8 @@ jugador::~jugador()
     delete calculo;
     delete andar;
     delete secuencia_muerte;
-    delete mano;
-    delete pistola;
+    //delete mano;
+    //delete pistola;
 
 }
 
@@ -198,13 +198,11 @@ void jugador::recibir_disparo()
     vidastotales--;
     if(vidastotales == 0)
     {
-        delete andar;
+        andar->stop();
         configuracion(muerteI,true,0,0,288,48);
         cambio_sprit = 0;
         secuencia_muerte -> start(200);
     }
-
-
 }
 
 int jugador::mostrar_vidas()

@@ -32,6 +32,8 @@ public:
 private:
     void detener();
     void iniciar();
+    void mostrar_puntaje();
+    void volver_a_iniciar();
     int select_bloc(int i, int j);
     bool aleatorio(),permisoO=true,estado_invencible=true,prendido=true;
 
@@ -51,8 +53,9 @@ private:
     base *puntaje;
     base *nivel_etiqueta;
     jugador *personaje;
+    QGraphicsTextItem* puntaje_pad;
 
-    int t_enemigos = 2000;
+    int t_enemigos = 6000;
     int e1_vidas = 3,Cparpadeo=10,Iparpadeo=0;
     int n=1;
 
@@ -65,6 +68,7 @@ private:
 
     QVector<polvora*> cartuchoprota;
     QVector<polvora*> cartuchoEnemigos;
+    QList<QGraphicsItem *> items_totales;
 
 public slots:
 
@@ -81,6 +85,7 @@ public slots:
     // inteligencia enemigos
     void cargar_enemigos();
     void parpadeo();
+    void salir();
 
 };
 

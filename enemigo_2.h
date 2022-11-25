@@ -26,7 +26,7 @@ public:
 
     // Metodos
     void recibir_disparo();
-
+    void terminar();
 
 private:
     void estado_inicial();

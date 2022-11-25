@@ -28,7 +28,7 @@ public:
 
     // Metodos
     void recibir_disparo();
-
+    void terminar();
 
 private:
 

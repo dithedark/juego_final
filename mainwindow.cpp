@@ -58,7 +58,7 @@ void MainWindow::setup_juego()
 }
 
 void MainWindow::iniciar_juego(){
-    delete scene;
+    //delete scene;
     setup_juego();
 }
 

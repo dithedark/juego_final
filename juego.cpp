@@ -2,7 +2,8 @@
 #include "enemigo_1.h"
 #include "enemigo_2.h"
 #include "enemigo_3.h"
-
+#include "button.h"
+#include <QApplication>
 //Constructores
 juego::juego()
 {
@@ -21,7 +22,7 @@ juego::~juego()
     {
         delete cartuchoprota[var];
     }
-    delete personaje;
+    //delete personaje;
     delete caida;
     delete t_disparo_protagonista;
     delete movimiento_drones;
@@ -34,11 +35,20 @@ void juego::iniciar_juego(){
     this->clear();
     mapa();
 
+    QString s_puntaje_total = QStringLiteral("%1").arg(puntaje_total, 5, 10, QLatin1Char('0'));
+    puntaje_pad = new QGraphicsTextItem(s_puntaje_total);
+    QFont puntajeFont("comic sans",15);
+    puntaje_pad->setFont(puntajeFont);
+    int txPos = 130;
+    int tyPos = 22;
+    puntaje_pad->setPos(txPos,tyPos);
+    addItem(puntaje_pad);
+
     nivel_etiqueta = new base;
     QString imagen = ":/sprites/interfaz/1.png";
     nivel_etiqueta->configuracion(imagen);
-    nivel_etiqueta->select_bloc(0,0,32,36,false,largo*2,(ancho)*2);
-    nivel_etiqueta-> setPos(16*4*scale_sprite,16*(ancho-1)*scale_sprite);
+    nivel_etiqueta->select_bloc(0,0,32,232,false,largo*2,(ancho)*2);
+    nivel_etiqueta-> setPos(16*4*scale_sprite,16*(ancho-1.25)*scale_sprite);
     addItem(nivel_etiqueta);
 
     personaje= new jugador;
@@ -79,16 +89,6 @@ void juego::mapa()
 
     fondo->select_bloc(0,0,576,324,false,largo*32,(ancho-2)*32);
     addItem(fondo);
-
-    QString s_puntaje_total = QStringLiteral("%1").arg(puntaje_total, 5, 10, QLatin1Char('0'));
-    QGraphicsTextItem* puntaje_pad = new QGraphicsTextItem(s_puntaje_total);
-    QFont puntajeFont("comic sans",15);
-    puntaje_pad->setFont(puntajeFont);
-    int txPos = 130;
-    int tyPos = 22;
-    puntaje_pad->setPos(txPos,tyPos);
-    addItem(puntaje_pad);
-
 
     nivel = new base;
     nivel->configuracion(":/sprites/interfaz/LEVEL-removebg-preview.png");
@@ -132,6 +132,39 @@ void juego::mapa()
 
 }
 
+void juego::mostrar_puntaje(){
+    QString s_puntaje_total = QStringLiteral("%1").arg(puntaje_total, 5, 10, QLatin1Char('0'));
+    puntaje_pad->setPlainText(s_puntaje_total);
+}
+
+void juego::volver_a_iniciar(){
+    base *logo= new base;
+    logo->configuracion(":/sprites/interfaz/CONTINUE-removebg-preview.png");
+    logo->select_bloc(0,0,512,96,false,512,96);
+    int txPos = this->width()/2 - 256;
+    int tyPos = 150;
+    logo-> setPos(txPos,tyPos);
+    addItem(logo);
+
+    Button* playButton = new Button(QString("Jugar"));
+    int bxPos = this->width()/2 - playButton->boundingRect().width()/2;
+    int byPos = 275;
+    playButton->setPos(bxPos,byPos);
+    connect(playButton,SIGNAL(clicked()),this,SLOT(iniciar_juego()));
+    addItem(playButton);
+
+    Button* quitButton = new Button(QString("Salir"));
+    int qxPos = this->width()/2 - quitButton->boundingRect().width()/2;
+    int qyPos = 350;
+    quitButton->setPos(qxPos,qyPos);
+    connect(quitButton,SIGNAL(clicked()),this,SLOT(salir()));
+    addItem(quitButton);
+}
+
+void juego::salir(){
+    QApplication::quit();
+}
+
 void juego::notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro){
     int v;
     if(giro)
@@ -139,34 +172,37 @@ void juego::notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro){
     else
         {v = -1;}
     polvora *p = new polvora();
-    polvora *s;
+    polvora *s = new polvora();
     switch(tipo_enemigo){
         case 1:
             p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",
                            x+10,y+10,0,0,v*scale_sprite*10,0,0,giro);
+            cartuchoEnemigos.push_back(p);
+            dronesbalas++;
+            addItem(p);
         break;
-
-
         case 2:
             p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/3.png",
                        x+((20.4*scale_sprite)),y+(14.4*scale_sprite),0,40,v*50,-90,0,false,10*scale_sprite);
-            s=new polvora();
-
+            cartuchoEnemigos.push_back(p);
+            dronesbalas++;
+            addItem(p);
 
             s->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/3.png",
                        x+((20.4*scale_sprite)),y+(14.4*scale_sprite),0,40,v*50,-45,0,false,10*scale_sprite);
+
             cartuchoEnemigos.push_back(s);
             dronesbalas++;
             addItem(s);
         break;
         case 3:
               p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",x+(13*scale_sprite),y+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
+              cartuchoEnemigos.push_back(p);
+              dronesbalas++;
+              addItem(p);
         break;
-
     }
-    cartuchoEnemigos.push_back(p);
-    dronesbalas++;
-    addItem(p);
+
 }
 
 void juego::disparo_protagonista()
@@ -191,6 +227,8 @@ void juego::disparo_protagonista()
                     else{
                         this -> removeItem(i);
                         total_enemigos1--;
+                        puntaje_total += 5;
+                        mostrar_puntaje();
                     }
                 }
                 enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(i);
@@ -206,6 +244,8 @@ void juego::disparo_protagonista()
                     else{
                         this -> removeItem(i);
                         total_enemigos2--;
+                        puntaje_total += 10;
+                        mostrar_puntaje();
                     }
                 }
                 enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(i);
@@ -217,9 +257,11 @@ void juego::disparo_protagonista()
                         exit = true;
                         dispa--;
                         break;
-                     }                    else{
+                    } else {
                         this -> removeItem(i);
                         total_enemigos3--;
+                        puntaje_total += 30;
+                        mostrar_puntaje();
                     }
                 }
             }
@@ -232,19 +274,22 @@ void juego::disparo_protagonista()
 
 void juego::disparoEnemigos()
 {
-    unsigned balasenemigos=dronesbalas;
-        for (unsigned var = 0; var < balasenemigos; ++var)
+    unsigned total_balas = dronesbalas;
+        for (unsigned var = 0; var < total_balas; ++var)
         {
             cartuchoEnemigos[var]->fisicas(personaje->x()+((x_jugador/2)*scale_sprite),personaje->y()+((y_jugador/2)*scale_sprite),personaje->calculo->getmasa());
             if(( (cartuchoEnemigos[var]->x()<=0) or (cartuchoEnemigos[var]->x()>=largo*scale_sprite*16)) or (cartuchoEnemigos[var]->y()<0) or (cartuchoEnemigos[var]->y()>ancho*16*scale_sprite))
             {
                 removeItem(cartuchoEnemigos[var]);
                 cartuchoEnemigos.remove(var);
-                balasenemigos--;
                 dronesbalas--;
+                break;
             }
             else if(cartuchoEnemigos[var]->collidesWithItem(personaje))
             {
+                removeItem(cartuchoEnemigos[var]);
+                cartuchoEnemigos.remove(var);
+                dronesbalas--;
                 if(estado_invencible)
                 {
                     personaje->recibir_disparo();
@@ -255,32 +300,49 @@ void juego::disparoEnemigos()
                         detener();
                     }
                 }
-
+                break;
             }
         }
          trampolin->Msen();
 }
 
 void juego::detener(){
+    puntaje = 0;
     t_disparo_protagonista->stop();
     caida->stop();
     movimiento_drones->stop();
     Disparo_enemigos->stop();
     invencible->stop();
     t_cargar_enemigos->stop();
-    for(unsigned i = 0; i < dronesbalas;i++){
+    removeItem(personaje->pistola);
+    removeItem(personaje->mano);
+    removeItem(personaje);
+    for(unsigned i = 0; i < cartuchoEnemigos.length();i++){
         removeItem(cartuchoEnemigos[i]);
     }
-
-    for(unsigned i = 0; i < dispa;i++){
+    for(unsigned i = 0; i < cartuchoprota.length();i++){
         removeItem(cartuchoprota[i]);
     }
+    cartuchoEnemigos.remove(0,cartuchoEnemigos.length());
+    cartuchoprota.remove(0,cartuchoprota.length());
     dronesbalas = 0;
     dispa = 0;
-    puntaje = 0;
-    mapa();
-    iniciar_juego();
-    iniciar();
+    foreach (QGraphicsItem *var, items_totales) {
+        enemigo_1 * e1 = dynamic_cast<enemigo_1 *>(var);
+        if(e1){
+            e1->terminar();
+        }
+        enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(var);
+        if(e2){
+            e2->terminar();
+        }
+        enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(var);
+        if(e3){
+            e3->terminar();
+        }
+        removeItem(var);
+    }
+    volver_a_iniciar();
 }
 
 void juego::iniciar(){
@@ -293,33 +355,36 @@ void juego::iniciar(){
 }
 
 void juego::cargar_enemigos(){
-    puntaje_total++;
     if((total_enemigos1 % 10) == 0 && total_enemigos1 > 10){
         if(t_enemigos > 300)
             t_enemigos -= 200;
         e1_vidas += 3;
         nivel_activo++;
+        if(nivel_activo > 9)
+            nivel_activo = 9;
         QString imagen = ":/sprites/interfaz/"+QString::number(nivel_activo)+".png";
         nivel_etiqueta->configuracion(imagen);
-        nivel_etiqueta->select_bloc(0,0,22,36,false,largo*2,(ancho)*2);
     }
 
     enemigo_1 *enemigo1 = new enemigo_1(aleatorio(), e1_vidas);
     enemigo1->agregar_observador(this);
     addItem(enemigo1);
+    items_totales.push_back(enemigo1);
     total_enemigos1++;
 
-    if(total_enemigos2 < 0){
+    if(total_enemigos2 < 2){
         enemigo_2 *enemigo2 = new enemigo_2(aleatorio(), e1_vidas);
         enemigo2->agregar_observador(this);
         addItem(enemigo2);
+        items_totales.push_back(enemigo2);
         total_enemigos2++;
     }
 
-    if(total_enemigos3 < 0){
+    if(total_enemigos3 < 1){
         enemigo_3 *enemigo3 = new enemigo_3(aleatorio(), e1_vidas);
         enemigo3->agregar_observador(this);
         addItem(enemigo3);
+        items_totales.push_back(enemigo3);
         total_enemigos3++;
     }
 }
@@ -345,14 +410,9 @@ void juego::parpadeo()
     {
         estado_invencible= !estado_invencible;
         invencible->stop();
-        addItem(personaje);
-        addItem(personaje->mano);
-        addItem(personaje->pistola);
         Iparpadeo=0;
         prendido=true;
-
     }
-
 }
 
 bool juego::aleatorio()

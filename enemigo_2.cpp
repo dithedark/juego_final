@@ -52,7 +52,7 @@ void enemigo_2::estado_inicial(){
         setPos(16*(largo)*scale_sprite,16*(ancho-(3.7))*scale_sprite);
 
     // Iniciar movimiento
-    t_caminar->start(200);
+    t_caminar->start(500);
 
 }
 
@@ -118,13 +118,12 @@ void enemigo_2::recibir_disparo(){
     }
 }
 
+void enemigo_2::terminar(){
+    muerte();
+}
+
 void enemigo_2::muerte(){
-    select_bloc(cambioE2_sprite*48,0,48,48,false,48*1.6,48*1.2,posF2);
-    cambioE2_sprite++;
-    if(cambioE2_sprite == 6){
-        delete t_mostrar_muerte;
-        remover_observador();
-    }
+    remover_observador();
 }
 
 
@@ -137,6 +136,7 @@ void enemigo_2::remover_observador(){
 }
 
 void enemigo_2::notificar(){
-    observador->notificacion_enemigo(2, x(), y(), posF2);
+    if(observador)
+        observador->notificacion_enemigo(2, x(), y(), posF2);
 }
 

@@ -20,6 +20,7 @@ public:
     void remover_observador() override;
     void notificar() override;
     void recibir_disparo();
+    void terminar();
 
     enemigo_3(bool posicionInicial);
     enemigo_3(bool posicionInicial, int vidas);
