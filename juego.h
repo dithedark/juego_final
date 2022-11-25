@@ -83,7 +83,6 @@ public slots:
 
 
     // inteligencia enemigos
-    void inteligencia_drones();
     void cargar_enemigos();
      void parpadeo();
 

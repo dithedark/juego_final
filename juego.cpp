@@ -55,7 +55,6 @@ void juego::iniciar_juego(){
     connect(invencible, SIGNAL (timeout()),this, SLOT(parpadeo()));
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));
     connect(t_disparo_protagonista, SIGNAL (timeout()),this, SLOT(disparo_protagonista()));
-    connect(movimiento_drones, SIGNAL (timeout()),this, SLOT(inteligencia_drones()));
     connect(Disparo_enemigos, SIGNAL (timeout()),this, SLOT(disparoEnemigos()));
 
     // Carga Enemigos Aleatoriamente
@@ -273,7 +272,6 @@ void juego::disparoEnemigos()
          trampolin->Msen();
     //numbalas=numbalas-eliminados;
 }
-
 
 
 void juego::cargar_enemigos(){
