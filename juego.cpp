@@ -1,5 +1,4 @@
 #include "juego.h"
-#include "button.h"
 #include "enemigo_1.h"
 #include "enemigo_2.h"
 #include "enemigo_3.h"
@@ -9,7 +8,6 @@ juego::juego()
     srand(time(NULL));
     setSceneRect(0,0,16*scale_sprite*largo,16*scale_sprite*ancho);
     mapa();
-    ver_menu();
 }
 
 juego::~juego()
@@ -26,30 +24,6 @@ juego::~juego()
     delete t_disparo_protagonista;
     delete movimiento_drones;
 
-}
-
-void juego::ver_menu(){
-    QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("SALTARIN"));
-    QFont titleFont("comic sans",50);
-    titleText->setFont(titleFont);
-    int txPos = this->width()/2 - titleText->boundingRect().width()/2;
-    int tyPos = 150;
-    titleText->setPos(txPos,tyPos);
-    addItem(titleText);
-
-    Button* playButton = new Button(QString("Jugar"));
-    int bxPos = this->width()/2 - playButton->boundingRect().width()/2;
-    int byPos = 275;
-    playButton->setPos(bxPos,byPos);
-    connect(playButton,SIGNAL(clicked()),this,SLOT(iniciar_juego()));
-    addItem(playButton);
-
-    Button* quitButton = new Button(QString("Salir"));
-    int qxPos = this->width()/2 - quitButton->boundingRect().width()/2;
-    int qyPos = 350;
-    quitButton->setPos(qxPos,qyPos);
-    connect(quitButton,SIGNAL(clicked()),this,SLOT(close()));
-    addItem(quitButton);
 }
 
 void juego::iniciar_juego(){
@@ -97,12 +71,24 @@ void juego::iniciar_juego(){
 
 void juego::mapa()
 {
+
+
     fondo =new base;
     fondo->configuracion(":/sprites/zona sprites/2 Background/Background.png");
 
 
     fondo->select_bloc(0,0,576,324,false,largo*32,(ancho-2)*32);
     addItem(fondo);
+
+
+    QString s_puntaje_total = QStringLiteral("%1").arg(puntaje_total, 5, 10, QLatin1Char('0'));
+    QGraphicsTextItem* puntaje_pad = new QGraphicsTextItem(s_puntaje_total);
+    QFont puntajeFont("comic sans",15);
+    puntaje_pad->setFont(puntajeFont);
+    int txPos = 130;
+    int tyPos = 22;
+    puntaje_pad->setPos(txPos,tyPos);
+    addItem(puntaje_pad);
 
 
     nivel = new base;
@@ -203,8 +189,10 @@ void juego::disparo_protagonista()
                         exit = true;
                         break;
                     }
-                    else
+                    else{
                         this -> removeItem(i);
+                        total_enemigos1--;
+                    }
                 }
                 enemigo_2 * e2 = dynamic_cast<enemigo_2 *>(i);
                 if(e2){
@@ -216,8 +204,10 @@ void juego::disparo_protagonista()
                         exit = true;
                         break;
                     }
-                    else
+                    else{
                         this -> removeItem(i);
+                        total_enemigos2--;
+                    }
                 }
                 enemigo_3 * e3 = dynamic_cast<enemigo_3 *>(i);
                 if(e3){
@@ -228,7 +218,10 @@ void juego::disparo_protagonista()
                         exit = true;
                         dispa--;
                         break;
-                     }
+                     }                    else{
+                        this -> removeItem(i);
+                        total_enemigos3--;
+                    }
                 }
             }
             if(exit) break;
@@ -312,6 +305,7 @@ void juego::inteligencia_drones()
 }
 
 void juego::cargar_enemigos(){
+    puntaje_total++;
     if((total_enemigos1 % 10) == 0 && total_enemigos1 > 10){
         if(t_enemigos > 300)
             t_enemigos -= 200;
@@ -328,14 +322,14 @@ void juego::cargar_enemigos(){
     total_enemigos1++;
 
     if(total_enemigos2 < 3){
-        enemigo_2 *enemigo2 = new enemigo_2();
+        enemigo_2 *enemigo2 = new enemigo_2(aleatorio(), e1_vidas);
         enemigo2->agregar_observador(this);
         addItem(enemigo2);
         total_enemigos2++;
     }
 
     if(total_enemigos3 < 2){
-        enemigo_3 *enemigo3 = new enemigo_3();
+        enemigo_3 *enemigo3 = new enemigo_3(aleatorio(), e1_vidas);
         enemigo3->agregar_observador(this);
         addItem(enemigo3);
         total_enemigos3++;
