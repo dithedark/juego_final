@@ -9,8 +9,12 @@
 class bloques : public base
 {
 public:
+    //Constructore
     bloques();
+    //Destructores
     ~bloques();
+
+
     //void select_bloc(int bl);
 
 private:

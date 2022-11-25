@@ -26,23 +26,19 @@ float operaciones::getPY() const
 {
     return PY;
 }
-
-
-
 float operaciones::getmasa() const
 {
     return masa;
 }
-
 float operaciones::getVX() const
 {
     return VX;
 }
-
 float operaciones::getAX() const
 {
     return ax;
 }
+
 
 
 

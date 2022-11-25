@@ -13,7 +13,7 @@ public:
     float getVX() const;
     float getAX() const;
 
-
+    //Metodos
     void acelerar(float px2_, float py2_, float masa2);
     void actualizarY(float dt);
     void actualizarX(float dt);
