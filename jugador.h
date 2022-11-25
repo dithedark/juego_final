@@ -32,7 +32,6 @@ public:
 
     operaciones *calculo;
 
-    operaciones *calculo;
     base *mano,*pistola;
 
 private:
