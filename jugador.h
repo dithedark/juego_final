@@ -33,6 +33,10 @@ public:
 
     bool getvuelta();
 
+    void recibir_disparo();
+
+    int mostrar_vidas();
+
     operaciones *calculo;
 
     base *mano,*pistola;
@@ -44,11 +48,15 @@ private:
     correr=":/sprites/armas y movimientos sprites/1 Characters/2 Punk/Run1_",
     armaB=":/sprites/armas y movimientos sprites/2 Guns/2_",
     bala=":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",
-    reves="I",png=".png";
+    reves="I",png=".png",
+    muerteI=":/sprites/animaciones personajes/2 Punk/Punk_death.png";
 
-    QTimer *animacion,*andar,*fisica_balar;
+
+    QTimer *animacion,*andar,*secuencia_muerte;
     int short cambio_sprit=0,cantidad_sprint=3,velocidad=scale_sprite*(23/2),posmanoX,posmanoY,pospistolaX,pospistolaY,signo;
-    bool vuelta=1 ;
+    bool vuelta=1;
+    int vidastotales=20 ;
+
 
 
 
@@ -58,6 +66,8 @@ private:
 private slots:
     void escena();
     void movimientoX();
+    void muerte();
+
 };
 
 #endif // JUGADOR_H
