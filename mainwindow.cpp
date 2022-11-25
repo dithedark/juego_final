@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "button.h"
 #include "base.h"
-
+//Constructores
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
     menu_inicio();
 }
 
+
+//Metodos
 void MainWindow::setup_window()
 {
     setWindowTitle("saltarin");
@@ -60,10 +62,10 @@ void MainWindow::iniciar_juego(){
     setup_juego();
 }
 
+//Destructores
 MainWindow::~MainWindow()
 {
     delete ui;
     delete scene;
-
 }
 

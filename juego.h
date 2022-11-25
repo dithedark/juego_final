@@ -18,12 +18,17 @@ class juego : public QGraphicsScene, public Observer
 {
 Q_OBJECT
 public:
+    //Constructores
     juego();
+
+    //Destructores
     ~juego();
 
+    //Metodos
     void mapa();
-
     void keyPressEvent(QKeyEvent *i) override;
+
+    //Parte observador
     virtual void notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro) override;
 
 private:
@@ -78,7 +83,6 @@ public slots:
 
     // inteligencia enemigos
     void inteligencia_drones();
-
     void cargar_enemigos();
 
 };

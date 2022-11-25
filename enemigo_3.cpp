@@ -1,15 +1,10 @@
 #include "enemigo_3.h"
 
+//Constructores
 enemigo_3::enemigo_3()
 {
     estado_inicial();
 
-}
-
-enemigo_3::~enemigo_3()
-{
-    delete t_caminar;
-    delete t_mostrar_muerte;
 }
 
 enemigo_3::enemigo_3(bool posicionInicial)
@@ -25,8 +20,14 @@ enemigo_3::enemigo_3(bool posicionInicial, int vidas)
     estado_inicial();
 }
 
+//Destructores
+enemigo_3::~enemigo_3()
+{
+    delete t_caminar;
+    delete t_mostrar_muerte;
+}
 
-
+//Metodos
 void enemigo_3::muerte(){
     select_bloc(cambioE3_sprite*48,0,48,48,false,48*1.6,48*1.2,posF3);
     cambioE3_sprite++;

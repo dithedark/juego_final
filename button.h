@@ -7,13 +7,14 @@
 class Button:public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
-    // constructors
+    // constructores
     Button(QString name, QGraphicsItem* parent=NULL);
 
-    // public methods (events)
+    // Metodos (eventos)
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+
 signals:
     void clicked();
 private:

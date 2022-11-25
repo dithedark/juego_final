@@ -9,22 +9,22 @@ class enemigo_3:public QObject , public base,public Subject
 Q_OBJECT
 
 public:
+    //Constructores
     enemigo_3();
+
+    //Destructores
     ~enemigo_3();
+
+    //Metodos
+    void agregar_observador(Observer *obs) override;
+    void remover_observador() override;
+    void notificar() override;
+    void recibir_disparo();
 
     enemigo_3(bool posicionInicial);
     enemigo_3(bool posicionInicial, int vidas);
 
-
-    void agregar_observador(Observer *obs) override;
-    void remover_observador() override;
-    void notificar() override;
-
-
     int obtener_total_vidas();
-
-    void recibir_disparo();
-
 
 private:
 

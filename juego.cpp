@@ -3,6 +3,7 @@
 #include "enemigo_2.h"
 #include "enemigo_3.h"
 
+//Constructores
 juego::juego()
 {
     srand(time(NULL));
@@ -10,6 +11,7 @@ juego::juego()
     mapa();
 }
 
+//Destructores
 juego::~juego()
 {
     for(int i=0;i<largo;i++){
@@ -26,6 +28,8 @@ juego::~juego()
 
 }
 
+
+//Metodos
 void juego::iniciar_juego(){
     this->clear();
     mapa();
@@ -33,7 +37,7 @@ void juego::iniciar_juego(){
     nivel_etiqueta = new base;
     QString imagen = ":/sprites/interfaz/1.png";
     nivel_etiqueta->configuracion(imagen);
-    nivel_etiqueta->select_bloc(0,0,22,36,false,largo*2,(ancho)*2);
+    nivel_etiqueta->select_bloc(0,0,32,36,false,largo*2,(ancho)*2);
     nivel_etiqueta-> setPos(16*4*scale_sprite,16*(ancho-1)*scale_sprite);
     addItem(nivel_etiqueta);
 
@@ -248,39 +252,7 @@ void juego::disparoEnemigos()
     //numbalas=numbalas-eliminados;
 }
 
-void juego::inteligencia_drones()
-{
-    for (unsigned var = 0; var < dronesEnemigos; ++var)
-    {
-        /*
-        if(drones[var]->fase()==2)
-        {
-            dronesbalas++;
-            cartuchoEnemigos.push_back(new polvora);
-            cartuchoEnemigos[dronesbalas-1]->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/1.png",drones[var]->x()+(13*scale_sprite),drones[var]->y()+(28.8*scale_sprite),0,10,0,10,40,false,10*scale_sprite);
-            addItem(cartuchoEnemigos[dronesbalas-1]);
-           // Disparo_enemigos->start(10);
-            // Disparo_enemigos->start(10);
 
-        }
-        if( drones[var]->convidas() ==1)
-        {
-            drones[var]->muerte();
-        }
-        else if(drones[var]->convidas() ==0)
-        {
-            removeItem(drones[var]);
-            drones.remove(var);
-            dronesEnemigos--;
-        }
-        else
-        {
-            drones[var]->disparoE3();
-        }*/
-    }
-
-    //tanque->disparoE2();
-}
 
 void juego::cargar_enemigos(){
     puntaje_total++;

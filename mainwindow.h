@@ -16,10 +16,15 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    //Constructor
     MainWindow(QWidget *parent = nullptr);
+
+    //Metodos
     void setup_window();
     void setup_juego();
     void menu_inicio();
+
+    //Destructor
     ~MainWindow();
 
 
