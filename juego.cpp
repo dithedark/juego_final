@@ -74,15 +74,11 @@ void juego::iniciar_juego(){
 
 void juego::mapa()
 {
-
-
     fondo =new base;
     fondo->configuracion(":/sprites/zona sprites/2 Background/Background.png");
 
-
     fondo->select_bloc(0,0,576,324,false,largo*32,(ancho-2)*32);
     addItem(fondo);
-
 
     QString s_puntaje_total = QStringLiteral("%1").arg(puntaje_total, 5, 10, QLatin1Char('0'));
     QGraphicsTextItem* puntaje_pad = new QGraphicsTextItem(s_puntaje_total);
@@ -244,7 +240,6 @@ void juego::disparoEnemigos()
             {
                 removeItem(cartuchoEnemigos[var]);
                 cartuchoEnemigos.remove(var);
-                //eliminados++;
                 balasenemigos--;
                 dronesbalas--;
             }
@@ -256,20 +251,46 @@ void juego::disparoEnemigos()
                     estado_invencible=!estado_invencible;
                     invencible->start(200);
 
-                    if(personaje->mostrar_vidas()==0)
-                    {
-                        removeItem(personaje->mano);
-                        removeItem(personaje->pistola);
-                        clear();
+                    if(personaje->mostrar_vidas()==0){
+                        detener();
                     }
                 }
 
             }
         }
          trampolin->Msen();
-    //numbalas=numbalas-eliminados;
 }
 
+void juego::detener(){
+    t_disparo_protagonista->stop();
+    caida->stop();
+    movimiento_drones->stop();
+    Disparo_enemigos->stop();
+    invencible->stop();
+    t_cargar_enemigos->stop();
+    for(unsigned i = 0; i < dronesbalas;i++){
+        removeItem(cartuchoEnemigos[i]);
+    }
+
+    for(unsigned i = 0; i < dispa;i++){
+        removeItem(cartuchoprota[i]);
+    }
+    dronesbalas = 0;
+    dispa = 0;
+    puntaje = 0;
+    mapa();
+    iniciar_juego();
+    iniciar();
+}
+
+void juego::iniciar(){
+    t_disparo_protagonista->start();
+    caida->start();
+    movimiento_drones->start();
+    Disparo_enemigos->start();
+    invencible->start();
+    t_cargar_enemigos->start();
+}
 
 void juego::cargar_enemigos(){
     puntaje_total++;
@@ -288,14 +309,14 @@ void juego::cargar_enemigos(){
     addItem(enemigo1);
     total_enemigos1++;
 
-    if(total_enemigos2 < 3){
+    if(total_enemigos2 < 0){
         enemigo_2 *enemigo2 = new enemigo_2(aleatorio(), e1_vidas);
         enemigo2->agregar_observador(this);
         addItem(enemigo2);
         total_enemigos2++;
     }
 
-    if(total_enemigos3 < 1){
+    if(total_enemigos3 < 0){
         enemigo_3 *enemigo3 = new enemigo_3(aleatorio(), e1_vidas);
         enemigo3->agregar_observador(this);
         addItem(enemigo3);
@@ -333,7 +354,6 @@ void juego::parpadeo()
     }
 
 }
-
 
 bool juego::aleatorio()
 {

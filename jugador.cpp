@@ -110,7 +110,6 @@ void jugador::muerte(){
     cambio_sprit++;
     if(cambio_sprit == 3){
         delete secuencia_muerte;
-
     }
 }
 

@@ -30,6 +30,8 @@ public:
     virtual void notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro) override;
 
 private:
+    void detener();
+    void iniciar();
     int select_bloc(int i, int j);
     bool aleatorio(),permisoO=true,estado_invencible=true,prendido=true;
 
@@ -50,7 +52,7 @@ private:
     base *nivel_etiqueta;
     jugador *personaje;
 
-    int t_enemigos = 6000;
+    int t_enemigos = 2000;
     int e1_vidas = 3,Cparpadeo=10,Iparpadeo=0;
     int n=1;
 
