@@ -32,7 +32,14 @@ juego::~juego()
 
 //Metodos
 void juego::iniciar_juego(){
-    this->clear();
+    //this->clear();
+    puntaje_total = 0;
+    nivel_activo = 1;
+    t_enemigos = 6000;
+    e1_vidas = 3;
+    total_enemigos1 = 0;
+    total_enemigos2 = 0;
+    total_enemigos3 = 0;
     mapa();
 
     QString s_puntaje_total = QStringLiteral("%1").arg(puntaje_total, 5, 10, QLatin1Char('0'));
@@ -175,7 +182,7 @@ void juego::notificacion_enemigo(int tipo_enemigo, int x, int y, bool giro){
     polvora *s = new polvora();
     switch(tipo_enemigo){
         case 1:
-            p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/4_1.png",
+            p->Iparametros(":/sprites/armas y movimientos sprites/5 Bullets/6.png",
                            x+10,y+10,0,0,v*scale_sprite*10,0,0,giro);
             cartuchoEnemigos.push_back(p);
             dronesbalas++;
@@ -227,7 +234,7 @@ void juego::disparo_protagonista()
                     else{
                         this -> removeItem(i);
                         total_enemigos1--;
-                        puntaje_total += 5;
+                        puntaje_total += 10;
                         mostrar_puntaje();
                     }
                 }
@@ -244,7 +251,7 @@ void juego::disparo_protagonista()
                     else{
                         this -> removeItem(i);
                         total_enemigos2--;
-                        puntaje_total += 10;
+                        puntaje_total += 20;
                         mostrar_puntaje();
                     }
                 }
@@ -264,7 +271,20 @@ void juego::disparo_protagonista()
                         mostrar_puntaje();
                     }
                 }
+                polvora * e4 = dynamic_cast<polvora *>(i);
+                if(e4){
+                    cartuchoEnemigos.remove(cartuchoEnemigos.indexOf(e4));
+                    removeItem(e4);
+                    dronesbalas--;
+                    dispa--;
+                    removeItem(cartuchoprota[var]);
+                    cartuchoprota.remove(var);
+                    exit = true;
+                    break;
+                }
             }
+            if(puntaje_total > 99999)
+                puntaje_total=0;
             if(exit) break;
         }
     } else {
@@ -355,15 +375,16 @@ void juego::iniciar(){
 }
 
 void juego::cargar_enemigos(){
-    if((total_enemigos1 % 10) == 0 && total_enemigos1 > 10){
+    if(puntaje_total > (por_nivel * nivel_activo)){
         if(t_enemigos > 300)
-            t_enemigos -= 200;
+            t_enemigos -= 100;
         e1_vidas += 3;
         nivel_activo++;
         if(nivel_activo > 9)
             nivel_activo = 9;
         QString imagen = ":/sprites/interfaz/"+QString::number(nivel_activo)+".png";
         nivel_etiqueta->configuracion(imagen);
+        nivel_etiqueta->select_bloc(0,0,32,232,false,largo*2,(ancho)*2);
     }
 
     enemigo_1 *enemigo1 = new enemigo_1(aleatorio(), e1_vidas);

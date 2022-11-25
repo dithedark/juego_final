@@ -39,7 +39,8 @@ private:
 
     unsigned dispa=0;
     unsigned dronesEnemigos=0,dronesbalas=0,limiteDrones;
-    int nivel_activo = 1;
+    unsigned nivel_activo = 1;
+    unsigned por_nivel=100;
     unsigned total_enemigos1 = 0;
     unsigned total_enemigos2 = 0;
     unsigned total_enemigos3 = 0;

@@ -52,12 +52,12 @@ void enemigo_3::estado_inicial()
 
     // Establece la dirección inical
     if(posF3)
-        setPos(0,16*(ancho*(2/11))*scale_sprite);
+        setPos(0,16*(ancho*2/11)*scale_sprite);
     else
-        setPos(16*(largo)*scale_sprite,16*(ancho*(2/11))*scale_sprite);
+        setPos(16*(largo)*scale_sprite,16*(ancho*2/11)*scale_sprite);
 
     // Iniciar movimiento
-    t_caminar->start(200);
+    t_caminar->start(300);
 }
 
 void enemigo_3::cambioE3()

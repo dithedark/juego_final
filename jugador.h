@@ -48,7 +48,7 @@ private:
     QTimer *animacion,*andar,*secuencia_muerte;
     int short cambio_sprit=0,cantidad_sprint=3,velocidad=scale_sprite*(23/2),posmanoX,posmanoY,pospistolaX,pospistolaY,signo;
     bool vuelta=1;
-    int vidastotales=5;
+    int vidastotales=10;
 
 
 private slots:
