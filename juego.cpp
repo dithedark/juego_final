@@ -260,9 +260,9 @@ void juego::disparo_protagonista()
                     e3->recibir_disparo();
                     removeItem(cartuchoprota[var]);
                     cartuchoprota.remove(var);
+                    dispa--;
                     if(e3->obtener_total_vidas() > 0){
                         exit = true;
-                        dispa--;
                         break;
                     } else {
                         this -> removeItem(i);
