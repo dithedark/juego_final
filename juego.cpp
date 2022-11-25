@@ -50,7 +50,9 @@ void juego::iniciar_juego(){
     caida= new QTimer;
     movimiento_drones=new QTimer;
     Disparo_enemigos=new QTimer;
+    invencible=new QTimer;
 
+    connect(invencible, SIGNAL (timeout()),this, SLOT(parpadeo()));
     connect(caida, SIGNAL (timeout()),this, SLOT(movimien()));
     connect(t_disparo_protagonista, SIGNAL (timeout()),this, SLOT(disparo_protagonista()));
     connect(movimiento_drones, SIGNAL (timeout()),this, SLOT(inteligencia_drones()));
@@ -236,6 +238,9 @@ void juego::disparo_protagonista()
 void juego::disparoEnemigos()
 {
     unsigned balasenemigos=dronesbalas;
+
+
+
         for (unsigned var = 0; var < balasenemigos; ++var)
         {
             cartuchoEnemigos[var]->fisicas(personaje->x()+((x_jugador/2)*scale_sprite),personaje->y()+((y_jugador/2)*scale_sprite),personaje->calculo->getmasa());
@@ -246,6 +251,23 @@ void juego::disparoEnemigos()
                 //eliminados++;
                 balasenemigos--;
                 dronesbalas--;
+            }
+            else if(cartuchoEnemigos[var]->collidesWithItem(personaje))
+            {
+                if(estado_invencible)
+                {
+                    personaje->recibir_disparo();
+                    estado_invencible=!estado_invencible;
+                    invencible->start(200);
+
+                    if(personaje->mostrar_vidas()==0)
+                    {
+                        removeItem(personaje->mano);
+                        removeItem(personaje->pistola);
+                        clear();
+                    }
+                }
+
             }
         }
          trampolin->Msen();
@@ -284,6 +306,37 @@ void juego::cargar_enemigos(){
         addItem(enemigo3);
         total_enemigos3++;
     }
+}
+
+void juego::parpadeo()
+{
+    if(prendido)
+    {
+        removeItem(personaje);
+        removeItem(personaje->mano);
+        removeItem(personaje->pistola);
+    }
+    else
+    {
+        addItem(personaje);
+        addItem(personaje->mano);
+        addItem(personaje->pistola);
+
+    }
+    prendido=!prendido;
+    Iparpadeo++;
+    if(Cparpadeo==Iparpadeo)
+    {
+        estado_invencible= !estado_invencible;
+        invencible->stop();
+        addItem(personaje);
+        addItem(personaje->mano);
+        addItem(personaje->pistola);
+        Iparpadeo=0;
+        prendido=true;
+
+    }
+
 }
 
 /*

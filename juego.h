@@ -33,7 +33,7 @@ public:
 
 private:
     int select_bloc(int i, int j);
-    bool aleatorio(),permisoO=true;
+    bool aleatorio(),permisoO=true,estado_invencible=true,prendido=true;
 
     unsigned dispa=0;
     unsigned dronesEnemigos=0,dronesbalas=0,limiteDrones;
@@ -55,19 +55,20 @@ private:
     jugador *personaje;
 
     int t_enemigos = 4000;
-    int e1_vidas = 3;
+    int e1_vidas = 3,Cparpadeo=10,Iparpadeo=0;
     int n=1;
 
     QTimer *caida
     ,*t_disparo_protagonista,
     *movimiento_drones,
     *Disparo_enemigos,
-    *t_cargar_enemigos;
+    *t_cargar_enemigos,
+    *invencible;
 
     QVector<polvora*> cartuchoprota;
     QVector<polvora*> cartuchoEnemigos;
 
-    QVector<enemigo_3*> drones;
+
 
 public slots:
 
@@ -84,6 +85,7 @@ public slots:
     // inteligencia enemigos
     void inteligencia_drones();
     void cargar_enemigos();
+     void parpadeo();
 
 };
 
