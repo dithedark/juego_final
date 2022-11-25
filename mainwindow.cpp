@@ -26,7 +26,7 @@ void MainWindow::menu_inicio(){
 
     logo= new base;
     logo->configuracion(":/sprites/interfaz/TITLE_2-removebg-preview.png");
-    logo->select_bloc(0,0,512,96,false,largo*3,(ancho)*1);
+    logo->select_bloc(0,0,512,96,false,512,96);
     int txPos = this->width()/2 - 256;
     int tyPos = 150;
     logo-> setPos(txPos,tyPos);
