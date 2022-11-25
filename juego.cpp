@@ -237,9 +237,6 @@ void juego::disparo_protagonista()
 void juego::disparoEnemigos()
 {
     unsigned balasenemigos=dronesbalas;
-
-
-
         for (unsigned var = 0; var < balasenemigos; ++var)
         {
             cartuchoEnemigos[var]->fisicas(personaje->x()+((x_jugador/2)*scale_sprite),personaje->y()+((y_jugador/2)*scale_sprite),personaje->calculo->getmasa());
@@ -298,7 +295,7 @@ void juego::cargar_enemigos(){
         total_enemigos2++;
     }
 
-    if(total_enemigos3 < 2){
+    if(total_enemigos3 < 1){
         enemigo_3 *enemigo3 = new enemigo_3(aleatorio(), e1_vidas);
         enemigo3->agregar_observador(this);
         addItem(enemigo3);
@@ -336,18 +333,6 @@ void juego::parpadeo()
     }
 
 }
-
-/*
- int juego::select_bloc(int i, int j)
-{
-   int bl=9;
-
-   if(j==0 || j==ancho-1 || i==0 || i==largo-1 || (i%2==0 && j%2==0)) bl = 0;
-   else if(aleatorio() && !((i==1 && j==1) || (i==2 && j==1) || (i==1 && j==2))) bl = 1;
-   return bl;
-}
-*/
-
 
 
 bool juego::aleatorio()

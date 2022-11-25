@@ -2,14 +2,12 @@
 #define JUEGO_H
 
 #include <QGraphicsScene>
-
 #include <QKeyEvent>
 #include <stdlib.h>
 #include "bloques.h"
 #include <cstdlib>
 #include <time.h>
 #include "jugador.h"
-#include "enemigo_3.h"
 #include "polvora.h"
 #include "objetivo.h"
 #include "Observador.h"
@@ -43,8 +41,6 @@ private:
     unsigned total_enemigos3 = 0;
     unsigned puntaje_total = 0;
 
-
-
     float p = 0.3;
     objetivo *trampolin;
     bloques *bl[largo][2];
@@ -54,7 +50,7 @@ private:
     base *nivel_etiqueta;
     jugador *personaje;
 
-    int t_enemigos = 4000;
+    int t_enemigos = 6000;
     int e1_vidas = 3,Cparpadeo=10,Iparpadeo=0;
     int n=1;
 
@@ -67,8 +63,6 @@ private:
 
     QVector<polvora*> cartuchoprota;
     QVector<polvora*> cartuchoEnemigos;
-
-
 
 public slots:
 
@@ -84,7 +78,7 @@ public slots:
 
     // inteligencia enemigos
     void cargar_enemigos();
-     void parpadeo();
+    void parpadeo();
 
 };
 
